@@ -1,7 +1,7 @@
 import {createStore, combineReducers} from 'redux'
 
 // import reducers here
-import appReducer from './reducers/app'
+import appReducer from './reducers/campaignReducer'
 
 const rootReducer = combineReducers({
   app: appReducer
