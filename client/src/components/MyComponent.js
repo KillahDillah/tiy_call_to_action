@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {getFoo} from '../actions/app'
+import {getFoo} from '../actions/campaignActions'
 
 class MyComponent extends Component {
   componentWillMount() {
