@@ -4,10 +4,10 @@ var twilio = require('twilio')
 
 /* /api starting endpoint */
 router.post('/sms', function(req, res, next) {
-  console.log(res.body)
+  console.log(res.body.Body)
   var twilio = require('twilio');
   var twiml = new twilio.TwimlResponse();
-  twiml.message('The Robots are coming! Head for the hills!');
+  twiml.message('The Robots are coming! Head for the hills!' + req.body.Body);
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
 });
