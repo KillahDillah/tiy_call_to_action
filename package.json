@@ -1,0 +1,25 @@
+{
+  "name": "heroku",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^3.5.0"
+  },
+  "scripts": {
+    "start": "concurrently \"yarn run server\" \"yarn run client\"",
+    "client": "cd client && yarn start",
+    "server": "cd server && yarn start",
+    "build": "cd server/public && rm -rf * && cd ../../client && yarn build",
+    "deploy": "git push heroku master",
+    "bad": "yarn run build && yarn run deploy"
+  },
+  "boilerplate": {
+    "name": "heroku-skeleton",
+    "version": "1.0.0",
+    "author": "Michael Sweeney <jfmike@gmail.com> (https://github.com/overthemike)",
+    "license": "MIT"
+  },
+  "description": ""
+}
