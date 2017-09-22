@@ -7,10 +7,10 @@ const Text = require('../model/textModel')
 router.post('/sms', function (req, res, next) {
   let text = Text.insertText(req.body.Body)
   text.catch(function (err) {
-    res.json(err)
+    console.log(err)
   })
     .then(function (data) {
-      res.json(data)
+      console.log(data)
     })
   var twiml = new twilio.TwimlResponse();
   twiml.message('The Robots are coming! Head for the hills!');
