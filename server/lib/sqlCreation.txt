@@ -1,0 +1,13 @@
+CREATE TABLE `heroku_a63de5d81717b5a`.`texts` (
+  `id_texts` INT UNSIGNED NOT NULL,
+  `SmsMessageSid` VARCHAR(140) NULL,
+  `NumMedia` VARCHAR(140) NULL,
+  `SmsSid` VARCHAR(140) NULL,
+  `SmsStatus` VARCHAR(140) NULL,
+  `Body` VARCHAR(1400) NULL,
+  `To` VARCHAR(140) NULL,
+  `From` VARCHAR(140) NULL,
+  `MessageSid` VARCHAR(140) NULL,
+  `Processed` TINYINT NULL DEFAULT 0,
+  PRIMARY KEY (`id_texts`),
+  UNIQUE INDEX `id_texts_UNIQUE` (`id_texts` ASC));
