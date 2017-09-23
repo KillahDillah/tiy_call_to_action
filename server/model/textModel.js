@@ -1,6 +1,7 @@
 const conn = require('../lib/db.js')
 
 function insertText(text){
+    console.log("text",text)
     return new Promise(function(resolve,reject){
         let sql = `
         INSERT INTO texts (SmsMessageSid,NumMedia,SmsSid,Body,To,From,MessageSid,Processed)
@@ -8,6 +9,7 @@ function insertText(text){
         `
         conn.query(sql,[text.SmsMessageSid,text.NumMedia,text.SmsSid,text.Body,text.To,text.From,text.MessageSid,text.Processed],function(err,results,fields){
             if(err){
+                //console.log(err)
                 reject({
                     status:'Failure',
                     error:true,
@@ -24,4 +26,8 @@ function insertText(text){
             }
         })
     })
+}
+
+module.exports = {
+    insertText:insertText
 }
