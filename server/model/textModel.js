@@ -33,6 +33,42 @@ function insertText(text){
     })
 }
 
+function identifyTexter(phone){
+    return new Promise(function(resolve,reject){
+        let sql = `
+        SELECT phone, firstname, lastname, streetname, city, state, zip, email, timestamp
+        FROM texters
+        WHERE phone = ?`
+        pool.getConnection(function(err,connection){
+            connection.query(sql,[phone],function(err,results, fields){
+                if(err){
+                    connection.release()
+                    reject({
+                        status:'Failure',
+                        error:true,
+                        errorMessage:['Unable to query the DB for phone']
+                    })
+                }
+                else if(results.length == 0){
+                    resolve({
+                        status:'Success',
+                        error:false,
+                        registered:false,
+                    })
+                } else{
+                    let texter = results[0]
+                    resolve({
+                        status:'Success',
+                        error:false,
+                        registered:true,
+                        texter: texter
+                    })
+                }
+            })
+        })
+    })
+}
 module.exports = {
-    insertText:insertText
+    insertText:insertText,
+    identifyTexter:identifyTexter
 }
