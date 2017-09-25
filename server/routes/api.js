@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Twilio = require('twilio')
 const Text = require('../model/textModel')
+const conn = require('../lib/db')
 
 /**
  * This a webhook for Twilio to use to send incoming text messages.
@@ -70,4 +71,29 @@ router.post('/texter', function (req, res, next) {
     )
 })
 
+router.post("/NewCampaign", function(req,res,next){
+  const name = req.body.campname
+  const SDesc = req.body.campsdesc
+  const LDesc = req.body.campldesc
+  const keywords= req.body.keywords
+
+  const sql= `
+  INSERT INTO campaigns (name, shortDesc, longDesc, keywords)
+  VALUES (?,?,?,?)
+  `
+
+  conn.query(sql, [name,SDesc,LDesc,keywords], function(err,results,fields){
+    if (!err){
+      res.json({
+        'it':'works'
+      })
+    } else {
+      console.log(err)
+      res.json({
+        'it':'doesnt work',
+        err: err
+      })
+    }
+  })
+})
 module.exports = router;
