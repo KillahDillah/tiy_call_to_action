@@ -21,7 +21,6 @@ class NewCampaign extends Component {
 
   submitForm=(e)=>{
     e.preventDefault()
-
     axios.post('/api/NewCampaign', {
       campname:this.state.campname,
       keywords:this.state.keywords,
