@@ -19,10 +19,11 @@ router.post('/sms', function (req, res, next) {
       res.end()
     })
       .then(function (data) {
+        let fullUrl = req.protocol + '://' + req.get('host') + '/register'
         console.log("data",data)
         if(data.registered !== true){
           res.send(`<Response>
-          <Message>You are not registerd yet!</Message>
+          <Message>You are not registerd yet! ${fullUrl}</Message>
         </Response>`)
         }else{
           res.send(`<Response>
@@ -47,12 +48,14 @@ router.post('/texter', function(req,res,next){
   }
   let texter = Text.insertTexter(identity)
   texter.catch(function (err) {
-    console.log(err)
-    res.end()
+    res.send({success:false,
+              error:err})
   })
   .then(
     function(data){
       console.log(data)
+      res.send({success:true,
+                id:data.id})
     }
   )
 })
