@@ -33,4 +33,28 @@ router.post('/sms', function (req, res, next) {
   ;
 });
 
+router.post('/texter', function(req,res,next){
+  console.log("texter req",req.body)
+  let identity = {
+    phone:req.body.phone,
+    firstname:req.body.firstname,
+    lastname:req.body.lastname,
+    streetname:req.body.streetname,
+    city:req.body.city,
+    state:req.body.state,
+    zip:req.body.zip,
+    email: req.body.email || ''
+  }
+  let texter = Text.insertTexter(identity)
+  texter.catch(function (err) {
+    console.log(err)
+    res.end()
+  })
+  .then(
+    function(data){
+      console.log(data)
+    }
+  )
+})
+
 module.exports = router;

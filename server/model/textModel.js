@@ -68,7 +68,42 @@ function identifyTexter(phone){
         })
     })
 }
+function insertTexter(texter){
+    return new Promise(function(resolve,reject){
+        let sql = `
+        INSERT INTO texters (phone,firstname,lastname,streetname,city,state,zip,email)
+        VALUES (?,?,?,?,?,?,?,?);`
+        pool.getConnection(function(err,connection){
+            if(err){
+                connection.release()
+                reject({
+                    status:'Failure',
+                    error:true,
+                    errorMessage:['Unable to connect to DB']
+                })
+            }
+            else{
+                connection.query(sql,[texter.phone,texter.firstname,texter.lastname,texter.streetname,texter.city,texter.state,texter.zip,texter.email],function(err,results, fields){
+                    if(err){
+                        reject({
+                            status:'Failure',
+                            error:true,
+                            errorMessage:['Unable to insert into the DB for texter']
+                        })
+                    } else{
+                        resolve({
+                            status:'Success',
+                            error:false,
+                            id:results.insertId
+                        })
+                    }
+                })
+            }
+        })
+    })
+}
 module.exports = {
     insertText:insertText,
-    identifyTexter:identifyTexter
+    identifyTexter:identifyTexter,
+    insertTexter:insertTexter
 }
