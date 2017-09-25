@@ -21,7 +21,7 @@ router.post('/sms', function (req, res, next) {
       .then(function (data) {
         let fullUrl = req.protocol + '://' + req.get('host') + '/register'
         console.log("data",data)
-        if(data.registered !== true){
+        if(data.registered === false){
           res.send(`<Response>
           <Message>You are not registerd yet! ${fullUrl}</Message>
         </Response>`)
