@@ -1,5 +1,9 @@
 const pool = require('../lib/db.js')
 
+/**
+ * This method inserts all the texts received from Twilio. Will return a promise with a status and error when failed, otherwise also returns the text body and from.
+ * @param {*Expects the standard post from Twilio of text message details} text 
+ */
 function insertText(text){
     //console.log("text",text)
     return new Promise(function(resolve,reject){
@@ -33,6 +37,10 @@ function insertText(text){
     })
 }
 
+/**
+ * Takes in a phone number and will return if they are registered or not, along with texter information if found.
+ * @param {*This parameter takes a phone number in the format +18887776666} phone 
+ */
 function identifyTexter(phone){
     return new Promise(function(resolve,reject){
         let sql = `
@@ -68,6 +76,10 @@ function identifyTexter(phone){
         })
     })
 }
+/**
+ * Returns a promise with the insert id if successful
+ * @param {*Takes in a json object with all fields needed for a texter} texter 
+ */
 function insertTexter(texter){
     return new Promise(function(resolve,reject){
         let sql = `

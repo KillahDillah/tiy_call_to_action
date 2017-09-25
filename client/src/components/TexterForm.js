@@ -21,6 +21,9 @@ class TexterForm extends Component {
     handleSubmit = (e) =>
     {
         e.preventDefault()
+        /**
+         * This call goes to the local api to register
+         */
         axios({
           method: 'post',
           url: '/api/texter',
@@ -43,7 +46,8 @@ class TexterForm extends Component {
             console.log(err, "Error submitting user");
           })
         .then(function(response){
-            console.log(response)
+            //API will send back success as false if there is an issue
+            //TODO: Handle it better so we can see if a phone number is already registered.
             if(response.data.success === false){
                 this.props.history.push('/error')
             }
@@ -53,6 +57,10 @@ class TexterForm extends Component {
         }.bind(this))
         
     }
+    /**
+     * This element is a simple form for registering a texter
+     * TODO: Make pretty, add validation
+     */
     render() {
         return (
                 <div>

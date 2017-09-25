@@ -3,9 +3,11 @@ const router = express.Router();
 const Twilio = require('twilio')
 const Text = require('../model/textModel')
 
-/* /api starting endpoint */
+/**
+ * This a webhook for Twilio to use to send incoming text messages.
+ */
 router.post('/sms', function (req, res, next) {
-  console.log("body", req.body)
+  //Creates a promise to store the incoming text, does not handle the response to client.
   let text = Text.insertText(req.body)
   text.catch(function (err) {
     console.log(err)
@@ -13,52 +15,59 @@ router.post('/sms', function (req, res, next) {
     .then(function (data) {
       console.log(data)
     })
-    let identify = Text.identifyTexter(req.body.From)
-    identify.catch(function (err) {
-      console.log(err)
-      res.end()
-    })
-      .then(function (data) {
-        let fullUrl = req.protocol + '://' + req.get('host') + '/register'
-        console.log("data",data)
-        console.log(fullUrl)
-        if(data.registered === false){
-          res.send(`<Response>
+  //Creates a promise to see if the texter has been identified.
+  let identify = Text.identifyTexter(req.body.From)
+  identify.catch(function (err) {
+    console.log(err)
+    res.end()
+  })
+    .then(function (data) {
+      //If the texter is not register it will tell them they need to register
+      let fullUrl = req.protocol + '://' + req.get('host') + '/register'
+      if (data.registered === false) {
+        res.send(`<Response>
           <Message>You are not registerd yet! ${fullUrl}</Message>
         </Response>`)
-        }else{
-          res.send(`<Response>
+      } else {
+        res.send(`<Response>
           <Message>Hello ${data.texter.firstname} ${data.texter.lastname}! We've seen you before!</Message>
         </Response>`)
-        }
-      })
-  ;
+      }
+    })
+    ;
 });
 
-router.post('/texter', function(req,res,next){
-  console.log("texter req",req.body)
+/**
+ * This is an endpoint for a texter to register for the service.
+ * TODO: Add validation.
+ */
+router.post('/texter', function (req, res, next) {
   let identity = {
-    phone:req.body.phone,
-    firstname:req.body.firstname,
-    lastname:req.body.lastname,
-    streetname:req.body.streetname,
-    city:req.body.city,
-    state:req.body.state,
-    zip:req.body.zip,
+    phone: req.body.phone,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    streetname: req.body.streetname,
+    city: req.body.city,
+    state: req.body.state,
+    zip: req.body.zip,
     email: req.body.email || ''
   }
   let texter = Text.insertTexter(identity)
   texter.catch(function (err) {
-    res.send({success:false,
-              error:err})
+    //If there is an error registering, success is sent as false to let the client tell them there was an error
+    res.send({
+      success: false,
+      error: err
+    })
   })
-  .then(
-    function(data){
-      console.log(data)
-      res.send({success:true,
-                id:data.id})
+    .then(
+    function (data) {
+      res.send({
+        success: true,
+        id: data.id
+      })
     }
-  )
+    )
 })
 
 module.exports = router;
