@@ -15,7 +15,7 @@
 	"ToZip": "90014",
 	"NumSegments": "1",
 	"MessageSid": "SM1928d49ff68c935a56a204471ac5322f",
-	"AccountSid": "AC9311c30d3d29fbfb406c9e77ebbc4118",
+	"AccountSid": "AC9311",
 	"From": "+18016162422",
 	"ApiVersion": "2010-04-01"
 }
