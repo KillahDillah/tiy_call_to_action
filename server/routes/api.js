@@ -14,8 +14,9 @@ router.post('/sms', function (req, res, next) {
     console.log(err)
   })
     .then(function (data) {
-      console.log(data)
     })
+  let campaign = Text.processText(req.body)
+  campaign.then(console.log)
   //Creates a promise to see if the texter has been identified.
   let identify = Text.identifyTexter(req.body.From)
   identify.catch(function (err) {
