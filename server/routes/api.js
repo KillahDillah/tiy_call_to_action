@@ -116,6 +116,26 @@ router.post('/CampaignerReg', function (req,res,next){
       next ("username already taken")
     }
   })
-
 })
+
+router.post("/Login", function(req,res,next){
+  const username = req.body.username
+  const password = hash(req.body.password)
+
+  const sql = `
+    SELECT * 
+    FROM clogin
+    WHERE username = ?
+    AND password = ?
+  `
+  conn.query(sql, [username, password], function(err, results, fields){
+    if (results.length > 0) { // username and password are correct
+      res.json(200)// return a res.json with status code 200
+    } else {
+      res.json(400)// return a res.json with status code 400
+      
+    }
+   })
+})
+
 module.exports = router;
