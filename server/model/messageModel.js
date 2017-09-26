@@ -39,7 +39,10 @@ function identifyTexter(phone) {
         })
     })
 }
-
+/**
+ * Checks to see if a phone number has any open campaigns that have not been responded to.
+ * @param {*Twilio format +18887776666} phone 
+ */
 function checkCampaign(phone) {
     return new Promise(function (resolve, reject) {
         let sql = `
@@ -83,7 +86,12 @@ function checkCampaign(phone) {
         })
     })
 }
-
+/**
+ * Function takes in a campaign, texter, and if they should be confirmed or removed from it. Confirmed goes to true, active goes to false if removed.
+ * @param {*} id_campaign 
+ * @param {*} id_texter 
+ * @param {* true/false} confirmed 
+ */
 function updateCampaign(id_campaign,id_texter,confirmed){
     return new Promise(function(resolve,reject){
         let sql = ''
@@ -126,7 +134,11 @@ function updateCampaign(id_campaign,id_texter,confirmed){
         })
     })
 }
-
+/**
+ * Adds a user to a campaign
+ * @param {*} id_campaign 
+ * @param {*} id_texter 
+ */
 function joinCampaign(id_campaign,id_texter){
     return new Promise(function(resolve,reject){
         let sql = `
@@ -160,7 +172,10 @@ function joinCampaign(id_campaign,id_texter){
         })
     })
 }
-
+/**
+ * Will match to a campaign keyword if the text body matches exactly (ignoring case)
+ * @param {*string} textBody 
+ */
 function findCampaign(textBody){
     return new Promise(function(resolve,reject){
         let search = /^[\w\W\d]*$/i.exec(textBody)

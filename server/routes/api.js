@@ -1,54 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const Twilio = require('twilio')
-const Text = require('../model/textModel')
+const Text = require('../model/texterModel')
 const conn = require('../lib/db')
-const TextRouter = require('../model/textRouter')
+const MessageRouter = require('../model/MessageRouter')
 
 /**
  * This a webhook for Twilio to use to send incoming text messages.
  */
 router.post('/sms', function (req, res, next) {
-  //Creates a promise to store the incoming text, does not handle the response to client.
-  let text = Text.insertText(req.body)
-  text.catch(function (err) {
-    console.log(err)
-  })
-    .then(function (data) {
-    })
-  let campaign = Text.processText(req.body)
-  campaign.then(console.log)
-  //Creates a promise to see if the texter has been identified.
-  let identify = Text.identifyTexter(req.body.From)
-  identify.catch(function (err) {
-    console.log(err)
-    res.end()
-  })
-    .then(function (data) {
-      //If the texter is not register it will tell them they need to register
-      let fullUrl = req.protocol + '://' + req.get('host') + '/register'
-      if (data.registered === false) {
-        res.send(`<Response>
-          <Message>You are not registerd yet! ${fullUrl}</Message>
-        </Response>`)
-      } else {
-        res.send(`<Response>
-          <Message>Hello ${data.texter.firstname} ${data.texter.lastname}! We've seen you before!</Message>
-        </Response>`)
-      }
-    })
-    ;
-});
-
-router.post('/smsTest',function(req,res,next){
   let fullUrl = req.protocol + '://' + req.get('host') + '/register'
-  TextRouter.textRouter(req.body.From,req.body.Body,function(message){
+  MessageRouter.messageRouter(req.body.From,req.body.Body,function(message){
     res.send(`<Response>
     <Message>${message}</Message>
   </Response>`)
   },fullUrl)
+});
 
-})
 /**
  * This is an endpoint for a texter to register for the service.
  * TODO: Add validation.
@@ -64,7 +32,7 @@ router.post('/texter', function (req, res, next) {
     zip: req.body.zip,
     email: req.body.email || ''
   }
-  let texter = Text.insertTexter(identity)
+  let texter = Texter.insertTexter(identity)
   texter.catch(function (err) {
     //If there is an error registering, success is sent as false to let the client tell them there was an error
     res.send({
