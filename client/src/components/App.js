@@ -8,10 +8,11 @@ import NewCampaign from './NewCampaign'
 import 'normalize.css/normalize.css'
 import 'font-awesome/css/font-awesome.min.css'
 import '../styles/App.css'
-
 import TexterForm from './TexterForm'
 import ErrorRegistering from './ErrorRegistering'
 import ThanksRegistering from './ThanksRegistering'
+import CampaignerReg from './CampaignerReg'
+import Login from './Login'
 
 class App extends Component {
   render() {
@@ -20,7 +21,8 @@ class App extends Component {
         <Router>
           <Layout>
             <Switch>
-              <Route exact path="/" component={MyComponent} />
+              <Route exact path="/" component={Login} />
+              <Route exact path="/registration" component={CampaignerReg} />
               <Route exact path="/register" component={TexterForm} />
               <Route exact path="/error" component={ErrorRegistering} />
               <Route exact path="/thanks/:id" component={ThanksRegistering}/>
