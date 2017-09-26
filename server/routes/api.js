@@ -17,6 +17,8 @@ router.post('/sms', function (req, res, next) {
   },fullUrl)
 });
 
+
+//TODO: Add in a put method for texter after they have registered to go over messageRouter again.
 /**
  * This is an endpoint for a texter to register for the service.
  * TODO: Add validation.
