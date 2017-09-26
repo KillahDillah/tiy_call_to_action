@@ -9,7 +9,7 @@ class Layout extends Component {
         <header>
           <nav>
             <ul>
-              <li><Link to="/">Home Page</Link></li>
+              <li><Link to="/">Log In</Link></li>
               <li><Link to="/new-campaign">Create New Campaign</Link></li>
             </ul>
           </nav>

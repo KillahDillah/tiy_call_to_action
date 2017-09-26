@@ -13,6 +13,7 @@ import ErrorRegistering from './ErrorRegistering'
 import ThanksRegistering from './ThanksRegistering'
 import CampaignerReg from './CampaignerReg'
 import Login from './Login'
+import Registered from './Registered'
 
 class App extends Component {
   render() {
@@ -26,6 +27,7 @@ class App extends Component {
               <Route exact path="/register" component={TexterForm} />
               <Route exact path="/error" component={ErrorRegistering} />
               <Route exact path="/thanks/:id" component={ThanksRegistering}/>
+              <Route exact path="/registered" component={Registered} />
               <Route path="/new-campaign" component={NewCampaign}/>
             </Switch>
           </Layout>

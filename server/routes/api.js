@@ -3,6 +3,7 @@ const router = express.Router();
 const Twilio = require('twilio')
 const Text = require('../model/textModel')
 const conn = require('../lib/db')
+const hash = require('js-sha512')
 
 /**
  * This a webhook for Twilio to use to send incoming text messages.
@@ -95,5 +96,26 @@ router.post("/NewCampaign", function(req,res,next){
       })
     }
   })
+})
+
+router.post('/CampaignerReg', function (req,res,next){
+  const fname = req.body.fname
+  const lname = req.body.lname
+  const username = req.body.username
+  const email = req.body.email
+  const password = hash (req.body.password)
+
+  const sql= `
+  INSERT INTO clogin (fname, lname, username, email, password)
+  VALUES (?,?,?,?,?)
+  `
+  conn.query(sql, [fname,lname,username,email,password], function(err,results,fields){
+    if (!err){
+      res.redirect('/register')
+    } else {
+      next ("username already taken")
+    }
+  })
+
 })
 module.exports = router;

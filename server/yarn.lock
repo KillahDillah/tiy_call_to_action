@@ -1166,6 +1166,10 @@ joi@^6.10.1:
     moment "2.x.x"
     topo "1.x.x"
 
+js-sha512@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/js-sha512/-/js-sha512-0.4.0.tgz#766b1d90bc3a3e17e86090c258658e4a23857420"
+
 jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
