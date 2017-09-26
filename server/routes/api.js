@@ -3,6 +3,7 @@ const router = express.Router();
 const Twilio = require('twilio')
 const Text = require('../model/textModel')
 const conn = require('../lib/db')
+const TextRouter = require('../model/textRouter')
 
 /**
  * This a webhook for Twilio to use to send incoming text messages.
@@ -39,6 +40,15 @@ router.post('/sms', function (req, res, next) {
     ;
 });
 
+router.post('/smsTest',function(req,res,next){
+  let fullUrl = req.protocol + '://' + req.get('host') + '/register'
+  TextRouter.textRouter(req.body.From,req.body.Body,function(message){
+    res.send(`<Response>
+    <Message>${message}</Message>
+  </Response>`)
+  },fullUrl)
+
+})
 /**
  * This is an endpoint for a texter to register for the service.
  * TODO: Add validation.
