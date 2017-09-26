@@ -3,7 +3,7 @@ const router = express.Router();
 const Twilio = require('twilio')
 const Text = require('../model/texterModel')
 const conn = require('../lib/db')
-const MessageRouter = require('../model/MessageRouter')
+const MessageRouter = require('../model/messageRouter')
 
 /**
  * This a webhook for Twilio to use to send incoming text messages.
