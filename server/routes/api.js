@@ -28,13 +28,15 @@ router.post('/texter', function (req, res, next) {
     phone: req.body.phone,
     firstname: req.body.firstname,
     lastname: req.body.lastname,
+    streetnumber: req.body.streetnumber,
     streetname: req.body.streetname,
     city: req.body.city,
     state: req.body.state,
     zip: req.body.zip,
-    email: req.body.email || ''
+    email: req.body.email || '',
+    address: req.body.address
   }
-  let texter = Texter.insertTexter(identity)
+  let texter = Text.insertTexter(identity)
   texter.catch(function (err) {
     //If there is an error registering, success is sent as false to let the client tell them there was an error
     res.send({

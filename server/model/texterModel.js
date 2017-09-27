@@ -82,11 +82,10 @@ function identifyTexter(phone) {
 function insertTexter(texter) {
     return new Promise(function (resolve, reject) {
         let sql = `
-        INSERT INTO texters (phone,firstname,lastname,streetname,city,state,zip,email)
-        VALUES (?,?,?,?,?,?,?,?);`
+        INSERT INTO texters (phone,firstname,lastname,streetnumber,streetname,city,state,zip,email,address)
+        VALUES (?,?,?,?,?,?,?,?,?,?);`
         pool.getConnection(function (err, connection) {
             if (err) {
-                connection.release()
                 reject({
                     status: 'Failure',
                     error: true,
@@ -94,8 +93,10 @@ function insertTexter(texter) {
                 })
             }
             else {
-                connection.query(sql, [texter.phone, texter.firstname, texter.lastname, texter.streetname, texter.city, texter.state, texter.zip, texter.email], function (err, results, fields) {
+                connection.query(sql, [texter.phone, texter.firstname, texter.lastname, texter.streetnumber, texter.streetname, texter.city, texter.state, texter.zip, texter.email,texter.address], function (err, results, fields) {
+                    connection.release()
                     if (err) {
+                        console.log(err)
                         reject({
                             status: 'Failure',
                             error: true,
@@ -131,6 +132,7 @@ function checkCampaign(phone) {
             }
             else {
                 connection.query(sql, [phone], function (err, results, fields) {
+                    connection.release()
                     if (err) {
                         reject({
                             status: 'Failure',
@@ -150,144 +152,9 @@ function checkCampaign(phone) {
     })
 }
 
-function checkBody(textBody){
-    return new Promise(function(resolve,reject){
-        //Check if it is a confirmation text or not
-        if(/^yes$/i.test(textBody)){
-            resolve({
-                status:'Success',
-                error:false,
-                message:'Yes was found',
-                confirmation:true
-            })
-        }
-        else if(/^no$/i.test(textBody)){
-            resolve({
-                status:'Success',
-                error:false,
-                message:'No was found',
-                confirmation:false
-            })
-        }
-        else{
-            let search = /^[\w\W\d]*$/i.exec(textBody)
-            let sql=`
-            SELECT keywords, id AS campaign_id, name
-            FROM campaigns
-            WHERE keywords LIKE ?`
-            pool.getConnection(function (err, connection) {
-                if(err){
-                    connection.release()
-                    console.log(err)
-                    reject()
-                }
-                else{
-                    connection.query(sql,[search[0]],function(err,results,fields){
-                        if(err){
-                            connection.release()
-                            console.log(err)
-                            reject()
-                        }
-                        else if(results.length == 0){
-                            connection.release()
-                            resolve({
-                                status:'Success',
-                                error:false,
-                                message:'Campaign not found',
-                                campaign:null
-                            })
-                        }
-                        else{
-                            connection.release()
-                            resolve({
-                                status:'Success',
-                                error:false,
-                                campaign:{
-                                    campaign_id:results[0].campaign_id,
-                                    name:results[0].name,
-                                    keyword:results[0].keywords
-                                },
-                                confirmation:null
-                            })
-                        }
-                    })
-                }
-            })
-        }
-    })
-}
-
-/*
-1. Check phone number
-    -If not recognized, send registration. Will accept a 'put' request later to start the process again.
-2. Find last text message from the user
-3. Check to see if texter has open campaigns
-4. If open campaign, check yes or no for confirmation
-5. If no open campaign, send back confirmation of joining campaign
-6. Store text
-
-State will have:
-texts rowId
-registered t/f
-active campaign t/f
-
-*/
-function processText(textBody) {
-    let state = {
-        previousTextId: '',
-        campaign: {},
-        previousBody: '',
-        registered: false,
-        activeCampaign: false,
-        processed: false,
-        currentBody: textBody.Body,
-        confirmation:''
-    }
-    return new Promise(function (resolve, reject) {
-        let texter = identifyTexter(textBody.From)
-        texter
-            .catch(err => reject({ err }))
-        texter
-            .then(data => {
-                state.registered = data.registered
-                if (state.registered) {
-                    state.texter = data.texter
-                }
-                let campaign = checkCampaign(textBody.From)
-                campaign
-                    .catch(err => reject({ err }))
-                    .then(data => {
-                        if(data.campaign){
-                            state.campaign = data.results[0]
-                            state.activeCampaign = true
-                        }else{
-                            state.campaign = null
-                            state.activeCampaign = false
-                        }
-                        state.processed = data.results.Processed || null
-                        state.previousBody = data.results.Body || null
-                        state.previousTextId = data.results.id_text || null
-                    })
-                    .then(data =>{
-                        let checks = checkBody(textBody)
-                        checks.catch(console.log)
-                        .then(data => {
-                            state.campaign = data.campaign || null
-                            state.confirmation = data.confirmation || null
-                        })
-                    })
-            })
-            .then(data =>{
-                resolve(state)
-            })
-    })
-}
 
 module.exports = {
     insertText: insertText,
     identifyTexter: identifyTexter,
-    insertTexter: insertTexter,
-    checkCampaign: checkCampaign,
-    processText: processText,
-    checkBody:checkBody
+    insertTexter: insertTexter
 }

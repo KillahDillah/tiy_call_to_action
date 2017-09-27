@@ -9,9 +9,9 @@ import 'normalize.css/normalize.css'
 import 'font-awesome/css/font-awesome.min.css'
 import '../styles/App.css'
 
-import TexterForm from './TexterForm'
-import ErrorRegistering from './ErrorRegistering'
-import ThanksRegistering from './ThanksRegistering'
+import TexterForm from './Texter/TexterForm'
+import ErrorRegistering from './Texter/ErrorRegistering'
+import ThanksRegistering from './Texter/ThanksRegistering'
 
 class App extends Component {
   render() {
