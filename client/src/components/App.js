@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Switch} from 'react-router-dom'
+import {AuthRoute as Route} from '../lib/auth'
 import {Provider} from 'react-redux'
 import store from '../store'
 import Layout from './Layout'
@@ -7,13 +8,14 @@ import MyComponent from './MyComponent'
 import NewCampaign from './NewCampaign'
 import 'normalize.css/normalize.css'
 import 'font-awesome/css/font-awesome.min.css'
-import '../styles/App.css'
+import '../styles/css/main.css'
 import TexterForm from './TexterForm'
 import ErrorRegistering from './ErrorRegistering'
 import ThanksRegistering from './ThanksRegistering'
 import CampaignerReg from './CampaignerReg'
 import Login from './Login'
 import Registered from './Registered'
+import Dashboard from './Dashboard'
 
 class App extends Component {
   render() {
@@ -23,11 +25,13 @@ class App extends Component {
           <Layout>
             <Switch>
               <Route exact path="/" component={Login} />
+              <Route exact path="/login" component={Login} />
               <Route exact path="/registration" component={CampaignerReg} />
               <Route exact path="/register" component={TexterForm} />
               <Route exact path="/error" component={ErrorRegistering} />
               <Route exact path="/thanks/:id" component={ThanksRegistering}/>
               <Route exact path="/registered" component={Registered} />
+              <Route exact path='/dashboard' component={Dashboard} />
               <Route path="/new-campaign" component={NewCampaign}/>
             </Switch>
           </Layout>

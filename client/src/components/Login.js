@@ -1,51 +1,72 @@
 import React, { Component } from 'react'
+import {loginUser, logoutUser} from '../lib/auth'
+import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import axios from 'axios'
 
 class Login extends Component {
-
-  constructor(){
-    super()
-    this.state={
-      username:"",
-      password:""
-    }
+  state = {
+    username:'',
+    password:''
   }
-
-  handleChange=(e)=>{
+  componentWillMount() {
+    this.props.dispatch(logoutUser())
+  }
+  handleSubmit = (e) => {
+    e.preventDefault()
+    this.props.dispatch(loginUser({username: this.state.username, password:this.state.password}))
+  }
+  handleChange = (e) => {
     this.setState({
       [e.target.name]:e.target.value
     })
   }
 
-  submitForm=(e)=>{
-      e.preventDefault()
-      axios.post('/api/Login',{
-        username: this.state.username,
-        password: this.state.password
-      }).then(resp => {
-      this.props.history.push('/Dashboard')
-    })
+  componentWillReceiveProps(props){
+    if (props.isAuthenticated){
+      props.history.push('/dashboard')
+    }
   }
 
-  render(){
-    return(
-      <div className="login-wrap">
-        <form onSubmit={this.submitForm}>
-          <div>
-            <label htmlFor="c-login">Username</label>
-            <input onChange={this.handleChange} type="text" name="username" value={this.state.username} placeholder="Campaign Login"/>
-          </div>
-          <div>
-            <label htmlFor="c-password">Password</label>
-            <input onChange={this.handleChange} type="password" name="password" value={this.state.password} />
-          </div>
-          <button type="submit">Login</button>
-        </form>
-      <Link to='/registration'>Register</Link>
+  render() {
+    return (
+      <div id="footer" className="wrapper">
+        <div className="inner">
+          <section>
+            <div className="box">
+              <div className="content">
+                <h2 className="align-center">Call to Action</h2>
+                <hr />
+                <form onSubmit={this.handleSubmit}>
+                  <div className="field half first">
+                    <label htmlFor="name">Username</label>
+                    <input onChange={this.handleChange} type="text" placeholder="username" name="username" value={this.state.username} />
+                  </div>
+                  <div className="field half">
+                    <label htmlFor="password">Password</label>
+                    <input onChange={this.handleChange} type="password" placeholder="password" name="password" value={this.state.password} />
+                  </div>
+                  <ul className="actions align-center">
+                    <li><input value="login" className="button special" type="submit" /></li>
+                    <li><Link to='/registration'>Register</Link></li>
+                  </ul>
+                </form>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
-    )
+      )
+    }
   }
-}
 
-export default Login
+  function mapStateToProps(appState) {
+    const {isAuthenticated, errorMessage, isFetching} = appState.auth
+
+   return {
+      isAuthenticated,
+      isFetching,
+      errorMessage
+    }
+  }
+
+  export default connect(mapStateToProps)(Login)

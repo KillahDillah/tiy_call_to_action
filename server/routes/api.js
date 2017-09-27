@@ -4,6 +4,9 @@ const Twilio = require('twilio')
 const Text = require('../model/textModel')
 const conn = require('../lib/db')
 const hash = require('js-sha512')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+const config = require('config')
 
 /**
  * This a webhook for Twilio to use to send incoming text messages.
@@ -103,39 +106,68 @@ router.post('/CampaignerReg', function (req,res,next){
   const lname = req.body.lname
   const username = req.body.username
   const email = req.body.email
-  const password = hash (req.body.password)
+  const password = req.body.password
 
-  const sql= `
-  INSERT INTO clogin (fname, lname, username, email, password)
-  VALUES (?,?,?,?,?)
+  const checkReg = `
+    SELECT *
+    FROM clogin
+    WHERE username = ?
   `
-  conn.query(sql, [fname,lname,username,email,password], function(err,results,fields){
-    if (!err){
-      res.redirect('/register')
+  conn.query(checkReg, [username], function(err,results,fields){
+    if (results.length>0){
+      res.status(400).json({
+        message:"Username taken"
+      })
     } else {
-      next ("username already taken")
+      const sql= `
+      INSERT INTO clogin (fname, lname, username, email, password)
+      VALUES (?,?,?,?,?)
+      `
+
+      bcrypt.hash(password, 10).then(function(hashedPassword){
+        conn.query(sql, [fname,lname,username,email,hashedPassword], function(err,results,fields){
+           if (!err) {
+            res.json({
+            message:"Success!"
+           })
+          } 
+        })
+      })
     }
   })
 })
 
-router.post("/Login", function(req,res,next){
+
+router.post ("/token", function(req,res,next){
   const username = req.body.username
-  const password = hash(req.body.password)
+  const password = req.body.password
 
   const sql = `
-    SELECT * 
-    FROM clogin
+    SELECT password FROM clogin
     WHERE username = ?
-    AND password = ?
   `
-  conn.query(sql, [username, password], function(err, results, fields){
-    if (results.length > 0) { // username and password are correct
-      res.json(200)// return a res.json with status code 200
+  conn.query (sql,[username], function(err,results,fields){
+    if (results.length>0){
+      const hashedPassword = results[0].password
+      bcrypt.compare(password,hashedPassword).then(function(result){
+        if(result){
+          res.json({
+            token: jwt.sign({username}, config.get('secret'), { expiresIn: config.get('sessionLengthInSeconds')})
+          })
+        } else{
+          res.status(401).json({
+            message: 'Invalid Credentials'
+          })
+        }
+      }).catch(function(err){
+        console.log(err)
+      })
     } else {
-      res.json(400)// return a res.json with status code 400
-      
+      res.status(401).json({
+        message: 'Invalid Credentials'
+      })
     }
-   })
+  })
 })
 
 module.exports = router;

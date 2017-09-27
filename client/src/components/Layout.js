@@ -9,15 +9,16 @@ class Layout extends Component {
         <header>
           <nav>
             <ul>
-              <li><Link to="/">Log In</Link></li>
-              <li><Link to="/new-campaign">Create New Campaign</Link></li>
+              
             </ul>
           </nav>
         </header>
         {/* Rendering of the page below */}
         {this.props.children}
         <footer>
-          &copy; 2017 Iron Yard
+         <div className="copyright">
+              &copy; 2017 by the Call to Action Team
+          </div>
         </footer>
       </div>
     )

@@ -3071,7 +3071,7 @@
 		.wrapper.style3 {
 			background-color: #000;
 			color: #bfbfbf;
-			background-image: url(../../images/bg.jpg);
+			
 			background-size: cover;
 			background-attachment: fixed;
 			background-position: center;
@@ -3706,7 +3706,7 @@
 		-webkit-justify-content: center;
 		-ms-justify-content: center;
 		justify-content: center;
-		background-image: url("../../images/mtrushmore.jpg");
+		background-image: url("https://www.nps.gov/common/uploads/grid_builder/mwr/crop16_9/62DDD5C1-1DD8-B71B-0BF70C23A3528536.jpg?width=950&quality=90&mode=crop");
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat;

@@ -11,7 +11,8 @@ class CampaignReg extends Component {
       lname:"",
       username:"",
       email:"",
-      password:""
+      password:"",
+      error:''
     }
   }
 
@@ -30,8 +31,13 @@ class CampaignReg extends Component {
         email: this.state.email,
         password: this.state.password
       }).then(resp => {
-      this.props.history.push('/registered')
-    })
+        this.props.history.push('/registered')
+      }).catch(err => {
+        console.log(err)
+        this.setState({
+          error:'Username already taken!'
+        })
+      })
     }
 
   render() {
@@ -49,6 +55,7 @@ class CampaignReg extends Component {
             </div>
             <div>
               <label htmlFor="username">Username</label>
+              {this.state.error !== '' ? <p>{this.state.error}</p> : ''}
               <input onChange={this.handleChange} type="text" value={this.state.username} name="username" placeholder="Username"/>
             </div>
             <div>
