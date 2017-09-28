@@ -41,18 +41,32 @@ function createRepsArray(googleBlob) {
 }
 
 function storeReps(reps,id_texters){
+    return new Promise(function(resolve,reject){
     let storagePromise = reps.map(function(rep){
         return new Promise(function(resole,reject){
+            let arr = [
+                id_texters,
+                rep.state,
+                rep.office.name,
+                rep.office.divisionId,
+                rep.office.roles[0],
+                rep.representative.name,
+                rep.representative.address.line1,
+                rep.representative.address.line2 || "",
+                rep.representative.address.city,
+                rep.representative.address.state,
+                rep.representative.address.zip
+            ]
             let sql = `
-            INSERT INTO representatives (id_texters,)
-            VALUES (?,?,?,?,?,?,?,?)
+            INSERT INTO representatives (id_texters,state,office_name,office_id,roles,name,addressLine1,addressLine2,addressCity,addressState,addressZip)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,)
             `
             pool.getConnection(function (err,connection){
                 if(err){
                     console.log("store reps db connection",err)
                     reject({status:'Failure',err:err})
                 }else{
-                    conncetion.query(sql,[],function(err,results,fields){
+                    connection.query(sql,arr,function(err,results,fields){
                         connection.release()
                         if(err){
                             reject({
@@ -74,10 +88,15 @@ function storeReps(reps,id_texters){
             })
         })
     })
+    let arrResults = Promise.all(storagePromise)
+    arrResults.catch(reject)
+    .then(resolve)
+})
 }
 //findRepresentatives("10146 Campo Tizzoro Ave, Las Vegas, NV, 89147")
 
 module.exports = {
     findRepresentatives:findRepresentatives,
-    createRepsArray:createRepsArray
+    createRepsArray:createRepsArray,
+    storeReps:storeReps
 }

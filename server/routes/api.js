@@ -72,7 +72,12 @@ router.post('/texter/test', function (req, res, next) {
   let repsBlob = Representative.findRepresentatives(identity.address)
   repsBlob.catch(console.log)
   .then(blob => Representative.createRepsArray(blob))
-  .then(blob => {res.json(blob)})
+  .then(blob => {
+    let stuff = Representative.storeReps(blob,'301')
+    stuff.catch(console.log)
+    .then(console.log)
+    res.json(blob)
+  })
 })
 
 router.post("/NewCampaign", function(req,res,next){
