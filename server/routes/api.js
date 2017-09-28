@@ -3,8 +3,17 @@ const router = express.Router();
 const Twilio = require('twilio')
 const Text = require('../model/texterModel')
 const conn = require('../lib/db')
+<<<<<<< HEAD
 const MessageRouter = require('../model/messageRouter')
 const Representative = require('../model/representativeModel')
+=======
+const hash = require('js-sha512')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+const config = require('config')
+
+const MessageRouter = require('../model/messageRouter')
+>>>>>>> 979259f58363957335694a3e536dd76adce5c26c
 
 /**
  * This a webhook for Twilio to use to send incoming text messages.
@@ -105,4 +114,74 @@ router.post("/NewCampaign", function(req,res,next){
     }
   })
 })
+
+router.post('/CampaignerReg', function (req,res,next){
+  const fname = req.body.fname
+  const lname = req.body.lname
+  const username = req.body.username
+  const email = req.body.email
+  const password = req.body.password
+
+  const checkReg = `
+    SELECT *
+    FROM clogin
+    WHERE username = ?
+  `
+  conn.query(checkReg, [username], function(err,results,fields){
+    if (results.length>0){
+      res.status(400).json({
+        message:"Username taken"
+      })
+    } else {
+      const sql= `
+      INSERT INTO clogin (fname, lname, username, email, password)
+      VALUES (?,?,?,?,?)
+      `
+
+      bcrypt.hash(password, 10).then(function(hashedPassword){
+        conn.query(sql, [fname,lname,username,email,hashedPassword], function(err,results,fields){
+           if (!err) {
+            res.json({
+            message:"Success!"
+           })
+          } 
+        })
+      })
+    }
+  })
+})
+
+
+router.post ("/token", function(req,res,next){
+  const username = req.body.username
+  const password = req.body.password
+
+  const sql = `
+    SELECT password FROM clogin
+    WHERE username = ?
+  `
+  conn.query (sql,[username], function(err,results,fields){
+    if (results.length>0){
+      const hashedPassword = results[0].password
+      bcrypt.compare(password,hashedPassword).then(function(result){
+        if(result){
+          res.json({
+            token: jwt.sign({username}, config.get('secret'), { expiresIn: config.get('sessionLengthInSeconds')})
+          })
+        } else{
+          res.status(401).json({
+            message: 'Invalid Credentials'
+          })
+        }
+      }).catch(function(err){
+        console.log(err)
+      })
+    } else {
+      res.status(401).json({
+        message: 'Invalid Credentials'
+      })
+    }
+  })
+})
+
 module.exports = router;
