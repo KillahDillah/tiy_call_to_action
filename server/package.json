@@ -6,11 +6,8 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
-<<<<<<< HEAD
     "axios": "^0.16.2",
-=======
     "bcrypt": "^1.0.3",
->>>>>>> 979259f58363957335694a3e536dd76adce5c26c
     "body-parser": "~1.13.2",
     "config": "^1.26.2",
     "cookie-parser": "~1.3.5",
