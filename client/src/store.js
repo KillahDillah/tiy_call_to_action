@@ -1,13 +1,16 @@
-import {createStore, combineReducers} from 'redux'
+import {createStore, combineReducers, applyMiddleware} from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import {apiMiddleware, authReducer} from './lib/auth'
+import campaignReducer from './reducers/campaignReducer'
 
-// import reducers here
-import appReducer from './reducers/campaignReducer'
+const createStoreWithMiddleware = applyMiddleware(thunkMiddleware, apiMiddleware)(createStore)
 
 const rootReducer = combineReducers({
-  app: appReducer
+  auth: authReducer,
+  app: campaignReducer // insert all your other reducers here
 })
 
-const store = createStore(rootReducer)
+const store = createStoreWithMiddleware(rootReducer)
 
 export default store
 
