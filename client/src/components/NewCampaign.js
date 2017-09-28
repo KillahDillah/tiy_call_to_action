@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import jwtDecode from 'jwt-decode'
 
 
 //TODO: Clear state on form submit and change to singular keyword
@@ -28,7 +29,8 @@ class NewCampaign extends Component {
       campname:this.state.campname,
       keywords:this.state.keywords,
       campldesc:this.state.campldesc,
-      campsdesc:this.state.campsdesc
+      campsdesc:this.state.campsdesc,
+      userId:jwtDecode(localStorage.getItem('token')).userId
     }).then(function(resp){
       console.log(resp)
     })

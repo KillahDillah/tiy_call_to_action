@@ -76,13 +76,14 @@ router.post("/NewCampaign", function(req,res,next){
   const SDesc = req.body.campsdesc
   const LDesc = req.body.campldesc
   const keywords= req.body.keywords
+  const userId = req.body.userId
 
   const sql= `
-  INSERT INTO campaigns (name, shortDesc, longDesc, keywords)
-  VALUES (?,?,?,?)
+  INSERT INTO campaigns (name, shortDesc, longDesc, keywords, userId)
+  VALUES (?,?,?,?,?)
   `
 
-  conn.query(sql, [name,SDesc,LDesc,keywords], function(err,results,fields){
+  conn.query(sql, [name,SDesc,LDesc,keywords,userId], function(err,results,fields){
     if (!err){
       res.json({
         'it':'works'
@@ -139,7 +140,7 @@ router.post ("/token", function(req,res,next){
   const password = req.body.password
 
   const sql = `
-    SELECT password FROM clogin
+    SELECT password,id FROM clogin
     WHERE username = ?
   `
   conn.query (sql,[username], function(err,results,fields){
@@ -148,7 +149,7 @@ router.post ("/token", function(req,res,next){
       bcrypt.compare(password,hashedPassword).then(function(result){
         if(result){
           res.json({
-            token: jwt.sign({username}, config.get('secret'), { expiresIn: config.get('sessionLengthInSeconds')})
+            token: jwt.sign({userId: results[0].id}, config.get('secret'), { expiresIn: config.get('sessionLengthInSeconds')})
           })
         } else{
           res.status(401).json({
