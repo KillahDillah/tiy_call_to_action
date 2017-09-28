@@ -3,6 +3,8 @@ import {loginUser, logoutUser} from '../lib/auth'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
+//Clean up CSS and div tags to be more clear
+
 class Login extends Component {
   state = {
     username:'',

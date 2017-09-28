@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
+
+//TODO: Clear state on form submit and change to singular keyword
+
 class NewCampaign extends Component {
 
   constructor (){
