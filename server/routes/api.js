@@ -5,6 +5,7 @@ const Text = require('../model/texterModel')
 const conn = require('../lib/db')
 const MessageRouter = require('../model/messageRouter')
 const Representative = require('../model/representativeModel')
+const Campaign = require('../model/campaignModel')
 const hash = require('js-sha512')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
@@ -71,6 +72,17 @@ router.post('/texter', function (req, res, next) {
 
 })
 
+router.get("/campaign/:id_campaign", function(req,res,next){
+  console.log(req.params.id_campaign)
+  let campaignDetails = Campaign.getCampaignDetails(req.params.id_campaign)
+  campaignDetails.catch(err =>{
+    console.log(err)
+    res.send({error:true,message:'Unable to get campaign details'})
+  })
+  .then(data => {
+    res.json(data)
+  })
+})
 router.post("/NewCampaign", function(req,res,next){
   const name = req.body.campname
   const SDesc = req.body.campsdesc
