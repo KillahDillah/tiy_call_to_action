@@ -51,15 +51,15 @@ function storeReps(reps,id_texters){
                 rep.office.divisionId,
                 rep.office.roles[0],
                 rep.representative.name,
-                rep.representative.address.line1,
-                rep.representative.address.line2 || "",
-                rep.representative.address.city,
-                rep.representative.address.state,
-                rep.representative.address.zip
+                rep.representative.address[0].line1,
+                rep.representative.address[0].line2 || "",
+                rep.representative.address[0].city,
+                rep.representative.address[0].state,
+                rep.representative.address[0].zip
             ]
             let sql = `
             INSERT INTO representatives (id_texters,state,office_name,office_id,roles,name,addressLine1,addressLine2,addressCity,addressState,addressZip)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?)
             `
             pool.getConnection(function (err,connection){
                 if(err){

@@ -49,39 +49,26 @@ router.post('/texter', function (req, res, next) {
       error: err
     })
   })
-    .then(
-    function (data) {
+    .then(function (data) {
       res.send({
         success: true,
         id: data.id
       })
-    }
-    )
+      return data.id
+    })
+    .then(function(id_texters){
+      console.log(id_texters)
+      let repsBlob = Representative.findRepresentatives(identity.address)
+      repsBlob.catch(console.log)
+      .then(blob => Representative.createRepsArray(blob))
+      .then(blob => {
+        let stuff = Representative.storeReps(blob,id_texters)
+        stuff.catch(console.log)
+        .then(console.log)
+        res.json(blob)
+      })
+    })
 
-})
-
-router.post('/texter/test', function (req, res, next) {
-  let identity = {
-    phone: req.body.phone,
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    streetnumber: req.body.streetnumber,
-    streetname: req.body.streetname,
-    city: req.body.city,
-    state: req.body.state,
-    zip: req.body.zip,
-    email: req.body.email || '',
-    address: req.body.address
-  }
-  let repsBlob = Representative.findRepresentatives(identity.address)
-  repsBlob.catch(console.log)
-  .then(blob => Representative.createRepsArray(blob))
-  .then(blob => {
-    let stuff = Representative.storeReps(blob,'301')
-    stuff.catch(console.log)
-    .then(console.log)
-    res.json(blob)
-  })
 })
 
 router.post("/NewCampaign", function(req,res,next){
