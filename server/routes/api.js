@@ -4,6 +4,7 @@ const Twilio = require('twilio')
 const Text = require('../model/texterModel')
 const conn = require('../lib/db')
 const MessageRouter = require('../model/messageRouter')
+const Representative = require('../model/representativeModel')
 
 /**
  * This a webhook for Twilio to use to send incoming text messages.
@@ -52,6 +53,26 @@ router.post('/texter', function (req, res, next) {
       })
     }
     )
+
+})
+
+router.post('/texter/test', function (req, res, next) {
+  let identity = {
+    phone: req.body.phone,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    streetnumber: req.body.streetnumber,
+    streetname: req.body.streetname,
+    city: req.body.city,
+    state: req.body.state,
+    zip: req.body.zip,
+    email: req.body.email || '',
+    address: req.body.address
+  }
+  let repsBlob = Representative.findRepresentatives(identity.address)
+  repsBlob.catch(console.log)
+  .then(blob => Representative.createRepsArray(blob))
+  .then(blob => {res.json(blob)})
 })
 
 router.post("/NewCampaign", function(req,res,next){
