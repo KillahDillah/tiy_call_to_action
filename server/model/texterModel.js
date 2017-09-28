@@ -11,17 +11,24 @@ function insertText(text) {
         VALUES (?,?,?,?,?,?,?,?)
         `
         pool.getConnection(function (err, connection) {
+            if(err){
+                reject({
+                    status:'Failure',
+                    error:true,
+                    errorMessage:['Failed to get a db connection'],
+                    err:err
+                })
+            }
             connection.query(sql, [text.SmsMessageSid, text.NumMedia, text.SmsSid, text.Body, text.To, text.From, text.MessageSid, text.Processed], function (err, results, fields) {
+                connection.release()
                 if (err) {
                     console.log(err)
-                    connection.release()
                     reject({
                         status: 'Failure',
                         error: true,
                         errorMessage: ['Text was not stored in the database']
                     })
                 } else {
-                    connection.release()
                     resolve(
                         {
                             status: 'Success',
