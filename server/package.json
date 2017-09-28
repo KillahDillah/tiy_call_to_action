@@ -6,6 +6,7 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "bcrypt": "^1.0.3",
     "body-parser": "~1.13.2",
     "config": "^1.26.2",

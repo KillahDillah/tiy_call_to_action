@@ -5,6 +5,9 @@
         "password":"2c2b19f8", // change me
         "database":"heroku_a63de5d81717b5a" // change me
     },
+    "google":{
+        "apiKey":"AIzaSyAugniaitAfv6TASa1c_WV3ac-Lvk8EFWg"
+    },
     "secret": "+L;t%hJZ5<a94@E[",
     "sessionLengthInSeconds": 300000000
 }
