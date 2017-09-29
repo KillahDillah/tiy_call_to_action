@@ -167,4 +167,19 @@ router.post ("/token", function(req,res,next){
   })
 })
 
+router.get ('/metrics/:id', function(req,res,next){
+  const id = req.params.id
+
+  const sql= `
+    SELECT *
+    FROM campaigns
+    WHERE userID = ?
+  `
+  conn.query(sql,[id],function(err,results,fields){
+    if(!err){
+      res.json(results)
+    }
+  })
+})
+
 module.exports = router;
