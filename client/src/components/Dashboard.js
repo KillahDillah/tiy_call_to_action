@@ -7,39 +7,45 @@ import axios from 'axios'
 class Dashboard extends Component {
 
   state= {
-    
+    campaigns:[]
   }
 
   componentWillMount() {
-    console.log(jwtDecode(localStorage.getItem('token')))
     let userId = jwtDecode(localStorage.getItem('token')).userId
-    console.log("userId",userId)
+    console.log(jwtDecode(localStorage.getItem('token')).userId)
     axios.get(`/api/metrics/${userId}`)
-    .then(results => {
-      console.log("results from /api/metrics",results.data)
+    .then(results =>{
+      console.log (results)
+      this.setState({
+        campaigns: results.data
+      })
     })
   }
 
-  then(results=>{
-    this.setState = results.data.results
-  })
-
-
+  
   render() {
     return(
       <div className="wrapper">
-        <div id="footer" class="wrapper">
+        <div id="footer" className="wrapper">
         <Link to="/new-campaign">New Campaign</Link>
-          <div class="inner">
+          <div className="inner">
             <section>
-              <div class="box">
-                <div class="content">
-                  <h2 class="align-center">Your active campaigns:</h2>
+              <div className="box">
+                <div className="content">
+                  <h2 className="align-center">Your active campaigns:</h2>
+                  <div>
+                  {this.state.campaigns.map(function(campaign){
+                    return <div key={campaign.id} className='result'>
+                    <div><Link to="/campaign/:id">{campaign.name}</Link></div>
+                    <div>{campaign.shortDesc}</div>
+                    </div>
+                  })}
+                  </div>
                   <hr />
                 </div>
               </div>
             </section>
-            <div class="copyright">
+            <div className="copyright">
               &copy; 2017 by the Call to Action Team
             </div>
           </div>
