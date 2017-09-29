@@ -34,7 +34,7 @@ class TexterForm extends Component {
         .then(results => {
             let addressObj = {}
             results[0].address_components.forEach(function(item){
-                addressObj [item.types[0]] = item.short_name
+                addressObj[item.types[0]] = item.short_name
             })
             this.setState({
                 streetnumber:addressObj.street_number || "",
