@@ -10,6 +10,7 @@ import '../styles/css/main.css'
 import TexterForm from './Texter/TexterForm'
 import ErrorRegistering from './Texter/ErrorRegistering'
 import ThanksRegistering from './Texter/ThanksRegistering'
+import CampaignDetails from './CampaignDetails/CampaignDetailsContainer'
 import CampaignerReg from './CampaignerReg'
 import Login from './Login'
 import Registered from './Registered'
@@ -30,6 +31,7 @@ class App extends Component {
               <Route exact path="/registered" component={Registered} />
               <Route exact path='/dashboard' component={Dashboard} />
               <Route path="/new-campaign" component={NewCampaign}/>
+              <Route path="/campaign/:id_campaign" component={CampaignDetails} />
             </Switch>
         </Router>
       </Provider>
