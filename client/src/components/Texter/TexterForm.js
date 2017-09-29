@@ -15,7 +15,7 @@ class TexterForm extends Component {
             usState:"",
             zip:"",
             email:"",
-            phone:"",
+            phone:this.props.match.params.phone,
             latLng:""
         }
         this.onChange = (address) => this.setState({ address })
@@ -34,7 +34,7 @@ class TexterForm extends Component {
         .then(results => {
             let addressObj = {}
             results[0].address_components.forEach(function(item){
-                addressObj [item.types[0]] = item.short_name
+                addressObj[item.types[0]] = item.short_name
             })
             this.setState({
                 streetnumber:addressObj.street_number || "",
@@ -66,7 +66,8 @@ class TexterForm extends Component {
             state:this.state.usState,
             zip:this.state.zip,
             email:this.state.email,
-            phone:this.state.phone
+            phone:this.state.phone,
+            showForm:false
             },
           headers: {
                 'Accept': 'application/json',
@@ -98,14 +99,13 @@ class TexterForm extends Component {
             value: this.state.address,
             onChange: this.onChange,
           }
-
         return (
                 <div>
                     <form onSubmit={this.handleSubmit}>
                         <input type="text" placeholder="First Name" onChange={this.handleChange} name="firstname"/>
                         <input type="text" placeholder="Last Name" onChange={this.handleChange} name="lastname"/>
                         <input type="text" placeholder="Email" onChange={this.handleChange} name="email"/>
-                        <input type="text" placeholder="Phone number including +1 and area code" onChange={this.handleChange} name="phone"/>
+                        <input type="text" placeholder="Phone number including +1 and area code" onChange={this.handleChange} name="phone" value={this.state.phone} />
                         <div>
                                 <PlacesAutocomplete inputProps={inputProps}/>
                                 <button type="submit" onClick={this.handleAddressSubmit}>Find Address from Google</button>
