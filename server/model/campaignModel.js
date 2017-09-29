@@ -4,9 +4,7 @@ function getCampaignDetails(id_campaign){
     return new Promise(function(resolve,reject){
         let sql = `
         SELECT ca.id_campaign, t.id_texters, ca.timestamp, t.phone as 'texterPhone', t.firstname AS 'texterFirstName', t.lastname as 'texterLastName', t.email as 'texterEmail', 
-        t.streetnumber as 'texterStreetNumber', t.streetname as 'texterStreetName', t.city as 'texterCity', t.state as 'texterState', t.zip as 'texterZip',
-        r.name as 'repName', r.office_name as 'repOfficeName', r.office_id as 'repOfficeId', r.addressLine1 as 'repAddress1', r.addressLine2 as 'repAddress2',
-        r.addressCity as 'repCity', r.addressState as 'repState', r.addressZip as 'repZip', r.roles as 'repRole'
+        t.streetnumber as 'texterStreetNumber', t.streetname as 'texterStreetName', t.city as 'texterCity', t.state as 'texterState', t.zip as 'texterZip', GROUP_CONCAT(DISTINCT CONCAT(r.office_name,': ', r.name ) SEPARATOR ', ') as texterRepresentatives
         FROM campaign_activity as ca
         JOIN texters as t on ca.id_texter=t.id_texters
         JOIN representatives r on t.id_texters=r.id_texters

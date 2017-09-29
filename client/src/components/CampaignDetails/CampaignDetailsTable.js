@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import CampaignDetailsTableRow from './CampaignDetailsTableRow'
 
 class CampaignDetailsTable extends Component {
     render() {
@@ -12,20 +13,14 @@ class CampaignDetailsTable extends Component {
                         <th>Email</th>
                         <th>City</th>
                         <th>State</th>
-                        <th>House Representative</th>
-                        <th>Senators</th>
+                        <th>Elected Representatives</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>{this.props.data[0].texterFirstName}</td>
-                        <td>{this.props.data[0].texterFirstName}</td>
-                        <td>{this.props.data[0].texterFirstName}</td>
-                        <td>{this.props.data[0].texterFirstName}</td>
-                        <td>{this.props.data[0].texterFirstName}</td>
-                        <td>{this.props.data[0].texterFirstName}</td>
-                        <td>{this.props.data[0].texterFirstName}</td>
-                    </tr>
+                        {this.props.data.map(function(item){
+                            console.log("item",item)
+                            return <CampaignDetailsTableRow person={item} key={item.id_texters} />
+                        }) }
                     </tbody>
                 </table>
                 </div>	
