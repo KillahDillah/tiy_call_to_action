@@ -31,8 +31,13 @@ class NewCampaign extends Component {
       campldesc:this.state.campldesc,
       campsdesc:this.state.campsdesc,
       userId:jwtDecode(localStorage.getItem('token')).userId
-    }).then(function(resp){
-      console.log(resp)
+    }).then (resp => {
+      this.setState({
+        campname: "",
+        keywords: "",
+        campsdesc: "",
+        campldesc: ""
+      })
     })
   }
 

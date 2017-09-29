@@ -36,7 +36,7 @@ class Dashboard extends Component {
                   <div>
                   {this.state.campaigns.map(function(campaign){
                     return <div key={campaign.id} className='result'>
-                    <div><Link to="/campaign/:id">{campaign.name}</Link></div>
+                    <div><Link to={`/campaign/${campaign.id}`}>{campaign.name}</Link></div>
                     <div>{campaign.shortDesc}</div>
                     </div>
                   })}
