@@ -14,7 +14,7 @@ function messageRouter(phone,textBody,cb,fullUrl){
     .then(function(identityResults){
         if(!identityResults.registered){
             //Registration url comes in from Express route
-            cb(`You are not registerd yet! ${fullUrl}`)
+            cb(`You are not registered yet! ${fullUrl}`)
         }else{
             //This object stores the needed id_texters key
             let texter = identityResults.texter
