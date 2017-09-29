@@ -15,7 +15,7 @@ const config = require('config')
  * This a webhook for Twilio to use to send incoming text messages.
  */
 router.post('/sms', function (req, res, next) {
-  let fullUrl = req.protocol + '://' + req.get('host') + '/register'
+  let fullUrl = req.protocol + '://' + req.get('host') + '/reg/' + req.body.From
   MessageRouter.messageRouter(req.body.From,req.body.Body,function(message){
     res.send(`<Response>
     <Message>${message}</Message>

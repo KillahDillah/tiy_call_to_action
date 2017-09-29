@@ -25,7 +25,7 @@ class App extends Component {
               <Route exact path="/" component={Login} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/registration" component={CampaignerReg} />
-              <Route exact path="/register" component={TexterForm} />
+              <Route exact path="/reg/:phone" component={TexterForm} />
               <Route exact path="/error" component={ErrorRegistering} />
               <Route exact path="/thanks/:id" component={ThanksRegistering}/>
               <Route exact path="/registered" component={Registered} />
