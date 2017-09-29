@@ -6,7 +6,7 @@ import CampaignDetailsTable from './CampaignDetailsTable'
 class CampaignDetailsContainer extends Component {
     state = {
         err:null,
-        detailsArr:[]
+        detailsArr:false
     }
     
     componentWillMount(){
@@ -21,15 +21,21 @@ class CampaignDetailsContainer extends Component {
                 detailsArr:results.data.results
             })
         })
-        .then(e =>{
-            console.log(this.state)
-        })
     }
     render() {
+        let partial
+        if(!this.state.detailsArr){
+            partial = <div>Loading</div>
+        }else if(!this.state.detailsArr[0].id_campaign){
+            partial = <div>No campaign data available</div>
+            
+        }else{
+            partial = <CampaignDetailsTable data={this.state.detailsArr} />
+        }
         return (
                 <div>
                 <h2>Campaign {this.props.match.params.id_campaign}</h2>
-                    { this.state.detailsArr.length > 0 && <CampaignDetailsTable data={this.state.detailsArr} /> }
+                    {partial}
                 </div>	
                 )
     }

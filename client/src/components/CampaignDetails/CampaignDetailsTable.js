@@ -18,7 +18,6 @@ class CampaignDetailsTable extends Component {
                     </thead>
                     <tbody>
                         {this.props.data.map(function(item){
-                            console.log("item",item)
                             return <CampaignDetailsTableRow person={item} key={item.id_texters} />
                         }) }
                     </tbody>
