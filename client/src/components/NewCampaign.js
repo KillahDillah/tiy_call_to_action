@@ -38,6 +38,8 @@ class NewCampaign extends Component {
         campsdesc: "",
         campldesc: ""
       })
+    }).then (resp => {
+      this.props.history.push('/dashboard')
     })
   }
 
@@ -58,8 +60,8 @@ class NewCampaign extends Component {
             <textarea onChange={this.handleChange} name="campldesc" value={this.state.campldesc} placeholder="Description used when user views campaign page via site"/>
           </div>
           <div className="keywords">
-            <label htmlFor="keywords"> Keywords</label>
-            <textarea onChange={this.handleChange} name="keywords" value={this.state.keywords} placeholder="For searching" />
+            <label htmlFor="keywords"> Keyword</label>
+            <textarea onChange={this.handleChange} name="keywords" value={this.state.keywords} placeholder="One keyword" />
           </div>
           <button type="submit">Submit</button>
         </form>
