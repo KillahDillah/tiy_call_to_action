@@ -51,10 +51,10 @@ router.post('/texter', function (req, res, next) {
     })
   })
     .then(function (data) {
-      res.send({
-        success: true,
-        id: data.id
-      })
+      // res.send({
+      //   success: true,
+      //   id: data.id
+      // })
       return data.id
     })
     .then(function(id_texters){
@@ -66,7 +66,10 @@ router.post('/texter', function (req, res, next) {
         let stuff = Representative.storeReps(blob,id_texters)
         stuff.catch(console.log)
         .then(console.log)
-        res.json(blob)
+        res.json({
+          succes:true,
+          senator:blob}
+        )
       })
     })
 
