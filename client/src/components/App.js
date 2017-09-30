@@ -15,6 +15,7 @@ import CampaignerReg from './CampaignerReg'
 import Login from './Login'
 import Registered from './Registered'
 import Dashboard from './Dashboard'
+import Letter from './Letter'
 
 class App extends Component {
   render() {
@@ -32,6 +33,7 @@ class App extends Component {
               <Route exact path='/dashboard' component={Dashboard} />
               <Route path="/new-campaign" component={NewCampaign}/>
               <Route path="/campaign/:id_campaign" component={CampaignDetails} />
+              <Route path="/letter/:id_campaign" component={Letter} />
             </Switch>
         </Router>
       </Provider>

@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const Twilio = require('twilio')
 const Text = require('../model/texterModel')
 const conn = require('../lib/db')
 const MessageRouter = require('../model/messageRouter')
@@ -10,17 +9,18 @@ const hash = require('js-sha512')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const config = require('config')
+const Twilio = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 /**
  * This a webhook for Twilio to use to send incoming text messages.
  */
 router.post('/sms', function (req, res, next) {
   let fullUrl = req.protocol + '://' + req.get('host') + '/reg/' + req.body.From
-  MessageRouter.messageRouter(req.body.From,req.body.Body,function(message){
+  MessageRouter.messageRouter(req.body.From, req.body.Body, function (message) {
     res.send(`<Response>
     <Message>${message}</Message>
   </Response>`)
-  },fullUrl)
+  }, fullUrl)
 });
 
 
@@ -40,7 +40,8 @@ router.post('/texter', function (req, res, next) {
     state: req.body.state,
     zip: req.body.zip,
     email: req.body.email || '',
-    address: req.body.address
+    address: req.body.address,
+    sendSMS: req.body.sendSMS || true
   }
   let texter = Text.insertTexter(identity)
   texter.catch(function (err) {
@@ -72,48 +73,58 @@ router.post('/texter', function (req, res, next) {
         )
       })
     })
-
+  if (req.body.sendSMS !== false) {
+    Twilio.messages.create({
+      to: identity.phone,
+      from: process.env.TWILIO_PHONE_NUMBER,
+      body: "You're registered! Please text in your keyword again.",
+    }), function (err, message) {
+      if (err) {
+        console.log("problem sending sms", err)
+      }
+    }
+  }
 })
 
-router.get("/campaign/:id_campaign", function(req,res,next){
+router.get("/campaign/:id_campaign", function (req, res, next) {
   console.log(req.params.id_campaign)
   let campaignDetails = Campaign.getCampaignDetails(req.params.id_campaign)
-  campaignDetails.catch(err =>{
+  campaignDetails.catch(err => {
     console.log(err)
-    res.send({error:true,message:'Unable to get campaign details'})
+    res.send({ error: true, message: 'Unable to get campaign details' })
   })
-  .then(data => {
-    res.json(data)
-  })
+    .then(data => {
+      res.json(data)
+    })
 })
-router.post("/NewCampaign", function(req,res,next){
+router.post("/NewCampaign", function (req, res, next) {
   const name = req.body.campname
   const SDesc = req.body.campsdesc
   const LDesc = req.body.campldesc
-  const keywords= req.body.keywords
+  const keywords = req.body.keywords
   const userId = req.body.userId
 
-  const sql= `
+  const sql = `
   INSERT INTO campaigns (name, shortDesc, longDesc, keywords, userId)
   VALUES (?,?,?,?,?)
   `
 
-  conn.query(sql, [name,SDesc,LDesc,keywords,userId], function(err,results,fields){
-    if (!err){
+  conn.query(sql, [name, SDesc, LDesc, keywords, userId], function (err, results, fields) {
+    if (!err) {
       res.json({
-        'it':'works'
+        'it': 'works'
       })
     } else {
       console.log(err)
       res.json({
-        'it':'doesnt work',
+        'it': 'doesnt work',
         err: err
       })
     }
   })
 })
 
-router.post('/CampaignerReg', function (req,res,next){
+router.post('/CampaignerReg', function (req, res, next) {
   const fname = req.body.fname
   const lname = req.body.lname
   const username = req.body.username
@@ -125,24 +136,24 @@ router.post('/CampaignerReg', function (req,res,next){
     FROM clogin
     WHERE username = ?
   `
-  conn.query(checkReg, [username], function(err,results,fields){
-    if (results.length>0){
+  conn.query(checkReg, [username], function (err, results, fields) {
+    if (results.length > 0) {
       res.status(400).json({
-        message:"Username taken"
+        message: "Username taken"
       })
     } else {
-      const sql= `
+      const sql = `
       INSERT INTO clogin (fname, lname, username, email, password)
       VALUES (?,?,?,?,?)
       `
 
-      bcrypt.hash(password, 10).then(function(hashedPassword){
-        conn.query(sql, [fname,lname,username,email,hashedPassword], function(err,results,fields){
-           if (!err) {
+      bcrypt.hash(password, 10).then(function (hashedPassword) {
+        conn.query(sql, [fname, lname, username, email, hashedPassword], function (err, results, fields) {
+          if (!err) {
             res.json({
-            message:"Success!"
-           })
-          } 
+              message: "Success!"
+            })
+          }
         })
       })
     }
@@ -150,7 +161,7 @@ router.post('/CampaignerReg', function (req,res,next){
 })
 
 
-router.post ("/token", function(req,res,next){
+router.post("/token", function (req, res, next) {
   const username = req.body.username
   const password = req.body.password
 
@@ -158,20 +169,20 @@ router.post ("/token", function(req,res,next){
     SELECT password,id FROM clogin
     WHERE username = ?
   `
-  conn.query (sql,[username], function(err,results,fields){
-    if (results.length>0){
+  conn.query(sql, [username], function (err, results, fields) {
+    if (results.length > 0) {
       const hashedPassword = results[0].password
-      bcrypt.compare(password,hashedPassword).then(function(result){
-        if(result){
+      bcrypt.compare(password, hashedPassword).then(function (result) {
+        if (result) {
           res.json({
-            token: jwt.sign({userId: results[0].id}, config.get('secret'), { expiresIn: config.get('sessionLengthInSeconds')})
+            token: jwt.sign({ userId: results[0].id }, config.get('secret'), { expiresIn: config.get('sessionLengthInSeconds') })
           })
-        } else{
+        } else {
           res.status(401).json({
             message: 'Invalid Credentials'
           })
         }
-      }).catch(function(err){
+      }).catch(function (err) {
         console.log(err)
       })
     } else {
@@ -182,15 +193,29 @@ router.post ("/token", function(req,res,next){
   })
 })
 
-router.get ('/metrics/:id', function(req,res,next){
+router.get('/metrics/:id', function (req, res, next) {
   const id = req.params.id
 
-  const sql= `
+  const sql = `
     SELECT *
     FROM campaigns
     WHERE userID = ?
   `
-  conn.query(sql,[id],function(err,results,fields){
+  conn.query(sql, [id], function (err, results, fields) {
+    if (!err) {
+      res.json(results)
+    }
+  })
+})
+
+router.get('/letter/:id', function(req,res,next){
+  const id = req.params.id
+  const sql=`
+    SELECT *
+    FROM campaigns
+    WHERE id = ?
+  `
+  conn.query(sql,[id], function(err,results,fields){
     if(!err){
       res.json(results)
     }
