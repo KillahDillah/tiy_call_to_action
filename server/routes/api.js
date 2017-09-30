@@ -58,17 +58,17 @@ router.post('/texter', function (req, res, next) {
       return data.id
     })
     .then(function(id_texters){
-      console.log(id_texters)
       let repsBlob = Representative.findRepresentatives(identity.address)
       repsBlob.catch(console.log)
       .then(blob => Representative.createRepsArray(blob))
       .then(blob => {
         let stuff = Representative.storeReps(blob,id_texters)
         stuff.catch(console.log)
-        .then(console.log)
+        .then()
         res.json({
           succes:true,
-          senator:blob}
+          reps:blob,
+          id:id_texters}
         )
       })
     })
