@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Switch} from 'react-router-dom'
 import {AuthRoute as Route} from '../lib/auth'
 import {Provider} from 'react-redux'
 import store from '../store'
+import Layout from './Layout'
 import NewCampaign from './NewCampaign'
 import 'normalize.css/normalize.css'
 import 'font-awesome/css/font-awesome.min.css'
@@ -22,6 +23,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
+          <Layout>
             <Switch>
               <Route exact path="/" component={Login} />
               <Route exact path="/login" component={Login} />
@@ -35,6 +37,7 @@ class App extends Component {
               <Route path="/campaign/:id_campaign" component={CampaignDetails} />
               <Route path="/letter/:id_campaign" component={Letter} />
             </Switch>
+          </Layout>
         </Router>
       </Provider>
     )

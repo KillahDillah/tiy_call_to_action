@@ -23,6 +23,7 @@ class Letter extends Component {
   }
 
   render() {
+    
     let formattedDate = Moment().format("MMMM Do YYYY")
 
     return(
