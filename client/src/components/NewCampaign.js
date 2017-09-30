@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
+import {Authorize} from '../lib/auth'
 
 
 //TODO: Clear state on form submit and change to singular keyword
@@ -70,4 +71,4 @@ class NewCampaign extends Component {
   }
 }
 
-export default NewCampaign
+export default Authorize(NewCampaign)

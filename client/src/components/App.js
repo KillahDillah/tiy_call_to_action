@@ -17,27 +17,24 @@ import Login from './Login'
 import Registered from './Registered'
 import Dashboard from './Dashboard'
 import Letter from './Letter'
+import Main from './Main'
+
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
         <Router>
-          <Layout>
-            <Switch>
-              <Route exact path="/" component={Login} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/registration" component={CampaignerReg} />
-              <Route exact path="/reg/:phone" component={TexterForm} />
-              <Route exact path="/error" component={ErrorRegistering} />
-              <Route exact path="/thanks/:id" component={ThanksRegistering}/>
-              <Route exact path="/registered" component={Registered} />
-              <Route exact path='/dashboard' component={Dashboard} />
-              <Route path="/new-campaign" component={NewCampaign}/>
-              <Route path="/campaign/:id_campaign" component={CampaignDetails} />
-              <Route path="/letter/:id_campaign" component={Letter} />
-            </Switch>
-          </Layout>
+          <Switch>
+            <Route exact path="/registration" component={CampaignerReg} />
+            <Route exact path="/reg/:phone" component={TexterForm} />
+            <Route exact path="/error" component={ErrorRegistering} />
+            <Route exact path="/thanks/:id" component={ThanksRegistering}/>
+            <Route exact path="/registered" component={Registered} />
+            <Route exact path="/ltr/:id_campaign" component={Letter} />
+            <Route exact path="/login" component={Login} />
+            <Route path="/" component={Main} />
+          </Switch>
         </Router>
       </Provider>
     )

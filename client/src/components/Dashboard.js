@@ -25,13 +25,8 @@ class Dashboard extends Component {
   
   render() {
     return(
-      <div className="wrapper">
-        <div id="footer" className="wrapper">
-        <Link to="/new-campaign">New Campaign</Link>
-          <div className="inner">
-            <section>
-              <div className="box">
-                <div className="content">
+            <div>
+                <Link to="/new-campaign">New Campaign</Link>
                   <h2 className="align-center">Your active campaigns:</h2>
                   <div>
                   {this.state.campaigns.map(function(campaign){
@@ -42,16 +37,7 @@ class Dashboard extends Component {
                     </div>
                   })}
                   </div>
-                  <hr />
                 </div>
-              </div>
-            </section>
-            <div className="copyright">
-              &copy; 2017 by the Call to Action Team
-            </div>
-          </div>
-        </div>
-      </div>
     )
   }
 }
