@@ -52,21 +52,26 @@ router.post('/texter', function (req, res, next) {
     })
   })
     .then(function (data) {
-      res.send({
-        success: true,
-        id: data.id
-      })
+      // res.send({
+      //   success: true,
+      //   id: data.id
+      // })
       return data.id
     })
-    .then(function (id_texters) {
+    .then(function(id_texters){
       let repsBlob = Representative.findRepresentatives(identity.address)
       repsBlob.catch(console.log)
-        .then(blob => Representative.createRepsArray(blob))
-        .then(blob => {
-          let stuff = Representative.storeReps(blob, id_texters)
-          stuff.catch(console.log)
-            .then(console.log)
-        })
+      .then(blob => Representative.createRepsArray(blob))
+      .then(blob => {
+        let stuff = Representative.storeReps(blob,id_texters)
+        stuff.catch(console.log)
+        .then()
+        res.json({
+          succes:true,
+          reps:blob,
+          id:id_texters}
+        )
+      })
     })
   if (req.body.sendSMS !== false) {
     Twilio.messages.create({
