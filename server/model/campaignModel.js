@@ -8,7 +8,8 @@ function getCampaignDetails(id_campaign){
         FROM campaign_activity as ca
         JOIN texters as t on ca.id_texter=t.id_texters
         JOIN representatives r on t.id_texters=r.id_texters
-        WHERE ca.active =1 AND ca.confirmed=1 AND ca.id_campaign LIKE ?;`
+        WHERE ca.active =1 AND ca.confirmed=1 AND ca.id_campaign LIKE ?
+        group by t.id_texters;`
         pool.getConnection(function(err,connection){
             if(err){
                 reject({
