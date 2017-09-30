@@ -33,7 +33,7 @@ class App extends Component {
               <Route exact path='/dashboard' component={Dashboard} />
               <Route path="/new-campaign" component={NewCampaign}/>
               <Route path="/campaign/:id_campaign" component={CampaignDetails} />
-              <Route path="/letter/" component={Letter} />
+              <Route path="/letter/:id_campaign" component={Letter} />
             </Switch>
         </Router>
       </Provider>

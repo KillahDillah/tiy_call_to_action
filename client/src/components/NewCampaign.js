@@ -57,7 +57,7 @@ class NewCampaign extends Component {
           </div>
           <div className="c-long-desc">
             <label htmlFor="c-long-desc">Body of Letter</label>
-            <textarea onChange={this.handleChange} name="campldesc" value={this.state.campldesc} placeholder="Description used when user views campaign page via site"/>
+            <textarea onChange={this.handleChange} name="campldesc" value={this.state.campldesc} placeholder="Body of letter sent to representative"/>
           </div>
           <div className="keywords">
             <label htmlFor="keywords"> Keyword</label>
