@@ -55,8 +55,8 @@ function identifyTexter(phone) {
         WHERE phone = ?`
         pool.getConnection(function (err, connection) {
             connection.query(sql, [phone], function (err, results, fields) {
+                connection.release()
                 if (err) {
-                    connection.release()
                     reject({
                         status: 'Failure',
                         error: true,
@@ -159,9 +159,45 @@ function checkCampaign(phone) {
     })
 }
 
+function getTexter(id_texters){
+    return new Promise(function (resolve, reject) {
+        let sql = `
+        SELECT id_texters, phone, firstname, lastname, streetname, city, state, zip, email, timestamp, address
+        FROM texters
+        WHERE id_texters = ?`
+        pool.getConnection(function (err, connection) {
+            connection.query(sql, [id_texters], function (err, results, fields) {
+                connection.release()
+                if (err) {
+                    reject({
+                        status: 'Failure',
+                        error: true,
+                        errorMessage: ['Unable to query the DB for id_texters']
+                    })
+                }
+                else if (results.length == 0) {
+                    resolve({
+                        status: 'Success',
+                        error: false,
+                        registered: false,
+                    })
+                } else {
+                    let texter = results[0]
+                    resolve({
+                        status: 'Success',
+                        error: false,
+                        registered: true,
+                        texter: texter
+                    })
+                }
+            })
+        })
+    })
+}
 
 module.exports = {
     insertText: insertText,
     identifyTexter: identifyTexter,
-    insertTexter: insertTexter
+    insertTexter: insertTexter,
+    getTexter: getTexter
 }
