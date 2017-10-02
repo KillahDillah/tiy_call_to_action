@@ -2,9 +2,13 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 class UpdateTexters extends Component {
-    state = {
-        body:""
+    constructor(props){
+        super(props)
+        this.state = {
+            body:""
+        }
     }
+    
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -12,14 +16,23 @@ class UpdateTexters extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault()
-        axios.post(`/api/campaign/${this.props.id_campaign}/updateTexters`, {
-            Body:this.state.body
-          }).then (resp => {
-            this.setState({
-              body: ""
+        axios({
+            method: 'post',
+            url: `/api/campaign/${this.props.id_campaign}/updateTexters`,
+            data: {
+                Body:this.state.body
+              },
+            headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                }
             })
-            this.props.history.push('/dashboard')
-          })
+            .catch(err => {
+              console.log(err, "Error sending texts");
+            })
+          .then(function(response){
+                  this.props.history.push('/dashboard')
+          }.bind(this))
     }
     render() {
         return (
