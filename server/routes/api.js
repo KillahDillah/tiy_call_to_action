@@ -96,13 +96,13 @@ router.get("/campaign/:id_campaign", function (req, res, next) {
       res.json(data)
     })
 })
-router.post("/campaign/id_campaign/updateTexters", function(req,res, next){
+router.post("/campaign/:id_campaign/updateTexters", function(req,res, next){
   let campaignDetails = Campaign.getCampaignDetails(req.params.id_campaign)
   campaignDetails.catch(err => {
     res.send({ error: true, message: 'Unable to get campaign details' })
   })
     .then(data => {
-      let phoneArr = data.results.map(item => item.phone)
+      let phoneArr = data.results.map(item => item.texterPhone)
       phoneArr.forEach(phone => {
         Twilio.messages.create({
           to: phone,
@@ -114,6 +114,7 @@ router.post("/campaign/id_campaign/updateTexters", function(req,res, next){
           }
         }
       })
+      res.json({message:"Sent"})
     })
 })
 router.post("/NewCampaign", function (req, res, next) {
