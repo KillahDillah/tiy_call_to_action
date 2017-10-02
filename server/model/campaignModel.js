@@ -1,4 +1,5 @@
 const pool = require('../lib/db.js')
+const Twilio = require('./twilioModel')
 
 function getCampaignDetails(id_campaign){
     return new Promise(function(resolve,reject){
@@ -50,6 +51,11 @@ function getCampaignDetails(id_campaign){
     })
 }
 
+function updateCampaign(body,arrPhone){
+    arrPhone.forEach(function(phone){
+        Twilio.sendSMS(body,phone)
+    })
+}
 module.exports = {
     getCampaignDetails:getCampaignDetails
 }
