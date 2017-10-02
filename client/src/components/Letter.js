@@ -23,6 +23,7 @@ class Letter extends Component {
   }
 
   render() {
+
     let formattedDate = Moment().format("MMMM Do YYYY")
 
     return(
@@ -43,13 +44,12 @@ class Letter extends Component {
               <p> {campaign.longDesc}</p>
             </div>
             <div>
-              <p>Regards,</p>
+              <p>Regards, (texter)</p>
             </div>
           </div>
 
         })}
         </div>
-        <button><Link to="/dashboard">Send</Link></button>
       </div>
     )
   }

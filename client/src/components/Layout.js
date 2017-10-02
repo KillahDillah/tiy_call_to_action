@@ -5,14 +5,12 @@ class Layout extends Component {
   render() {
     return (
       <div>
-        {/* this is just an example layout*/}
-        <header>
-          <nav>
-            <ul>
-              
-            </ul>
-          </nav>
-        </header>
+        <nav>
+          <ul>
+            <li><Link to="/dashboard">Home</Link></li>
+            <li><Link to="/">Log out</Link></li>
+          </ul>
+        </nav>
         {/* Rendering of the page below */}
         {this.props.children}
         <footer>
