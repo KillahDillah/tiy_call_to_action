@@ -43,6 +43,18 @@ router.post('/texter', function (req, res, next) {
     address: req.body.address,
     sendSMS: req.body.sendSMS || true
   }
+  console.log("req.body.sendSMS",identity.sendSMS)
+  if(identity.sendSMS !== 'false'){
+    Twilio.messages.create({
+      to: identity.phone,
+      from: process.env.TWILIO_PHONE_NUMBER,
+      body: "You're registered! Please text in your keyword again.",
+    }), function (err, message) {
+      if (err) {
+        console.log("problem sending sms", err)
+      }
+    }
+  }
   let texter = Text.insertTexter(identity)
   texter.catch(function (err) {
     //If there is an error registering, success is sent as false to let the client tell them there was an error
@@ -73,17 +85,6 @@ router.post('/texter', function (req, res, next) {
         )
       })
     })
-  if (req.body.sendSMS !== false) {
-    Twilio.messages.create({
-      to: identity.phone,
-      from: process.env.TWILIO_PHONE_NUMBER,
-      body: "You're registered! Please text in your keyword again.",
-    }), function (err, message) {
-      if (err) {
-        console.log("problem sending sms", err)
-      }
-    }
-  }
 })
 
 router.get("/campaign/:id_campaign", function (req, res, next) {
