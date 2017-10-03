@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 
 class ListItem extends Component {
-  onClick = (e) =>{
-    console.log(`/campaign/${this.props.id_campaign}/${this.props.name}`)
-  }
+  
   render() {
     return(
-      <li onClick={this.onClick}>
-      {this.props.name}
-      </li>
+      <Link to={'/campaign/'+this.props.id_campaign+'/'+this.props.name}>{this.props.name}</Link>
     )
   }
 }

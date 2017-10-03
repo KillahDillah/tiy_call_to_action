@@ -6,7 +6,7 @@ class BySenate extends Component {
   render() {
     return(
       <div>
-
+        
       </div>
     )
   }
