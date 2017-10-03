@@ -56,6 +56,58 @@ function updateCampaign(body,arrPhone){
         Twilio.sendSMS(body,phone)
     })
 }
+
+function getCampaignKeywordList(id_texters,top,bottom){
+    return new Promise(function(resolve,reject){
+        let topNum = top || 10
+        let bottomNum = bottom || 0
+        let sql = `
+        SELECT c.keywords, ca.id_texter
+        FROM campaigns as c
+        LEFT JOIN campaign_activity as ca on ca.id_campaign=c.id
+        GROUP BY c.id
+        HAVING ca.id_texter != ? OR ca.id_texter is null
+        LIMIT ?,?`
+        pool.getConnection(function(err,connection){
+            if(err){
+                reject({
+                    status:'Failure',
+                    err:err,
+                    error:true,
+                    errorMessage:['Unable to get db connection getCampaignDetails']
+                })
+            }
+            else{
+                connection.query(sql,[id_texters,bottomNum,topNum],function(err,results,fields){
+                    connection.release()
+                    if(err){
+                        reject(
+                            {
+                                status:'Failure',
+                                err:err,
+                                error:true,
+                                errorMessage:['Failure querying db for list of campaigns']
+                            })}
+                    else if(results.length > 10){
+                        let arr = results.map(item => item.keywords)
+                        let textBody = arr.join(", ") + ` - Text back LIST${topNum} to see more.`
+                        resolve({
+                            textBody:textBody
+                        })
+                    }
+                    else{
+                        let arr = results.map(item => item.keywords).join(", ")
+                        resolve({
+                            textBody:arr
+                        })
+                    }
+                })
+            }
+        })
+    })
+}
+
 module.exports = {
-    getCampaignDetails:getCampaignDetails
+    getCampaignDetails:getCampaignDetails,
+    getCampaignKeywordList:getCampaignKeywordList
 }
