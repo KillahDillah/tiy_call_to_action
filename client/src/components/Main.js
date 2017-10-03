@@ -7,6 +7,7 @@ import {BrowserRouter as Router, Switch} from 'react-router-dom'
 import {AuthRoute as Route} from '../lib/auth'
 import Dashboard from './Dashboard'
 import Home from './Home'
+import CloserLook from './CloserLook'
 
 class Main extends Component {
   render() {
@@ -18,7 +19,8 @@ class Main extends Component {
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/campaign/:id_campaign" component={CampaignDetails} />
             <Route path="/letter/:id_campaign" component={Letter} />
-            <Route exact path="/" component={Home}/>
+            <Route path="/dataview/:id_campaign" component={CloserLook} />
+            <Route exact path="/" component={Home} />
           </Switch>
         </Layout>
       </Router>
