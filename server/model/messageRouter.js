@@ -1,4 +1,5 @@
 const Text = require('./messageModel')
+const Campaign = require("./campaignModel")
 
 /**
  * This performs the logic of what to do with an incoming text. Relies heavily on promises in messageModel
@@ -51,6 +52,14 @@ function messageRouter(phone,textBody,cb,fullUrl){
                     }else{
                         cb("No open campaign for you to confirm. Please text back with a campaign keyword to join!")
                     }
+                })
+            }
+            else if(/^list\d*/i.test(textBody)){
+                let topDigit = /^list(\d\d)*$/i.exec(textBody)[1] || 0
+                let campaignList = Campaign.getCampaignKeywordList(texter.id_texters,Number(topDigit)+10,Number(topDigit))
+                campaignList.catch(console.log)
+                .then(obj =>{
+                    cb(obj.textBody)
                 })
             }
             //After checking for yes/no, it checks for a keyword
