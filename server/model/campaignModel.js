@@ -88,7 +88,7 @@ function getCampaignKeywordList(id_texters,top,bottom){
                                 error:true,
                                 errorMessage:['Failure querying db for list of campaigns']
                             })}
-                    else if(results.length > 10){
+                    else if(results.length == 10){
                         let arr = results.map(item => item.keywords)
                         let textBody = arr.join(", ") + ` - Text back LIST${topNum} to see more.`
                         resolve({
