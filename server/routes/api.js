@@ -15,7 +15,7 @@ const Twilio = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWI
  * This a webhook for Twilio to use to send incoming text messages.
  */
 router.post('/sms', function (req, res, next) {
-  let fullUrl = req.protocol + '://' + req.get('host') + '/reg/' + req.body.From
+  let fullUrl = req.protocol + '://' + req.get('host')
   MessageRouter.messageRouter(req.body.From, req.body.Body, function (message) {
     res.send(`<Response>
     <Message>${message}</Message>

@@ -14,7 +14,7 @@ function messageRouter(phone,textBody,cb,fullUrl){
     .then(function(identityResults){
         if(!identityResults.registered){
             //Registration url comes in from Express route
-            cb(`You are not registered yet! ${fullUrl}`)
+            cb(`You are not registered yet! ${fullUrl}/reg/${phone}`)
         }else{
             //This object stores the needed id_texters key
             let texter = identityResults.texter
@@ -46,7 +46,7 @@ function messageRouter(phone,textBody,cb,fullUrl){
                         //Update campaign marks the campaign as no longer active
                         updateCampaign.catch(console.log)
                         .then(function(results){
-                            cb(`You will not be part of campaign ${campaignResults.id_campaign}`)
+                            cb(`You will not be part of campaign #${campaignResults.id_campaign}`)
                         })
                     }else{
                         cb("No open campaign for you to confirm. Please text back with a campaign keyword to join!")
@@ -79,7 +79,7 @@ function messageRouter(phone,textBody,cb,fullUrl){
                             let joinCampaign = Text.joinCampaign(results.campaign_id,texter.id_texters)
                             joinCampaign.catch(console.log)
                             .then(function(results){
-                                cb(`Text back 'Yes' to join campaign ${results.id_campaign}`)
+                                cb(`Text back 'Yes' to have this letter sent on your behalf: ${fullUrl}/ltr/${results.id_campaign}`)
                             })
                         })
                     }
