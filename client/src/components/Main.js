@@ -7,6 +7,10 @@ import {BrowserRouter as Router, Switch} from 'react-router-dom'
 import {AuthRoute as Route} from '../lib/auth'
 import Dashboard from './Dashboard'
 import Home from './Home'
+import All from './All'
+import Update from './Update'
+import ByDay from './ByDay'
+import ByState from './ByState'
 
 class Main extends Component {
   render() {
@@ -16,9 +20,14 @@ class Main extends Component {
           <Switch>
             <Route path="/new-campaign" component={NewCampaign}/>
             <Route path="/dashboard" component={Dashboard} />
-            <Route path="/campaign/:id_campaign" component={CampaignDetails} />
-            <Route path="/letter/:id_campaign" component={Letter} />
-            <Route exact path="/" component={Home}/>
+            <Route exact path="/campaign/:id_campaign/All" component={All} />
+            <Route exact path="/campaign/:id_campaign/update" component={Update} />
+            <Route exact path="/campaign/:id_campaign" component={CampaignDetails} />
+            <Route exact path="/letter/:id_campaign" component={Letter} />
+            <Route exact path="/dataview/:id_campaign" component={All} />
+            <Route path="/campaign/:id_campaign/Day" component={ByDay}/>
+            <Route path="/campaign/:id_campaign/State" component={ByState}/>
+            <Route exact path="/" component={Home} />
           </Switch>
         </Layout>
       </Router>

@@ -22,22 +22,21 @@ class Dashboard extends Component {
     })
   }
 
-  
   render() {
     return(
-            <div>
-                <Link to="/new-campaign">New Campaign</Link>
-                  <h2 className="align-center">Your active campaigns:</h2>
-                  <div>
-                  {this.state.campaigns.map(function(campaign){
-                    return <div key={campaign.id} className='result'>
-                    <div><Link to={`/campaign/${campaign.id}`}>{campaign.name}</Link></div>
-                    <div><Link to={`/letter/${campaign.id}`}>Letter</Link></div>
-                    <div>{campaign.shortDesc}</div>
-                    </div>
-                  })}
-                  </div>
-                </div>
+      <div>
+        <Link to="/new-campaign">New Campaign</Link>
+        <h2 className="align-center">Your active campaigns:</h2>
+        <div>
+        {this.state.campaigns.map(function(campaign){
+          return <div key={campaign.id} className='result'>
+          <div><Link to={`/campaign/${campaign.id}`}>{campaign.name}</Link></div>
+          <div><Link to={`/letter/${campaign.id}`}>Letter</Link></div>
+          <div>{campaign.shortDesc}</div>
+          </div>
+          })}
+        </div>
+      </div>
     )
   }
 }
