@@ -43,7 +43,6 @@ router.post('/texter', function (req, res, next) {
     address: req.body.address,
     sendSMS: req.body.sendSMS || true
   }
-  console.log("req.body.sendSMS",identity.sendSMS)
   if(identity.sendSMS !== 'false'){
     Twilio.messages.create({
       to: identity.phone,
@@ -85,6 +84,19 @@ router.post('/texter', function (req, res, next) {
         )
       })
     })
+})
+
+router.get("/texter/:id_texters",function(req,res,next){
+  let texter = Text.getTexter(req.params.id_texters)
+  texter.catch(console.log)
+  .then(data =>{
+    let repsBlob = Representative.findRepresentatives(data.texter.address)
+    repsBlob.catch(console.log)
+    .then(blob => Representative.createRepsArray(blob))
+    .then(arr => {
+      res.json(arr)
+    })
+  })
 })
 
 router.get("/campaign/:id_campaign", function (req, res, next) {
