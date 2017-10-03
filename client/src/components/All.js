@@ -1,23 +1,22 @@
 import React, { Component } from 'react'
 import CampaignSubContainer from './CampaignSubContainer'
 import CampaignDetails from './CampaignDetails/CampaignDetails'
+import Nav from './Nav'
+import {Authorize} from '../lib/auth'
+import jwtDecode from 'jwt-decode'
 
-class CloserLook extends Component {
+class All extends Component {
   render() {
     let id=this.props.match.params.id_campaign
     return(
       <div>
-        <div class="campaign-wrap">
+        <div className="campaign-wrap">
             <CampaignDetails id_campaign={id} />
         </div>
-        <div class="nav">
-          <ul>
-          {['All','Day','state'].map(item => <li>{item}</li>)}
-          </ul>
-        </div>
+        <Nav id_campaign={id}/>
       </div>
     )
   }
 }
 
-export default CloserLook
+export default Authorize(All)
