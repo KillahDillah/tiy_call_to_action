@@ -15,7 +15,7 @@ const Twilio = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWI
  * This a webhook for Twilio to use to send incoming text messages.
  */
 router.post('/sms', function (req, res, next) {
-  let fullUrl = req.protocol + '://' + req.get('host') + '/reg/' + req.body.From
+  let fullUrl = req.protocol + '://' + req.get('host')
   MessageRouter.messageRouter(req.body.From, req.body.Body, function (message) {
     res.send(`<Response>
     <Message>${message}</Message>
@@ -88,14 +88,33 @@ router.post('/texter', function (req, res, next) {
 })
 
 router.get("/campaign/:id_campaign", function (req, res, next) {
-  console.log(req.params.id_campaign)
   let campaignDetails = Campaign.getCampaignDetails(req.params.id_campaign)
   campaignDetails.catch(err => {
-    console.log(err)
     res.send({ error: true, message: 'Unable to get campaign details' })
   })
     .then(data => {
       res.json(data)
+    })
+})
+router.post("/campaign/:id_campaign/updateTexters", function(req,res, next){
+  let campaignDetails = Campaign.getCampaignDetails(req.params.id_campaign)
+  campaignDetails.catch(err => {
+    res.send({ error: true, message: 'Unable to get campaign details' })
+  })
+    .then(data => {
+      let phoneArr = data.results.map(item => item.texterPhone)
+      phoneArr.forEach(phone => {
+        Twilio.messages.create({
+          to: phone,
+          from: process.env.TWILIO_PHONE_NUMBER,
+          body: req.body.Body,
+        }), function (err, message) {
+          if (err) {
+            console.log("problem sending sms", err)
+          }
+        }
+      })
+      res.json({message:"Sent"})
     })
 })
 router.post("/NewCampaign", function (req, res, next) {

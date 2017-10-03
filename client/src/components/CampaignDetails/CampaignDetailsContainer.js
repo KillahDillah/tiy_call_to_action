@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-
+import UpdateTexters from '../UpdateTexters'
 import CampaignDetailsTable from './CampaignDetailsTable'
 
 class CampaignDetailsContainer extends Component {
@@ -30,7 +30,7 @@ class CampaignDetailsContainer extends Component {
             partial = <div>No campaign data available</div>
             
         }else{
-            partial = <CampaignDetailsTable data={this.state.detailsArr} />
+            partial = <div><UpdateTexters id_campaign={this.props.match.params.id_campaign}/><CampaignDetailsTable data={this.state.detailsArr} /></div>
         }
         return (
                 <div>
