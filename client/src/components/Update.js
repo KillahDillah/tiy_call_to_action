@@ -10,7 +10,7 @@ class Update extends Component {
     let id=this.props.match.params.id_campaign
     return(
       <div>
-        <div class="campaign-wrap">
+        <div className="campaign-wrap">
             <UpdateTexters id_campaign={id} />
         </div>
         <Nav id_campaign={id}/>
