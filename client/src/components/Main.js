@@ -4,7 +4,7 @@ import CampaignDetails from './CampaignDetails/CampaignDetailsContainer'
 import Letter from './Letter'
 import Layout from './Layout'
 import {BrowserRouter as Router, Switch} from 'react-router-dom'
-import {AuthRoute as Route} from '../lib/auth'
+import {AuthRoute as Route, Authorize} from '../lib/auth'
 import Dashboard from './Dashboard'
 import Home from './Home'
 import All from './All'
@@ -35,4 +35,4 @@ class Main extends Component {
   }
 }
 
-export default Main
+export default Authorize(Main)
