@@ -12,6 +12,7 @@
     "moment": "^2.18.1",
     "normalize.css": "^7.0.0",
     "object-assign": "^4.1.1",
+    "prop-types": "^15.6.0",
     "react": "^15.6.1",
     "react-alert": "^2.3.0",
     "react-dom": "^15.6.1",
