@@ -1,5 +1,6 @@
 const Text = require('./messageModel')
 const Campaign = require("./campaignModel")
+const Representative = require('../model/representativeModel')
 
 /**
  * This performs the logic of what to do with an incoming text. Relies heavily on promises in messageModel
@@ -61,6 +62,23 @@ function messageRouter(phone,textBody,cb,fullUrl){
                 .then(obj =>{
                     cb(obj.textBody)
                 })
+            }
+            else if(/^reps*/i.test(textBody)){
+                let repsBlob = Representative.findRepresentatives(texter.address)
+                repsBlob.catch(console.log)
+                .then(blob => Representative.createRepsArray(blob))
+                .then(function(blob){
+                    let reps = blob.map(i => i.representative.name + ": " + i.office.name)
+                    console.log(reps)
+                    return reps
+                })
+                .then(e =>{
+                    console.log("hello",e)
+                    cb(`Your representatives - ${e}`)
+                })
+            }
+            else if(/^help$/i.test(textBody)){
+                cb(`Text 'LIST' to get a list of campaigns or 'REPS' for your representatives.`)
             }
             //After checking for yes/no, it checks for a keyword
             else{
