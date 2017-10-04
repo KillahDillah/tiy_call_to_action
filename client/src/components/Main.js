@@ -12,6 +12,7 @@ import Update from './Update'
 import ByDay from './ByDay'
 import ByState from './ByState'
 import National from './National/National'
+
 class Main extends Component {
   render() {
     return(
