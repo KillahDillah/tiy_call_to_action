@@ -6,7 +6,7 @@ import {Authorize} from '../lib/auth'
 class Nav extends Component {
   
   render() {
-    let navItems = ['All','National','State','Senate','Update']
+    let navItems = ['All','National','Representatives','Text an Update','View Letter','Send Letter']
     return(
       <div className="nav">
           <ul>

@@ -38,13 +38,16 @@ class Letter extends Component {
             <p>Name: {campaign.name}</p>
             </div>
             <div>
-              <p> To: (congressperson) </p>
+              <p> {`To: {{repName}}`}</p>
             </div>
             <div>
               <p> {campaign.longDesc}</p>
             </div>
             <div>
-              <p>Regards, (texter)</p>
+              <p>Regards, {`{{yourName}}`}</p>
+              <br/>
+              <p>{`{{address1}}`}</p>
+              <p>{`{{city}}, {{state}}, {{zip}}`}</p>
             </div>
           </div>
 
