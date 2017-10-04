@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import jwtDecode from 'jwt-decode'
+//import jwtDecode from 'jwt-decode'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
 import Moment from 'moment'
 
 class Letter extends Component {

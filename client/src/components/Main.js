@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import NewCampaign from './NewCampaign'
-import CampaignDetails from './CampaignDetails/CampaignDetailsContainer'
 import Letter from './Letter'
 import Layout from './Layout'
 import {BrowserRouter as Router, Switch} from 'react-router-dom'
