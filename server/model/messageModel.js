@@ -7,7 +7,7 @@ const pool = require('../lib/db.js')
 function identifyTexter(phone) {
     return new Promise(function (resolve, reject) {
         let sql = `
-        SELECT id_texters, phone, firstname, lastname, streetnumber, streetname, city, state, zip, email, timestamp
+        SELECT id_texters, phone, firstname, lastname, streetnumber, streetname, city, state, zip, email, timestamp, address
         FROM texters
         WHERE phone = ?`
         pool.getConnection(function (err, connection) {

@@ -107,7 +107,56 @@ function getCampaignKeywordList(id_texters,top,bottom){
     })
 }
 
+function getNationalDetails(id_campaign){
+    return new Promise(function(resolve,reject){
+        let sql = `
+        SELECT COUNT(distinct ca.id_texter) as value, t.state as code, t.state as regionName
+        FROM campaign_activity as ca
+        JOIN texters as t on ca.id_texter=t.id_texters
+        WHERE ca.active =1 AND ca.confirmed=1 AND ca.id_campaign LIKE ?
+        group by t.state`
+        pool.getConnection(function(err,connection){
+            if(err){
+                reject({
+                    status:'Failure',
+                    err:err,
+                    error:true,
+                    errorMessage:['Unable to get db connection getCampaignDetails']
+                })
+            }
+            else{
+                connection.query(sql,[id_campaign],function(err,results,fields){
+                    connection.release()
+                    if(err){
+                        reject({
+                            status:'Failure',
+                            err:err,
+                            error:true,
+                            errorMessage:['Query issue getCampaignDetails']
+                        })
+                    }else if(results.length == 0){
+                        resolve({
+                            status:'Success',
+                            error:false,
+                            id_campaign:null,
+                            message:'No campaign details found'
+                        })
+                    }else{
+                        resolve({
+                            status:'Success',
+                            error:false,
+                            id_campaign:id_campaign,
+                            results:results
+                        })
+                    }
+                })
+            }
+        })
+    })
+}
+
 module.exports = {
     getCampaignDetails:getCampaignDetails,
-    getCampaignKeywordList:getCampaignKeywordList
+    getCampaignKeywordList:getCampaignKeywordList,
+    getNationalDetails:getNationalDetails
 }
