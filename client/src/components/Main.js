@@ -11,7 +11,7 @@ import All from './All'
 import Update from './Update'
 import ByDay from './ByDay'
 import ByState from './ByState'
-
+import National from './National/National'
 class Main extends Component {
   render() {
     return(
@@ -22,6 +22,7 @@ class Main extends Component {
             <Route path="/dashboard" component={Dashboard} />
             <Route exact path="/campaign/:id_campaign/All" component={All} />
             <Route exact path="/campaign/:id_campaign/update" component={Update} />
+            <Route exact path="/campaign/:id_campaign/national" component={National} />
             <Route exact path="/campaign/:id_campaign" component={CampaignDetails} />
             <Route exact path="/letter/:id_campaign" component={Letter} />
             <Route exact path="/dataview/:id_campaign" component={All} />
