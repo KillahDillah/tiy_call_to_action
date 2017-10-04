@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {Label} from 'semantic-ui-react'
 
 class CampaignReg extends Component {
 
@@ -44,26 +45,30 @@ class CampaignReg extends Component {
       <div>
         <div className="reg-box">
           <form onSubmit={this.submitForm}>
-            <div>
-              <label htmlFor="fname">First Name</label>
-              <input onChange={this.handleChange} type="text" value={this.state.fname} name="fname" placeholder="First Name"/>
-            </div>
-            <div>
-              <label htmlFor="lname">Last Name</label>
-              <input onChange={this.handleChange} type="text" value={this.state.lname} name="lname" placeholder="Last Name"/>
-            </div>
-            <div>
-              <label htmlFor="username">Username</label>
-              {this.state.error !== '' ? <p>{this.state.error}</p> : ''}
-              <input onChange={this.handleChange} type="text" value={this.state.username} name="username" placeholder="Username"/>
-            </div>
-            <div>
-              <label htmlFor="email">Email</label>
-              <input onChange={this.handleChange} type="email" value={this.state.email} name="email" placeholder="email"/>
-            </div>
-            <div>
-              <label htmlFor="password">Password</label>
-              <input onChange={this.handleChange} type="password" value={this.state.password} name="password"/>
+            <div className='reg-wrap'>
+              <div id="reg-name">
+                <div>
+                  <label htmlFor="fname">First Name</label>
+                  <input onChange={this.handleChange} type="text" value={this.state.fname} name="fname" placeholder="First Name"/>
+                </div>
+                <div>
+                  <label htmlFor="lname">Last Name</label>
+                  <input onChange={this.handleChange} type="text" value={this.state.lname} name="lname" placeholder="Last Name"/>
+                </div>
+                </div>
+               <div>
+                <label htmlFor="email">Email</label>
+                <input onChange={this.handleChange} type="email" value={this.state.email} name="email" placeholder="email"/>
+              </div>
+              <div>
+                <label htmlFor="username">Username</label>
+                {this.state.error !== '' ? <p>{this.state.error}</p> : ''}
+                <input onChange={this.handleChange} type="text" value={this.state.username} name="username" placeholder="Username"/>
+              </div>
+              <div>
+                <label htmlFor="password">Password</label>
+                <input onChange={this.handleChange} type="password" value={this.state.password} name="password"/>
+              </div>
             </div>
             <button type="submit">Register</button>
           </form>

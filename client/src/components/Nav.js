@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ListItem from './ListItem'
 import jwtDecode from 'jwt-decode'
 import {Authorize} from '../lib/auth'
+import {Button} from 'semantic-ui-react'
 
 class Nav extends Component {
   
@@ -12,7 +13,7 @@ class Nav extends Component {
           <ul>
           {navItems.map(name => 
             <li key={name}>
-            <button><ListItem name={name} id_campaign={this.props.id_campaign}/></button>
+            <Button><ListItem name={name} id_campaign={this.props.id_campaign}/></Button>
             </li>
             )}
           </ul>

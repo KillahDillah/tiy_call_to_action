@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {loginUser, logoutUser} from '../lib/auth'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {Button} from 'semantic-ui-react'
+import { Divider } from 'semantic-ui-react'
 
 
 //Clean up CSS and div tags to be more clear
@@ -32,27 +34,32 @@ class Login extends Component {
 
   render() {
     return (
-      <div id="footer" className="wrapper">
+      <div id="login_wrap" className="wrapper">
         <div className="inner">
           <section>
             <div className="box">
               <div className="content">
-                <h2 className="align-center">Call to Action</h2>
+                <h2 className="align-center">Sign in to Call to Action</h2>
                 <hr />
                 <form onSubmit={this.handleSubmit}>
-                  <div className="field half first">
-                    <label htmlFor="name">Username</label>
-                    <input onChange={this.handleChange} type="text" placeholder="username" name="username" value={this.state.username} />
+                  <div className="login-box">
+                    <div className="login-name">
+                      <label htmlFor="name">Username</label>
+                      <input onChange={this.handleChange} type="text" name="username" value={this.state.username} />
+                    </div>
+                    <div className="login-name">
+                      <label htmlFor="password">Password</label>
+                      <input onChange={this.handleChange} type="password" name="password" value={this.state.password} />
+                    </div>
+                    <Button compact value="login" type="submit">Login</Button>
                   </div>
-                  <div className="field half">
-                    <label htmlFor="password">Password</label>
-                    <input onChange={this.handleChange} type="password" placeholder="password" name="password" value={this.state.password} />
-                  </div>
-                  <ul className="actions align-center">
-                    <li><input value="login" className="button special" type="submit" /></li>
-                    <li><Link to='/registration'>Register</Link></li>
-                  </ul>
                 </form>
+              </div>
+            </div>
+            <div className="box">
+              <div className="reg-content">
+                <p>New to Call to Action?</p>
+                <Link to='/registration'>Register</Link>
               </div>
             </div>
           </section>
