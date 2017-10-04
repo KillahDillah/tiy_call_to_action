@@ -1,22 +1,45 @@
 import React, { Component } from 'react'
 import ListItem from './ListItem'
 import jwtDecode from 'jwt-decode'
-import {Authorize} from '../lib/auth'
+import { Authorize } from '../lib/auth'
 
 class Nav extends Component {
-  
+
   render() {
-    let navItems = ['All','National','State','Senate','Update']
-    return(
+    let navItems = [{
+      name: 'All',
+      param: 'all'
+    },
+    {
+      name: 'National',
+      param: 'national'
+    },
+    {
+      name: 'By Representative',
+      param: 'representative'
+    },
+    {
+      name: 'Update Texters',
+      param: 'updatetexters'
+    },
+    {
+      name: 'View Letter',
+      param: 'letter'
+    },
+    {
+      name: 'Send Letter',
+      param: 'sendletter'
+    }]
+    return (
       <div className="nav">
-          <ul>
-          {navItems.map(name => 
-            <li key={name}>
-            <button><ListItem name={name} id_campaign={this.props.id_campaign}/></button>
+        <ul>
+          {navItems.map(item =>
+            <li key={item.param}>
+              <button><ListItem obj={item} id_campaign={this.props.id_campaign} /></button>
             </li>
-            )}
-          </ul>
-        </div>
+          )}
+        </ul>
+      </div>
     )
   }
 }
