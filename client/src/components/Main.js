@@ -19,7 +19,7 @@ class Main extends Component {
       <Router>
         <Layout>
           <Switch>
-            <Route path="/new-campaign" component={NewCampaign}/>
+            <Route path="/newcampaign" component={NewCampaign}/>
             <Route path="/dashboard" component={Dashboard} />
             <Route exact path="/letter/:id_campaign/letter" component={Letter} />
             <Route exact path="/campaign/:id_campaign/all" component={All} />
@@ -31,7 +31,7 @@ class Main extends Component {
             <Route exact path="/campaign/:id_campaign/state" component={ByState}/>
             <Route exact path="/campaign/:id_campaign/sendletter" component={Letter}/>
             <Route exact path="/campaign/:id_campaign/letter" component={Letter}/>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={Dashboard} />
           </Switch>
         </Layout>
       </Router>

@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
-import {callLogoutUser} from '../actions/campaignAction'
-import {Icon} from 'semantic-ui-react'
-//import {connect} from 'react-redux'
+import { Link } from 'react-router-dom'
+import { callLogoutUser } from '../actions/campaignAction'
+import { Container, Divider, Dropdown, Grid, Header, Image, List, Menu, Segment, Icon } from 'semantic-ui-react'
 
 class Layout extends Component {
 
-  logout =(e)=> {
+  logout = (e) => {
     callLogoutUser()
   }
 
@@ -14,24 +13,25 @@ class Layout extends Component {
   render() {
     return (
       <div>
-        <div id="navy">
-          <header className="nav">
-            <ul>
-              <li><Link to="/dashboard">Text to Action</Link></li>
-              <div className="top-right">
-                <li><Link to="/new-campaign"><Icon name='plus'/></Link></li>
-                <li><Link onClick={this.logout} to="/login"><Icon name='lock'/></Link></li>
-              </div>
-            </ul>
-          </header>
-        </div>
+        <Menu>
+          <Container>
+            <Menu.Item header>
+              <Image
+                size='mini'
+                src='/logo_small.png'
+                style={{ marginRight: '1.5em' }}
+              />
+              Text to Action
+      </Menu.Item>
+            <Menu.Item as={Link} to="/dashboard">Home</Menu.Item>
+            <Menu.Item as={Link} to="/newcampaign" name="newCampaign"><Icon name="add" />New Campaign</Menu.Item>
+          </Container>
+          <Menu.Menu position="right">
+            <Menu.Item as={Link} to="/login" name="logout" onClick={this.logout}><Icon name="sign out" />Sign Out</Menu.Item>
+          </Menu.Menu>
+        </Menu>
         {/* Rendering of the page below */}
         {this.props.children}
-        <footer>
-         <div className="copyright">
-              <p>&copy; 2017 by the Text to Action Team</p>
-          </div>
-        </footer>
       </div>
     )
   }

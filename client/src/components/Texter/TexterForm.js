@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete'
+import { Form, Container } from 'semantic-ui-react'
 
 class TexterForm extends Component {
     constructor(props){
@@ -16,7 +17,8 @@ class TexterForm extends Component {
             zip:"",
             email:"",
             phone:this.props.match.params.phone,
-            latLng:""
+            latLng:"",
+            type:"hidden"
         }
         this.onChange = (address) => this.setState({ address })
     }
@@ -41,7 +43,28 @@ class TexterForm extends Component {
                 streetname:addressObj.route || "",
                 city:addressObj.locality || "",
                 usState:addressObj.administrative_area_level_1 || "",
-                zip:addressObj.postal_code || ""
+                zip:addressObj.postal_code || "",
+                type:"text"
+            })
+        } )
+        .catch(error => console.error('Error', error))
+    }
+
+    handleAddressSubmitSelect = (e) =>
+    {
+        geocodeByAddress(this.state.address)
+        .then(results => {
+            let addressObj = {}
+            results[0].address_components.forEach(function(item){
+                addressObj[item.types[0]] = item.short_name
+            })
+            this.setState({
+                streetnumber:addressObj.street_number || "",
+                streetname:addressObj.route || "",
+                city:addressObj.locality || "",
+                usState:addressObj.administrative_area_level_1 || "",
+                zip:addressObj.postal_code || "",
+                type:"text"
             })
         } )
         .catch(error => console.error('Error', error))
@@ -100,24 +123,24 @@ class TexterForm extends Component {
             onChange: this.onChange,
           }
         return (
-                <div>
-                    <form onSubmit={this.handleSubmit}>
-                        <input type="text" placeholder="First Name" onChange={this.handleChange} name="firstname"/>
-                        <input type="text" placeholder="Last Name" onChange={this.handleChange} name="lastname"/>
-                        <input type="text" placeholder="Email" onChange={this.handleChange} name="email"/>
-                        <input type="text" placeholder="Phone number including +1 and area code" onChange={this.handleChange} name="phone" value={this.state.phone} />
+                <Container>
+                    <Form onSubmit={this.handleSubmit}>
+                        <Form.Input type="text" placeholder="First Name" name="firstname" label="First Name"/>
+                        <Form.Input type="text" placeholder="Last Name" name="lastname" label="Last Name"/>
+                        <Form.Input type="text" placeholder="Email" name="email" label="Email"/>
+                        <Form.Input type="text" placeholder="Phone number including +1 and area code" name="phone" value={this.state.phone} label="Phone starting with +1"/>
                         <div>
-                                <PlacesAutocomplete inputProps={inputProps}/>
+                                <PlacesAutocomplete onContextMenu={this.handleAddressSubmitSelect} inputProps={inputProps} />
                                 <button type="submit" onClick={this.handleAddressSubmit}>Find Address from Google</button>
                         </div>
-                        <input type="text" placeholder="Street Number" onChange={this.handleChange} name="streetnumber" value={this.state.streetnumber} />
-                        <input type="text" placeholder="Street Name" onChange={this.handleChange} name="streetname" value={this.state.streetname} />
-                        <input type="text" placeholder="City" onChange={this.handleChange} name="city" value={this.state.city} />
-                        <input type="text" placeholder="State" onChange={this.handleChange} name="usState" value={this.state.usState} />
-                        <input type="text" placeholder="Zip" onChange={this.handleChange} name="zip" value={this.state.zip} />
+                        <input type={this.state.type} placeholder="Street Number" onChange={this.handleChange} name="streetnumber" value={this.state.streetnumber} />
+                        <input type={this.state.type} placeholder="Street Name" onChange={this.handleChange} name="streetname" value={this.state.streetname} />
+                        <input type={this.state.type} placeholder="City" onChange={this.handleChange} name="city" value={this.state.city} />
+                        <input type={this.state.type} placeholder="State" onChange={this.handleChange} name="usState" value={this.state.usState} />
+                        <input type={this.state.type} placeholder="Zip" onChange={this.handleChange} name="zip" value={this.state.zip} />
                         <button type="Submit">Register</button>
-                    </form>
-                </div>	
+                    </Form>
+                </Container>	
                 )
     }
 }
