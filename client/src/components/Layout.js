@@ -23,7 +23,7 @@ class Layout extends Component {
               />
               Text to Action
       </Menu.Item>
-            <Menu.Item as={Link} to="/dashboard">Home</Menu.Item>
+            <Menu.Item as={Link} to="/">Home</Menu.Item>
             <Menu.Item as={Link} to="/newcampaign" name="newCampaign"><Icon name="add" />New Campaign</Menu.Item>
           </Container>
           <Menu.Menu position="right">

@@ -5,11 +5,9 @@ import Nav from './Nav'
 
 class BySenate extends Component {
   render() {
-    let id=this.props.match.params.id_campaign
     return(
       <div>
         <h2>Show by representative here TODO</h2>
-        <Nav id_campaign={id}/>
       </div>
     )
   }

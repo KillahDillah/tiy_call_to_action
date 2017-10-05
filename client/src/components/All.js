@@ -7,18 +7,8 @@ import { Grid, Menu, Segment } from 'semantic-ui-react'
 
 class All extends Component {
   render() {
-    let id = this.props.match.params.id_campaign
     return (
-      <Grid>
-        <Grid.Column width={3}>
-          <Nav id_campaign={id} />
-        </Grid.Column>
-        <Grid.Column stretched width={12}>
-          <Segment>
-            <CampaignDetails id_campaign={id} />
-          </Segment>
-        </Grid.Column>
-      </Grid>
+            <CampaignDetails id_campaign={this.props.match.params.id_campaign} />
     )
   }
 }

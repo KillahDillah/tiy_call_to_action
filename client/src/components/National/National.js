@@ -24,16 +24,7 @@ class National extends Component {
     }
     render() {
         return (
-            <Grid>
-                <Grid.Column width={3}>
-                    <Nav id_campaign={this.props.match.params.id_campaign} />
-                </Grid.Column>
-                <Grid.Column stretched width={12}>
-                    <Segment>
-                        <DataMap regionData={this.state.detailsArr} />
-                    </Segment>
-                </Grid.Column>
-            </Grid>
+            <DataMap regionData={this.state.detailsArr} />
         )
     }
 }

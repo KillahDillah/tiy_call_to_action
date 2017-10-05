@@ -7,13 +7,11 @@ import {Authorize} from '../lib/auth'
 
 class Update extends Component {
   render() {
-    let id=this.props.match.params.id_campaign
     return(
       <div>
         <div className="campaign-wrap">
-            <UpdateTexters id_campaign={id} />
+            <UpdateTexters id_campaign={this.props.match.params.id_campaign} />
         </div>
-        <Nav id_campaign={id}/>
       </div>
     )
   }
