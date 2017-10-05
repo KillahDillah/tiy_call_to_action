@@ -31,7 +31,7 @@ class UpdateTexters extends Component {
               console.log(err, "Error sending texts");
             })
           .then(function(response){
-                  this.props.history.push('/dashboard')
+                  this.props.history.push('/')
           }.bind(this))
     }
     render() {

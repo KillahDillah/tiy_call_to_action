@@ -41,7 +41,7 @@ class NewCampaign extends Component {
         campldesc: ""
       })
     }).then (resp => {
-      this.props.history.push('/dashboard')
+      this.props.history.push('/')
     })
   }
 

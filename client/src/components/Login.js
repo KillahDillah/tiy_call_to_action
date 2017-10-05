@@ -27,7 +27,7 @@ class Login extends Component {
 
   componentWillReceiveProps(props){
     if (props.isAuthenticated){
-      props.history.push('/dashboard')
+      props.history.push('/')
     }
   }
 

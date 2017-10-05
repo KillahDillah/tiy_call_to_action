@@ -37,7 +37,7 @@ class Nav extends Component {
       <div className="nav">
       <Menu vertical tabular>
       {navItems.map(item =>
-        <Menu.Item as={Link} to={'/campaign/'+this.props.id_campaign+'/'+item.param} key={item.param}>
+        <Menu.Item as={Link} to={'/campaign/'+this.props.match.params.id_campaign+'/'+item.param} key={item.param}>
           {item.name}
         </Menu.Item>
       )}
