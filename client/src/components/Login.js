@@ -34,12 +34,12 @@ class Login extends Component {
 
   render() {
     return (
-      <div id="login_wrap" className="wrapper">
+      <div className="login_wrap wrapper">
         <div className="inner">
           <section>
             <div className="box">
               <div className="content">
-                <h2 className="align-center">Sign in to Call to Action</h2>
+                <h2 className="align-center">Sign in to Text to Action</h2>
                 <hr />
                 <form onSubmit={this.handleSubmit}>
                   <div className="login-box">
@@ -58,7 +58,7 @@ class Login extends Component {
             </div>
             <div className="box">
               <div className="reg-content">
-                <p>New to Call to Action?</p>
+                <p>New to Text to Action?</p>
                 <Link to='/registration'>Register</Link>
               </div>
             </div>
