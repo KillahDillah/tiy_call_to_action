@@ -3,7 +3,6 @@ import {loginUser, logoutUser} from '../lib/auth'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {Button} from 'semantic-ui-react'
-import { Divider } from 'semantic-ui-react'
 
 
 //Clean up CSS and div tags to be more clear
@@ -56,8 +55,10 @@ class Login extends Component {
             </div>
             <div className="box">
               <div className="reg-content">
-                <p>New to Text to Action?</p>
-                <Link to='/registration'>Register</Link>
+                <div className="reg-content-box">
+                  <p>New to Text to Action?</p>
+                  <Link to='/registration'>Create an account</Link>
+                </div>
               </div>
             </div>
           </section>

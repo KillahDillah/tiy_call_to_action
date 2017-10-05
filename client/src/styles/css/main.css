@@ -48,20 +48,26 @@ html, body, #root {
 
 .reg-content{
   padding: 1rem;
-  display: flex;
-  justify-content: space-around;
   margin-top: 20px;
 }
 
 .reg-content p{
   margin-bottom: 0px;
+  font-weight: bold;
+}
+
+.reg-content-box {
+  width: 75%;
+  margin:auto;
+  display: flex;
+  justify-content: space-around;
 }
 
 .align-center {
   text-align: center;
 }
 
-.login-name label{
+.login-name, .login-user label{
   display: block;
 }
 
@@ -70,8 +76,9 @@ html, body, #root {
   width: -webkit-fill-available;
 }
 
-p {
-  margin-bottom: 0em;
+.login-user input{
+  width: -webkit-fill-available;
+  margin-bottom: 0px;
 }
 
 .ui.compact.button {
@@ -84,7 +91,6 @@ p {
 .reg-box {
   width: 50%;
   margin: auto;
-
 }
 
 .reg-name{
@@ -94,4 +100,9 @@ p {
 
 input {
   width: 250px;
+}
+
+#p{
+  margin:0px;
+  margin-bottom: 5px;
 }

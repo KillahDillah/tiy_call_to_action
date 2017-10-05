@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {Label} from 'semantic-ui-react'
+import {Label,Button} from 'semantic-ui-react'
 
 class CampaignReg extends Component {
 
@@ -58,19 +58,20 @@ class CampaignReg extends Component {
                     </div>
                    <div>
                     <label htmlFor="email">Email</label>
-                    <input onChange={this.handleChange} type="email" value={this.state.email} name="email" placeholder="email"/>
+                    <input onChange={this.handleChange} type="email" value={this.state.email} name="email" placeholder="Email"/>
                   </div>
-                  <div>
+                  <div className="login-user">
                     <label htmlFor="username">Username</label>
                     {this.state.error !== '' ? <p>{this.state.error}</p> : ''}
                     <input onChange={this.handleChange} type="text" value={this.state.username} name="username" placeholder="Username"/>
+                    <h6 id="p">Your organization's name may be used for the username</h6>
                   </div>
                   <div>
                     <label htmlFor="password">Password</label>
                     <input onChange={this.handleChange} type="password" value={this.state.password} name="password"/>
                   </div>
                  </div>
-                <button type="submit">Register</button>
+                <Button compact type="submit">Register</Button>
               </form>
             </div>
           </div>
