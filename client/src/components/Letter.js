@@ -11,8 +11,6 @@ class Letter extends Component {
   }
 
   componentWillMount() {
-    let userId = jwtDecode(localStorage.getItem('token')).userId
-    console.log(jwtDecode(localStorage.getItem('token')).userId)
     axios.get(`/api/letter/${this.props.match.params.id_campaign}`)
     .then(results =>{
       console.log (results)
