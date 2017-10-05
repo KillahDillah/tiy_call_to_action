@@ -15,7 +15,7 @@ class Layout extends Component {
       <div>
         <Menu>
           <Container>
-            <Menu.Item header>
+            <Menu.Item header as={Link} to="/">
               <Image
                 size='mini'
                 src='/logo_small.png'
