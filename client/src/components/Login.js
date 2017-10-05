@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {loginUser, logoutUser} from '../lib/auth'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {Button} from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 
 
 //Clean up CSS and div tags to be more clear
@@ -33,37 +33,55 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login_wrap wrapper">
-        <div className="inner">
-          <section>
-            <div className="box">
-              <div className="content">
-                <h2 className="align-center">Sign in to Text to Action</h2>
-                <hr />
-                <form onSubmit={this.handleSubmit}>
-                    <div className="login-name">
-                      <label htmlFor="name">Username</label>
-                      <input onChange={this.handleChange} type="text" name="username" value={this.state.username} />
-                    </div>
-                    <div className="login-name">
-                      <label htmlFor="password">Password</label>
-                      <input onChange={this.handleChange} type="password" name="password" value={this.state.password} />
-                    </div>
-                    <Button compact value="login" type="submit">Login</Button>
-                </form>
-              </div>
-            </div>
-            <div className="box">
-              <div className="reg-content">
-                <div className="reg-content-box">
-                  <p>New to Text to Action?</p>
-                  <Link to='/registration'>Create an account</Link>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
+      <div className='login-form'>
+      <Image 
+        src="https://d371bzke8qmfhi.cloudfront.net/styles/explore_hero/s3/images/navigation/mountrushmore_1.jpg?itok=4-xvtCQs"
+        style={{position:'fixed', opacity:'0.5'}}
+        />
+    <style>{`
+      body > div,
+      body > div > div,
+      body > div > div > div.login-form {
+        height: 100%;
+      }
+    `}</style>
+    <Grid
+      textAlign='center'
+      style={{ height: '100%' }}
+      verticalAlign='middle'
+    >
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Header as='h2' color='grey' textAlign='center'>
+          <Image src='/logo.png' />
+          {' '}Log-in to your account
+        </Header>
+        <Form size='large' onSubmit={this.handleSubmit}>
+          <Segment stacked>
+            <Form.Input onChange={this.handleChange}
+              fluid
+              icon='user'
+              iconPosition='left'
+              placeholder='Username'
+              name='username'
+            />
+            <Form.Input onChange={this.handleChange}
+              fluid
+              icon='lock'
+              iconPosition='left'
+              placeholder='Password'
+              type='password'
+              name='password'
+            />
+
+            <Button type='submit'color='grey' fluid size='large'>Login</Button>
+          </Segment>
+        </Form>
+        <Message>
+          New to us? <a href='/registration'>Sign Up</a>
+        </Message>
+      </Grid.Column>
+    </Grid>
+  </div>
       )
     }
   }

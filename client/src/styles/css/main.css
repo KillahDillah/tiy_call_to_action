@@ -21,12 +21,20 @@ html, body, #root {
   height:100%;
 }
 
+/*.login_wrap, .new-camp-wrap{
+  background: url(https://d371bzke8qmfhi.cloudfront.net/styles/explore_hero/s3/images/navigation/mountrushmore_1.jpg?itok=4-xvtCQs);
+  opacity:0.5;
+}*/
+
 /*Login*/
 
-.login_wrap {
+/*.login_wrap {
   padding: 6rem 0 4rem 0 ;
   height: 100%;
-  background-image: url(https://d371bzke8qmfhi.cloudfront.net/styles/explore_hero/s3/images/navigation/mountrushmore_1.jpg?itok=4-xvtCQs);
+  
+}
+.tall {
+  height:100%;
 }
 
 .wrapper {
@@ -85,7 +93,7 @@ html, body, #root {
   margin: 0px;
   width: -webkit-fill-available;
 }
-
+*/
 /*Camp-Registration*/
 
 .reg-box {
@@ -108,9 +116,9 @@ input {
 }
 
 /*Dashboard*/
-
-
-
+#root{
+  overflow: hidden;
+}
 
 /*Layout*/
 
@@ -125,41 +133,9 @@ footer .copyright {
 .copyright p{
   text-align: center;
 }
-#navy {
-  background: gray;
-}
-
-li {
-  list-style-type: none;
-  color: black;
-}
-
-.fa {
-  color: black;
-}
-li a {
-  color: black;
-}
-
-li a :hover{
-  color: gray;
-}
-
-ul {
-  display: flex;
-  justify-content: space-between;
-  padding-right: 40px;
-}
-
-.top-right {
-  display: flex;
-  justify-content: space-between;
-  width: 100px;
-}
 
 /*NewCampaign*/
 
 .new-camp-wrap {
-  background-image: url(http://s2.thingpic.com/images/qk/78PnyreMR6MD13igBkg8HGop.jpeg);
   padding:50px;
 }
