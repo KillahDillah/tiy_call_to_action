@@ -10,7 +10,7 @@ class Nav extends Component {
 
   render() {
     let navItems = [{
-      name: 'All',
+      name: 'Details',
       param: 'all'
     },
     {

@@ -6,7 +6,7 @@ import { Grid, Menu, Segment } from 'semantic-ui-react'
 
 class National extends Component {
     state = {
-        detailsArr: []
+        detailsArr: "loading"
     }
     componentWillMount() {
         axios.get(`/api/campaign/${this.props.match.params.id_campaign}/national`)
@@ -16,15 +16,26 @@ class National extends Component {
                 })
             })
             .then(results => {
-                console.log(results.data.results)
+                console.log("national",results.data.results)
                 this.setState({
                     detailsArr: results.data.results
                 })
             })
     }
     render() {
+        let partial
+        if(this.state.detailsArr === "loading"){
+            partial = <div>Loading</div>
+        }else if(!this.state.detailsArr){
+            partial = <div>No campaign data available</div>
+            
+        }else{
+            partial = <DataMap regionData={this.state.detailsArr} />
+        }
         return (
-            <DataMap regionData={this.state.detailsArr} />
+            <div>
+                {partial}
+            </div>
         )
     }
 }
