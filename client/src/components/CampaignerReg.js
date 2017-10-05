@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {Label,Button} from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 
 class CampaignReg extends Component {
 
@@ -42,41 +42,69 @@ class CampaignReg extends Component {
 
   render() {
     return(
-      <div className="login_wrap wrapper">
-        <div className="reg-box" className="inner">
-          <div className="box">
-            <div className="content">
-              <form onSubmit={this.submitForm}>
-                  <div className="login-name">
-                    <div>
-                      <label htmlFor="fname">First Name</label>
-                      <input onChange={this.handleChange} type="text" value={this.state.fname} name="fname" placeholder="First Name"/>
-                    </div>
-                    <div>
-                      <label htmlFor="lname">Last Name</label>
-                      <input onChange={this.handleChange} type="text" value={this.state.lname} name="lname" placeholder="Last Name"/>
-                    </div>
-                   <div>
-                    <label htmlFor="email">Email</label>
-                    <input onChange={this.handleChange} type="email" value={this.state.email} name="email" placeholder="Email"/>
-                  </div>
-                  <div className="login-user">
-                    <label htmlFor="username">Username</label>
-                    {this.state.error !== '' ? <p>{this.state.error}</p> : ''}
-                    <input onChange={this.handleChange} type="text" value={this.state.username} name="username" placeholder="Username"/>
-                    <h6 id="p">Your organization's name may be used for the username</h6>
-                  </div>
-                  <div>
-                    <label htmlFor="password">Password</label>
-                    <input onChange={this.handleChange} type="password" value={this.state.password} name="password"/>
-                  </div>
-                 </div>
-                <Button compact type="submit">Register</Button>
-              </form>
-            </div>
-          </div>
+      <div className='login-form'>
+        <Image 
+        src="https://d371bzke8qmfhi.cloudfront.net/styles/explore_hero/s3/images/navigation/mountrushmore_1.jpg?itok=4-xvtCQs"
+        style={{position:'fixed', opacity:'0.5'}}
+        />
+          <style>{`
+            body > div,
+            body > div > div,
+            body > div > div > div.login-form {
+              height: 100%;
+            }
+          `}</style>
+          <Grid
+            textAlign='center'
+            style={{ height: '100%' }}
+            verticalAlign='middle'
+          >
+            <Grid.Column style={{ maxWidth: 450 }}>
+              <Form size='large' onSubmit={this.submitForm}>
+                <Segment stacked>
+                  <Form.Input onChange={this.handleChange}
+                    fluid
+                    icon='user'
+                    iconPosition='left'
+                    placeholder='First Name or Organization'
+                    name='fname'
+                  />
+                  <Form.Input onChange={this.handleChange}
+                    fluid
+                    icon='user'
+                    iconPosition='left'
+                    placeholder='Last Name (optional)'
+                    name='lname'
+                  />
+                  <Form.Input onChange={this.handleChange}
+                    fluid
+                    icon='user'
+                    iconPosition='left'
+                    placeholder='Username/Organization'
+                    name='username'
+                  />
+                  {this.state.error !== '' ? <p>{this.state.error}</p> : ''}
+                  <Form.Input onChange={this.handleChange}
+                    fluid
+                    icon='user'
+                    iconPosition='left'
+                    placeholder='E-mail address'
+                    name=''
+                  />
+                  <Form.Input onChange={this.handleChange}
+                    fluid
+                    icon='lock'
+                    iconPosition='left'
+                    placeholder='Password'
+                    type='password'
+                  />
+
+                  <Button color='teal' fluid size='large' type="submit">Register</Button>
+                </Segment>
+              </Form>
+            </Grid.Column>
+          </Grid>
         </div>
-      </div>
     )
   }
 }

@@ -48,16 +48,11 @@ class NewCampaign extends Component {
   render() {
     return(
       <div className="new-camp-wrap">
-      <div className="box">
-      <div id="head">
-        <h3>Create New Campaign</h3>
-      </div>
-      </div>
         <div className="box">
           <div className="content">
             <form onSubmit={this.submitForm}>
               <div className="login-name">
-                <label htmlFor="c-name">Campaign Name</label>
+                <label htmlFor="c-name">New Campaign Name</label>
                 <input onChange={this.handleChange} type="text" value={this.state.campname} name="campname" />
               </div>
               <div>
