@@ -47,7 +47,6 @@ class CampaignReg extends Component {
           <div className="box">
             <div className="content">
               <form onSubmit={this.submitForm}>
-                <div className='login-box'>
                   <div className="login-name">
                     <div>
                       <label htmlFor="fname">First Name</label>
@@ -71,7 +70,6 @@ class CampaignReg extends Component {
                     <input onChange={this.handleChange} type="password" value={this.state.password} name="password"/>
                   </div>
                  </div>
-                </div>
                 <button type="submit">Register</button>
               </form>
             </div>

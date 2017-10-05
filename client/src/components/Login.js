@@ -42,7 +42,6 @@ class Login extends Component {
                 <h2 className="align-center">Sign in to Text to Action</h2>
                 <hr />
                 <form onSubmit={this.handleSubmit}>
-                  <div className="login-box">
                     <div className="login-name">
                       <label htmlFor="name">Username</label>
                       <input onChange={this.handleChange} type="text" name="username" value={this.state.username} />
@@ -52,7 +51,6 @@ class Login extends Component {
                       <input onChange={this.handleChange} type="password" name="password" value={this.state.password} />
                     </div>
                     <Button compact value="login" type="submit">Login</Button>
-                  </div>
                 </form>
               </div>
             </div>
