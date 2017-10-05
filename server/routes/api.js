@@ -249,6 +249,20 @@ router.get('/metrics/:id', function (req, res, next) {
   })
 })
 
+router.get('/user/:id', function(req,res,next){
+  const id = req.params.id
+  const sql = `
+    SELECT *
+    FROM clogin
+    WHERE id = ?
+  `
+  conn.query(sql,[id], function(err,results,fields){
+    if(!err){
+      res.json(results)
+    }
+  })
+})
+
 router.get('/letter/:id', function(req,res,next){
   const id = req.params.id
   const sql=`

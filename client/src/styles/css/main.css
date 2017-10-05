@@ -116,9 +116,9 @@ input {
 }
 
 /*Dashboard*/
-
-
-
+#root{
+  overflow: hidden;
+}
 
 /*Layout*/
 
@@ -133,11 +133,6 @@ footer .copyright {
 .copyright p{
   text-align: center;
 }
-
-.ui.menu:first-child {
-  margin: 0;
-}
-
 
 /*NewCampaign*/
 
