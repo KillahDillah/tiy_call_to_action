@@ -23,7 +23,7 @@ class Layout extends Component {
         {this.props.children}
         <footer>
          <div className="copyright">
-              &copy; 2017 by the Call to Action Team
+              &copy; 2017 by the Text to Action Team
           </div>
         </footer>
       </div>
