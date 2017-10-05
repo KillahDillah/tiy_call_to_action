@@ -3,7 +3,6 @@ import {loginUser, logoutUser} from '../lib/auth'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {Button} from 'semantic-ui-react'
-import { Divider } from 'semantic-ui-react'
 
 
 //Clean up CSS and div tags to be more clear
@@ -42,7 +41,6 @@ class Login extends Component {
                 <h2 className="align-center">Sign in to Text to Action</h2>
                 <hr />
                 <form onSubmit={this.handleSubmit}>
-                  <div className="login-box">
                     <div className="login-name">
                       <label htmlFor="name">Username</label>
                       <input onChange={this.handleChange} type="text" name="username" value={this.state.username} />
@@ -52,14 +50,15 @@ class Login extends Component {
                       <input onChange={this.handleChange} type="password" name="password" value={this.state.password} />
                     </div>
                     <Button compact value="login" type="submit">Login</Button>
-                  </div>
                 </form>
               </div>
             </div>
             <div className="box">
               <div className="reg-content">
-                <p>New to Text to Action?</p>
-                <Link to='/registration'>Register</Link>
+                <div className="reg-content-box">
+                  <p>New to Text to Action?</p>
+                  <Link to='/registration'>Create an account</Link>
+                </div>
               </div>
             </div>
           </section>
