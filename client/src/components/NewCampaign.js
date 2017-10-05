@@ -48,6 +48,11 @@ class NewCampaign extends Component {
   render() {
     return(
       <div className="new-camp-wrap">
+      <div className="box">
+      <div id="head">
+        <h3>Create New Campaign</h3>
+      </div>
+      </div>
         <div className="box">
           <div className="content">
             <form onSubmit={this.submitForm}>
