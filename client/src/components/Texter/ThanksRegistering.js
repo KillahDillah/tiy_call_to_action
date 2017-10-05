@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Representative from './Representative'
+import { Container, Grid, Header} from 'semantic-ui-react'
 
 class ThanksRegistering extends Component {
     state = {
@@ -34,13 +35,15 @@ class ThanksRegistering extends Component {
             })
         }
         return (
-                <div>
-                <h3>Thanks for registering!</h3>
-                <br/>
+                <Container textAlign="centered">
+                <Header as='h2'>Thanks for registering!</Header>
                 <p>You should receive a text back shortly</p>
-                <h3>Your representatives are:</h3>
+                <Header as='h4'>Your representatives are:</Header>
+                <Container>
+                
                 {partial}
-                </div>	
+                </Container>
+                </Container>	
                 )
     }
 }
