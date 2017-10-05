@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import ListItem from './ListItem'
-import jwtDecode from 'jwt-decode'
 import {Authorize} from '../lib/auth'
 import {Button} from 'semantic-ui-react'
 

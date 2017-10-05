@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import CampaignSubContainer from './CampaignSubContainer'
 import CampaignDetails from './CampaignDetails/CampaignDetails'
 import Nav from './Nav'
 import {Authorize} from '../lib/auth'
-import jwtDecode from 'jwt-decode'
+//import jwtDecode from 'jwt-decode'
 
 class All extends Component {
   render() {
