@@ -5,7 +5,7 @@ class ListItem extends Component {
   
   render() {
     return(
-      <Link to={'/campaign/'+this.props.id_campaign+'/'+this.props.name}>{this.props.name}</Link>
+      <Link to={'/campaign/'+this.props.id_campaign+'/'+this.props.obj.param}>{this.props.obj.name}</Link>
     )
   }
 }

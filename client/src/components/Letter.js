@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import jwtDecode from 'jwt-decode'
+//import jwtDecode from 'jwt-decode'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
 import Moment from 'moment'
 
 class Letter extends Component {
@@ -11,8 +10,6 @@ class Letter extends Component {
   }
 
   componentWillMount() {
-    let userId = jwtDecode(localStorage.getItem('token')).userId
-    console.log(jwtDecode(localStorage.getItem('token')).userId)
     axios.get(`/api/letter/${this.props.match.params.id_campaign}`)
     .then(results =>{
       console.log (results)

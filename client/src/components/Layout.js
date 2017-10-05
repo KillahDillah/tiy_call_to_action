@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
-import {logoutUser} from '../lib/auth'
-import {connect} from 'react-redux'
+import {callLogoutUser} from '../actions/campaignAction'
+//import {connect} from 'react-redux'
 
 class Layout extends Component {
 
   logout =(e)=> {
-    this.props.dispatch(logoutUser())
+    callLogoutUser()
   }
 
 
@@ -31,14 +31,4 @@ class Layout extends Component {
   }
 }
 
-function mapStateToProps(appState) {
-    const {isAuthenticated, errorMessage, isFetching} = appState.auth
-
-   return {
-      isAuthenticated,
-      isFetching,
-      errorMessage
-    }
-  }
-
-  export default connect(mapStateToProps)(Layout)
+export default Layout

@@ -1,16 +1,9 @@
 import store from '../store'
+import {logoutUser} from '../lib/auth'
 // example actions
 
-import {MY_ACTION} from './actionValues'
+//import {MY_ACTION} from './actionValues'
 
-export function getFoo() {
-  fetch('/api/foo')
-  .then(resp => resp.json())
-  .then(resp => {
-    console.log(resp)
-    store.dispatch({
-      type: MY_ACTION,
-      payload: resp.foo
-    })
-  })
+export function callLogoutUser() {
+  store.dispatch(logoutUser())
 }

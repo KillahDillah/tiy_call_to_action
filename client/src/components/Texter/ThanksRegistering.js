@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Representative from '../Representative'
+import Representative from './Representative'
 
 class ThanksRegistering extends Component {
     state = {
