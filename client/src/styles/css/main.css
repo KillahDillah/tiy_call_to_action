@@ -116,9 +116,9 @@ input {
 }
 
 /*Dashboard*/
-#root{
+/*#root{
   overflow: hidden;
-}
+}*/
 
 .welcome {
   display: flex;

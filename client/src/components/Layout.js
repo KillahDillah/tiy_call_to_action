@@ -13,7 +13,8 @@ class Layout extends Component {
   render() {
     return (
       <div>
-        <Menu>
+        <Menu
+        style={{marginBottom:'0'}}>
           <Container>
             <Menu.Item header as={Link} to="/">
               <Image

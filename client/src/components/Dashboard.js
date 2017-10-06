@@ -3,7 +3,7 @@ import {Authorize} from '../lib/auth'
 import jwtDecode from 'jwt-decode'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
-import { Button, Form, Grid, Header, Image, Message, Segment, Container } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Message, Segment, Container, Card } from 'semantic-ui-react'
 
 function getMetrics(userId){
   return axios.get(`/api/metrics/${userId}`)
@@ -50,24 +50,24 @@ class Dashboard extends Component {
           `}</style>
           <Container
           style={{padding:'50px'}}>
-          <Segment.Group
-            style={{backgroundColor:'white', textAlign:'center'}}>
-            <Header as='h1'
-              style={{display:'flex', justifyContent:'center'}}>Welcome,{this.state.user.map(function(user){
-              return <div key={user.username}>{user.username}</div>
-              })}
-            </Header>
-            <Segment.Group compact
-            style={{margin:'1em'}}>
-              {this.state.campaigns.map(function(campaign){
-                return <Segment color="grey" key={campaign.id} className='result'>
-                <div><Link to={`/campaign/${campaign.id}`}>{campaign.name}</Link></div>
-                <div>{campaign.shortDesc}</div>
-                </Segment>
-              })}
+            <Segment.Group
+              style={{backgroundColor:'white', textAlign:'center'}}>
+              <Header as='h1'
+                style={{display:'flex', justifyContent:'center', marginTop:'1em'}}>Welcome,{this.state.user.map(function(user){
+                return <div key={user.username}>{user.username}</div>
+                })}
+              </Header>
+              <Container
+              style={{display:'flex', flexWrap:'wrap', justifyContent:'space-around', padding:'0 1em 1em'}}>
+                {this.state.campaigns.map(function(campaign){
+                  return <Link to={`/campaign/${campaign.id}`}><Segment color="grey" style={{width:'200px', margin:'1em'}} key={campaign.id}>
+                    <Header style={{}}><b>{campaign.name}</b></Header>
+                    <div>{campaign.shortDesc}</div>
+                    </Segment></Link>
+                })} 
+              </Container>
             </Segment.Group>
-        </Segment.Group>
-        </Container>
+          </Container>
         </div>
 
     )
