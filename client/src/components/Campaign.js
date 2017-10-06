@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
-import { AuthRoute as Route, Authorize } from '../lib/auth'
+import { AuthRoute as Route } from '../lib/auth'
 import CampaignLayout from './CampaignLayout'
 
 import All from './All'
@@ -10,9 +10,13 @@ import ByState from './ByState'
 import BySenate from './BySenate'
 import National from './National/National'
 import Letter from './Letter'
-
+import {setCampaignDetails} from '../actions/campaignAction'
+//import {withRouter} from 'react-router-dom'
 
 class Campaign extends Component {
+    componentWillMount(){
+        setCampaignDetails(this.props.match.params.id_campaign)
+    }
     render() {
         return (
             <Router>

@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import ListItem from './ListItem'
 import {Authorize} from '../lib/auth'
-import {Button} from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import { Container, Divider, Dropdown, Grid, Header, Image, List, Menu, Segment, Icon } from 'semantic-ui-react'
+import { Menu} from 'semantic-ui-react'
 
 
 class Nav extends Component {

@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
-import { Grid, Menu, Segment } from 'semantic-ui-react'
+import { Grid, Segment } from 'semantic-ui-react'
 import Nav from './Nav'
-
+import { connect } from 'react-redux'
 import { AuthRoute as Route } from '../lib/auth'
 
 class CampaignLayout extends Component {
+    state = {
+        campaign:{
+            name:''
+        }
+    }
     render() {
-        console.log("this.props.match",this.props.match)
+        console.log("appState",this.props.campaign)
         return (
             <Grid>
                 <Grid.Column width={3}>
@@ -21,5 +26,7 @@ class CampaignLayout extends Component {
         )
     }
 }
-
-export default CampaignLayout
+function mapStateToProps(appState) {
+    return { campaign: appState.campaign }
+}
+export default connect(mapStateToProps)(CampaignLayout)

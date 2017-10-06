@@ -154,9 +154,62 @@ function getNationalDetails(id_campaign){
         })
     })
 }
+function getCampaignObj(id_campaign){
+    return new Promise(function(resolve,reject){
+        let sql =`
+        SELECT COUNT(distinct ca.id_texter) as countActivity, c.id as id_campaign, c.shortDesc, c.longDesc as letter, c.keywords as keyword, c.name, c.timestamp
+        FROM campaigns as c
+        LEFT JOIN campaign_activity as ca on c.id=ca.id_campaign
+        AND (ca.confirmed = 1 OR ca.confirmed is null)
+        WHERE c.id=?
+        GROUP BY c.id;`
+        pool.getConnection(function(err,connection){
+            if(err){
+                reject({
+                    status:'Failure',
+                    err:err,
+                    error:true,
+                    errorMessage:['Unable to get db connection getCampaignObj']
+                })
+            }
+            else{
+                connection.query(sql,[id_campaign],function(err,results,fields){
+                    connection.release()
+                    if(err){
+                        reject({
+                            status:'Failure',
+                            err:err,
+                            error:true,
+                            errorMessage:['Query issue getCampaignObj']
+                        })
+                    }else if(results.length == 0){
+                        resolve({
+                            status:'Success',
+                            error:false,
+                            id_campaign:null,
+                            message:'No campaign details found',
+                            results:results
+                        })
+                    }else{
+                        resolve({
+                            status:'Success',
+                            error:false,
+                            id_campaign:id_campaign,
+                            results:results
+                        })
+                    }
+                })
+            }
+        })
+    })
 
+
+
+
+}
 module.exports = {
     getCampaignDetails:getCampaignDetails,
     getCampaignKeywordList:getCampaignKeywordList,
-    getNationalDetails:getNationalDetails
+    getNationalDetails:getNationalDetails,
+    getCampaignObj:getCampaignObj
 }

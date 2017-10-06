@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import UpdateTexters from './UpdateTexters'
-import Nav from './Nav'
 //import jwtDecode from 'jwt-decode'
 import {Authorize} from '../lib/auth'
 

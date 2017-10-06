@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import DataMap from './DataMap'
 import axios from 'axios'
-import Nav from '../Nav'
-import { Grid, Menu, Segment } from 'semantic-ui-react'
 
 class National extends Component {
     state = {

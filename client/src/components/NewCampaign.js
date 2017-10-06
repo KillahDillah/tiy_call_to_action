@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import {Authorize} from '../lib/auth'
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Image, Segment } from 'semantic-ui-react'
 
 
 //TODO: Clear state on form submit and change to singular keyword

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Representative from './Representative'
-import { Container, Grid, Header, Menu, Image} from 'semantic-ui-react'
+import { Container, Header, Menu, Image} from 'semantic-ui-react'
 
 class ThanksRegistering extends Component {
     state = {

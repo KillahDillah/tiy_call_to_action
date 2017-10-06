@@ -1,15 +1,23 @@
 // if you so choose, you may name your actions and import them here
 // for reducing typing errors
-import {MY_ACTION} from '../actions/actionValues'
+import {SET_CAMPAIGN} from '../actions/actionValues'
 
 const initialState = {
-  foo: 'bar'
+  campaign: {
+    countActivity:0,
+    id_campaign:'',
+    shortDesc:'',
+    letter:'',
+    keyword:'',
+    name:'',
+    timestamp:''
+  }
 }
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case MY_ACTION:
-      return {...state, foo: action.payload}
+    case SET_CAMPAIGN:
+      return {...state, campaign: action.payload}
     default:
       return state
   }
