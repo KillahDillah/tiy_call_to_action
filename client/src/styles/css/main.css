@@ -75,3 +75,16 @@ footer .copyright {
 .ui.grey.card.card :hover{
   background-color: lightgrey;
 }
+
+.ui.vertical.tabular.menu.item :hover{
+  background-color: grey;
+}
+
+.stretched.twelve.wide.column {
+  margin-top: 2em;
+}
+
+th, td {
+  text-align:left;
+  padding-right:20px;
+}
