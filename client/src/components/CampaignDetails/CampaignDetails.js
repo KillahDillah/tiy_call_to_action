@@ -34,7 +34,6 @@ class CampaignDetails extends Component {
         }
         return (
                 <div>
-                <h2>Campaign {this.props.id_campaign}</h2>
                     {partial}
                 </div>	
                 )

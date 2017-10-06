@@ -3,15 +3,10 @@ import { Grid, Segment } from 'semantic-ui-react'
 import Nav from './Nav'
 import { connect } from 'react-redux'
 import { AuthRoute as Route } from '../lib/auth'
+import {withRouter} from 'react-router-dom'
 
 class CampaignLayout extends Component {
-    state = {
-        campaign:{
-            name:''
-        }
-    }
     render() {
-        console.log("appState",this.props.campaign)
         return (
             <Grid>
                 <Grid.Column width={3}>
@@ -19,6 +14,9 @@ class CampaignLayout extends Component {
                 </Grid.Column>
                 <Grid.Column stretched width={12}>
                     <Segment>
+                    <h2>{this.props.name}</h2>
+                    <p>{this.props.shortDesc}</p>
+                    <p>Activity: {this.props.countActivity}</p>
                     {this.props.children}
                     </Segment>
                 </Grid.Column>
@@ -27,6 +25,6 @@ class CampaignLayout extends Component {
     }
 }
 function mapStateToProps(appState) {
-    return { campaign: appState.campaign }
+    return {...appState.app.campaign }
 }
-export default connect(mapStateToProps)(CampaignLayout)
+export default withRouter(connect(mapStateToProps)(CampaignLayout))
