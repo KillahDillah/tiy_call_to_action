@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { callLogoutUser } from '../actions/campaignAction'
-import { Container, Divider, Dropdown, Grid, Header, Image, List, Menu, Segment, Icon } from 'semantic-ui-react'
+import { Container, Image, Menu, Icon } from 'semantic-ui-react'
 
 class Layout extends Component {
 

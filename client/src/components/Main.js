@@ -4,7 +4,6 @@ import Layout from './Layout'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import { AuthRoute as Route, Authorize } from '../lib/auth'
 import Dashboard from './Dashboard'
-import Home from './Home'
 import Campaign from './Campaign'
 
 class Main extends Component {

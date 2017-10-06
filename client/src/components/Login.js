@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {loginUser, logoutUser} from '../lib/auth'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 
 
