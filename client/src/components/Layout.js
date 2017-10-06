@@ -13,7 +13,8 @@ class Layout extends Component {
   render() {
     return (
       <div>
-        <Menu>
+        <Menu
+        style={{marginBottom:'0'}}>
           <Container>
             <Menu.Item header as={Link} to="/">
               <Image
@@ -22,7 +23,7 @@ class Layout extends Component {
                 style={{ marginRight: '1.5em' }}
               />
               Text to Action
-      </Menu.Item>
+            </Menu.Item>
             <Menu.Item as={Link} to="/">Home</Menu.Item>
             <Menu.Item as={Link} to="/newcampaign" name="newCampaign"><Icon name="add" />New Campaign</Menu.Item>
           </Container>
@@ -32,6 +33,7 @@ class Layout extends Component {
         </Menu>
         {/* Rendering of the page below */}
         {this.props.children}
+      
       </div>
     )
   }

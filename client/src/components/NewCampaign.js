@@ -76,26 +76,26 @@ class NewCampaign extends Component {
                   />
                   <Form.Input onChange={this.handleChange}
                     fluid
-                    icon='lock'
+                    icon='edit'
                     iconPosition='left'
                     placeholder='This desciption will be when sent via text'
-                    name='campdesc'
+                    name='campsdesc'
                   />
                   <Form.Input onChange={this.handleChange}
                     fluid
-                    icon='lock'
+                    icon='sticky note outline'
                     iconPosition='left'
                     placeholder='Body of letter sent to representative'
                     name='campldesc'
                   />
                   <Form.Input onChange={this.handleChange}
                     fluid
-                    icon='lock'
+                    icon='asterisk'
                     iconPosition='left'
                     placeholder='Keyword'
                     name='keywords'
                   />
-                  <Button color='teal' fluid size='large' type='submit'>Login</Button>
+                  <Button color='teal' fluid size='large' type='submit'>Create</Button>
                 </Segment>
               </Form>
             </Grid.Column>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {Container} from 'semantic-ui-react'
 
 import CampaignDetailsTable from './CampaignDetailsTable'
 
@@ -33,9 +34,10 @@ class CampaignDetails extends Component {
             partial = <CampaignDetailsTable data={this.state.detailsArr} />
         }
         return (
-                <div>
+                <Container>
+                <h2>Campaign {this.props.id_campaign}</h2>
                     {partial}
-                </div>	
+                </Container>	
                 )
     }
 }
