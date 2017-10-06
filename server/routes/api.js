@@ -117,6 +117,15 @@ router.get("/campaign/:id_campaign/national", function(req,res,next){
       res.json(data)
     })
 })
+router.get("/campaign/:id_campaign/obj", function(req,res,next){
+  let campaignObj = Campaign.getCampaignObj(req.params.id_campaign)
+  campaignObj.catch(err => {
+    res.send({ error: true, message: 'Unable to get campaign obj' })
+  })
+    .then(data => {
+      res.json(data)
+    })
+})
 router.post("/campaign/:id_campaign/updateTexters", function(req,res, next){
   let campaignDetails = Campaign.getCampaignDetails(req.params.id_campaign)
   campaignDetails.catch(err => {

@@ -1,1 +1,1 @@
-export const MY_ACTION = 'MY_ACTION'
+export const SET_CAMPAIGN = 'SET_CAMPAIGN'
