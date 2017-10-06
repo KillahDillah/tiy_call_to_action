@@ -32,6 +32,7 @@ class Layout extends Component {
         </Menu>
         {/* Rendering of the page below */}
         {this.props.children}
+      
       </div>
     )
   }

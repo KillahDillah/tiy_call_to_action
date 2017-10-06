@@ -120,6 +120,10 @@ input {
   overflow: hidden;
 }
 
+.welcome {
+  display: flex;
+}
+
 /*Layout*/
 
 footer .copyright {
