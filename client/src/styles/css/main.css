@@ -21,79 +21,7 @@ html, body, #root {
   height:100%;
 }
 
-/*.login_wrap, .new-camp-wrap{
-  background: url(https://d371bzke8qmfhi.cloudfront.net/styles/explore_hero/s3/images/navigation/mountrushmore_1.jpg?itok=4-xvtCQs);
-  opacity:0.5;
-}*/
 
-/*Login*/
-
-/*.login_wrap {
-  padding: 6rem 0 4rem 0 ;
-  height: 100%;
-  
-}
-.tall {
-  height:100%;
-}
-
-.wrapper {
-  padding: 6rem 0 4rem 0 ;
-  position: relative;
-  margin: 0;
-}
-
-.box {
-  width: 400px;
-  background: #FFF;
-  margin: auto;
-  border-radius: 25px;
-}
-
-.box .content {
-  padding: 3rem;
-}
-
-.reg-content{
-  padding: 1rem;
-  margin-top: 20px;
-}
-
-.reg-content p{
-  margin-bottom: 0px;
-  font-weight: bold;
-}
-
-.reg-content-box {
-  width: 75%;
-  margin:auto;
-  display: flex;
-  justify-content: space-around;
-}
-
-.align-center {
-  text-align: center;
-}
-
-.login-name, .login-user label{
-  display: block;
-}
-
-.login-name input, textarea {
-  margin-bottom: 20px;
-  width: -webkit-fill-available;
-}
-
-.login-user input{
-  width: -webkit-fill-available;
-  margin-bottom: 0px;
-}
-
-.ui.compact.button {
-  margin: 0px;
-  width: -webkit-fill-available;
-}
-*/
 /*Camp-Registration*/
 
 .reg-box {
@@ -142,4 +70,8 @@ footer .copyright {
 
 .new-camp-wrap {
   padding:50px;
+}
+
+.ui.grey.card.card :hover{
+  background-color: lightgrey;
 }

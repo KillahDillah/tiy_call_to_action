@@ -59,12 +59,21 @@ class Dashboard extends Component {
               </Header>
               <Container
               style={{display:'flex', flexWrap:'wrap', justifyContent:'space-around', padding:'0 1em 1em'}}>
-                {this.state.campaigns.map(function(campaign){
-                  return <Link to={`/campaign/${campaign.id}`}><Segment color="grey" style={{width:'200px', margin:'1em'}} key={campaign.id}>
-                    <Header style={{}}><b>{campaign.name}</b></Header>
-                    <div>{campaign.shortDesc}</div>
-                    </Segment></Link>
+                <Card.Group
+                style={{justifyContent:'center',display:'flex'}}>
+                {this.state.campaigns.map(campaign => {
+                  return (
+                    <Card color='grey' className='card'>
+                      <Card.Content
+                        header={campaign.name}
+                        description={campaign.shortDesc}
+                        as={Link}
+                        to={`/campaign/${campaign.id}`}
+                      />
+                    </Card>
+                  )
                 })} 
+                </Card.Group>
               </Container>
             </Segment.Group>
           </Container>
