@@ -11,7 +11,7 @@ import BySenate from './BySenate'
 import National from './National/National'
 import Letter from './Letter'
 import {setCampaignDetails} from '../actions/campaignAction'
-//import {withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
 class Campaign extends Component {
     componentWillMount(){
@@ -38,4 +38,4 @@ class Campaign extends Component {
     }
 }
 
-export default Campaign
+export default withRouter(Campaign)
