@@ -1,33 +1,40 @@
 import React, { Component } from 'react'
 import DataMap from './DataMap'
 import axios from 'axios'
-import Nav from '../Nav'
 
 class National extends Component {
-    state={
-        detailsArr:[]
+    state = {
+        detailsArr: "loading"
     }
-    componentWillMount(){
+    componentWillMount() {
         axios.get(`/api/campaign/${this.props.match.params.id_campaign}/national`)
-        .catch(err => {
-            this.setState({
-                err:err
+            .catch(err => {
+                this.setState({
+                    err: err
+                })
             })
-        })
-        .then(results => {
-            console.log(results.data.results)
-            this.setState({
-                detailsArr:results.data.results
+            .then(results => {
+                console.log("national",results.data.results)
+                this.setState({
+                    detailsArr: results.data.results
+                })
             })
-        })
     }
     render() {
+        let partial
+        if(this.state.detailsArr === "loading"){
+            partial = <div>Loading</div>
+        }else if(!this.state.detailsArr){
+            partial = <div>No campaign data available</div>
+            
+        }else{
+            partial = <DataMap regionData={this.state.detailsArr} />
+        }
         return (
-                <div>
-                    <DataMap regionData={this.state.detailsArr}/>
-                    <Nav id_campaign={this.props.match.params.id_campaign} />
-                </div>	
-                )
+            <div>
+                {partial}
+            </div>
+        )
     }
 }
 

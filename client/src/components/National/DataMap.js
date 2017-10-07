@@ -1,10 +1,10 @@
 import d3 from 'd3';
-import topojson from 'topojson';
 import Datamap from 'datamaps/dist/datamaps.usa.min'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import statesDefaults from './states-defaults';
 import objectAssign from 'object-assign';
+import PropTypes from 'prop-types';
 
 export default class DataMap extends React.Component {
   constructor(props){
@@ -91,5 +91,5 @@ export default class DataMap extends React.Component {
 }
 
 DataMap.propTypes = {
-    regionData: React.PropTypes.array.isRequired
+    regionData: PropTypes.array.isRequired
 };

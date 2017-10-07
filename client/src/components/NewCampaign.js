@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import {Authorize} from '../lib/auth'
+import { Button, Form, Grid, Image, Segment } from 'semantic-ui-react'
 
 
 //TODO: Clear state on form submit and change to singular keyword
@@ -40,33 +41,66 @@ class NewCampaign extends Component {
         campldesc: ""
       })
     }).then (resp => {
-      this.props.history.push('/dashboard')
+      this.props.history.push('/')
     })
   }
 
   render() {
     return(
-      <div className="new-campaign">
-        <form onSubmit={this.submitForm}>
-          <div className="new-c-name">
-            <label htmlFor="c-name">Campaign Name</label>
-            <input onChange={this.handleChange} type="text" value={this.state.campname} name="campname" placeholder="Campaign Name" />
-          </div>
-          <div className="c-short-desc">
-            <label htmlFor="c-short-desc">Short Description</label>
-            <textarea onChange={this.handleChange} name="campsdesc" value={this.state.campsdesc} placeholder="This desciption will be when sent via text" />
-          </div>
-          <div className="c-long-desc">
-            <label htmlFor="c-long-desc">Body of Letter</label>
-            <textarea onChange={this.handleChange} name="campldesc" value={this.state.campldesc} placeholder="Body of letter sent to representative"/>
-          </div>
-          <div className="keywords">
-            <label htmlFor="keywords"> Keyword</label>
-            <textarea onChange={this.handleChange} name="keywords" value={this.state.keywords} placeholder="One keyword" />
-          </div>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
+      <div className='login-form'>
+        <Image 
+        src="https://d371bzke8qmfhi.cloudfront.net/styles/explore_hero/s3/images/navigation/mountrushmore_1.jpg?itok=4-xvtCQs"
+        style={{position:'fixed', opacity:'0.5'}}
+        />
+          <style>{`
+            body > div,
+            body > div > div,
+            body > div > div > div.login-form {
+              height: 100%;
+            }
+          `}</style>
+          <Grid
+            textAlign='center'
+            style={{ height: '100%' }}
+            verticalAlign='middle'
+          >
+            <Grid.Column style={{ maxWidth: 450 }}>
+              <Form size='large' onSubmit={this.submitForm}>
+                <Segment stacked>
+                  <Form.Input onChange={this.handleChange}
+                    fluid
+                    icon='user'
+                    iconPosition='left'
+                    placeholder='New Campaign Name'
+                    name='campname'
+                  />
+                  <Form.Input onChange={this.handleChange}
+                    fluid
+                    icon='edit'
+                    iconPosition='left'
+                    placeholder='This desciption will be when sent via text'
+                    name='campsdesc'
+                  />
+                  <Form.Input onChange={this.handleChange}
+                    fluid
+                    icon='sticky note outline'
+                    iconPosition='left'
+                    placeholder='Body of letter sent to representative'
+                    name='campldesc'
+                  />
+                  <Form.Input onChange={this.handleChange}
+                    fluid
+                    icon='asterisk'
+                    iconPosition='left'
+                    placeholder='Keyword'
+                    name='keywords'
+                  />
+                  <Button color='teal' fluid size='large' type='submit'>Create</Button>
+                </Segment>
+              </Form>
+            </Grid.Column>
+          </Grid>
+        </div>
     )
   }
 }

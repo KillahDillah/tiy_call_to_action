@@ -117,6 +117,15 @@ router.get("/campaign/:id_campaign/national", function(req,res,next){
       res.json(data)
     })
 })
+router.get("/campaign/:id_campaign/obj", function(req,res,next){
+  let campaignObj = Campaign.getCampaignObj(req.params.id_campaign)
+  campaignObj.catch(err => {
+    res.send({ error: true, message: 'Unable to get campaign obj' })
+  })
+    .then(data => {
+      res.json(data)
+    })
+})
 router.post("/campaign/:id_campaign/updateTexters", function(req,res, next){
   let campaignDetails = Campaign.getCampaignDetails(req.params.id_campaign)
   campaignDetails.catch(err => {
@@ -244,6 +253,20 @@ router.get('/metrics/:id', function (req, res, next) {
   `
   conn.query(sql, [id], function (err, results, fields) {
     if (!err) {
+      res.json(results)
+    }
+  })
+})
+
+router.get('/user/:id', function(req,res,next){
+  const id = req.params.id
+  const sql = `
+    SELECT *
+    FROM clogin
+    WHERE id = ?
+  `
+  conn.query(sql,[id], function(err,results,fields){
+    if(!err){
       res.json(results)
     }
   })

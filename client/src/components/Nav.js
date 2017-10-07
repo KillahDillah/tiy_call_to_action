@@ -1,22 +1,46 @@
 import React, { Component } from 'react'
-import ListItem from './ListItem'
-import jwtDecode from 'jwt-decode'
 import {Authorize} from '../lib/auth'
+import { Link } from 'react-router-dom'
+import { Menu} from 'semantic-ui-react'
+
 
 class Nav extends Component {
-  
+
   render() {
-    let navItems = ['All','National','Representatives','Text an Update','View Letter','Send Letter']
-    return(
+    let navItems = [{
+      name: 'Details',
+      param: 'all'
+    },
+    {
+      name: 'National',
+      param: 'national'
+    },
+    {
+      name: 'By Representative',
+      param: 'representative'
+    },
+    {
+      name: 'Update Texters',
+      param: 'updatetexters'
+    },
+    {
+      name: 'View Letter',
+      param: 'letter'
+    },
+    {
+      name: 'Send Letter',
+      param: 'sendletter'
+    }]
+    return (
       <div className="nav">
-          <ul>
-          {navItems.map(name => 
-            <li key={name}>
-            <button><ListItem name={name} id_campaign={this.props.id_campaign}/></button>
-            </li>
-            )}
-          </ul>
-        </div>
+      <Menu vertical tabular>
+      {navItems.map(item =>
+        <Menu.Item className='nav' as={Link} to={'/campaign/'+this.props.match.params.id_campaign+'/'+item.param} key={item.param}>
+          {item.name}
+        </Menu.Item>
+      )}
+      </Menu>
+      </div>
     )
   }
 }

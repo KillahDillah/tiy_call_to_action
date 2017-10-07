@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Representative from '../Representative'
+import Representative from './Representative'
+import { Container, Header, Menu, Image} from 'semantic-ui-react'
 
 class ThanksRegistering extends Component {
     state = {
         err:null,
-        reps:false
+        reps:"loading"
     }
     componentWillMount(){
         axios.get(`/api/texter/${this.props.match.params.id}`)
@@ -22,11 +23,10 @@ class ThanksRegistering extends Component {
       }
     render() {
         let partial
-        if(!this.state.reps){
+        if(this.state.reps === "loading"){
             partial = <div>Loading</div>
-        }else if(!this.state.reps[0].representative){
-            console.log("reps",this.state.reps)
-            partial = <div>No senators found</div>
+        }else if(!this.state.reps){
+            partial = <div>No representatives found</div>
             
         }else{
             partial = this.state.reps.map(function(rep){
@@ -34,13 +34,25 @@ class ThanksRegistering extends Component {
             })
         }
         return (
-                <div>
-                <h3>Thanks for registering!</h3>
-                <br/>
+                <Container>
+                <Menu>
+                <Menu.Item header>
+                    <Image
+                        size='mini'
+                        src='/logo_small.png'
+                        style={{ marginRight: '1.5em' }}
+                    />
+                    Text to Action
+                </Menu.Item>
+                
+            </Menu>
+                <Header as='h2'>Thanks for registering!</Header>
                 <p>You should receive a text back shortly</p>
-                <h3>Your representatives are:</h3>
+                <Header as='h4'>Your representatives are:</Header>
+                <Container>
                 {partial}
-                </div>	
+                </Container>
+                </Container>	
                 )
     }
 }

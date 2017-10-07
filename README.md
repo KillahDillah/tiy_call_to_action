@@ -4,7 +4,6 @@
 
 This is a group project to showcase our skills learned at The Iron Yard - Las Vegas over the past three months.
 * [Jase Cutler](https://github.com/cutlerjd)
-* [Jordan Quinn](https://github.com/jordquinn)
 * [Leah Miller](https://github.com/KillahDillah)
 
 ## Purpose

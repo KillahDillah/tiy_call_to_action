@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { withRouter } from 'react-router-dom'
 
 class UpdateTexters extends Component {
     constructor(props){
@@ -31,7 +32,7 @@ class UpdateTexters extends Component {
               console.log(err, "Error sending texts");
             })
           .then(function(response){
-                  this.props.history.push('/dashboard')
+                  this.props.history.push(`/campaign/${this.props.id_campaign}`)
           }.bind(this))
     }
     render() {
@@ -47,4 +48,4 @@ class UpdateTexters extends Component {
     }
 }
 
-export default UpdateTexters
+export default withRouter(UpdateTexters)
