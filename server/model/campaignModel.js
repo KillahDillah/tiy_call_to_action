@@ -4,12 +4,12 @@ const Twilio = require('./twilioModel')
 function getCampaignDetails(id_campaign){
     return new Promise(function(resolve,reject){
         let sql = `
-        SELECT ca.id_campaign, t.id_texters, ca.timestamp, t.phone as 'texterPhone', t.firstname AS 'texterFirstName', t.lastname as 'texterLastName', t.email as 'texterEmail', 
+        SELECT ca.id_campaign, t.id_texters, ca.timestamp, t.phone as 'texterPhone', t.firstname AS 'texterFirstName', t.lastname as 'texterLastName', t.email as 'texterEmail', t.phone as 'texterPhone'
         t.streetnumber as 'texterStreetNumber', t.streetname as 'texterStreetName', t.city as 'texterCity', t.state as 'texterState', t.zip as 'texterZip', GROUP_CONCAT(DISTINCT CONCAT(r.office_name,': ', r.name ) SEPARATOR ', ') as texterRepresentatives
         FROM campaign_activity as ca
         JOIN texters as t on ca.id_texter=t.id_texters
         JOIN representatives r on t.id_texters=r.id_texters
-        WHERE ca.active =1 AND ca.confirmed=1 AND ca.id_campaign LIKE ?
+        WHERE ca.confirmed=1 AND ca.id_campaign LIKE ?
         group by t.id_texters;`
         pool.getConnection(function(err,connection){
             if(err){
@@ -113,7 +113,7 @@ function getNationalDetails(id_campaign){
         SELECT COUNT(distinct ca.id_texter) as value, t.state as code, t.state as regionName
         FROM campaign_activity as ca
         JOIN texters as t on ca.id_texter=t.id_texters
-        WHERE ca.active =1 AND ca.confirmed=1 AND ca.id_campaign LIKE ?
+        WHERE ca.confirmed=1 AND ca.id_campaign LIKE ?
         group by t.state`
         pool.getConnection(function(err,connection){
             if(err){
@@ -202,14 +202,63 @@ function getCampaignObj(id_campaign){
             }
         })
     })
-
-
-
-
+}
+function getLetterList(id_campaign){
+    return new Promise(function(resolve,reject){
+        let sql =`
+        SELECT distinct ca.id_texter as id_texter, ca.confirmed, t.firstname as texterFirstName, t.lastname as texterLastName, t.streetname as texterStreet, t.city as texterCity, t.state as texterState, t.zip as texterZip, t.phone as texterPhone,
+		r.id_rep as id_rep, r.state as repState, r.name as repName, r.addressLine1 as repAddressLine1, r.addressCity as repAddressCity, r.addressState as repAddressState, r.addressZip as repAddressZip,
+        cl.lob_id as lob_id, c.longDesc as letter, cl.id_letter_campaign as idCL, c.id as id_campaign
+        FROM campaign_activity as ca
+        JOIN texters as t on ca.id_texter=t.id_texters
+        JOIN representatives r on t.id_texters=r.id_texters
+        JOIN campaigns as c on ca.id_campaign=c.id
+        LEFT JOIN campaign_letter as cl on (r.id_rep=cl.id_rep AND ca.id_campaign=cl.id_campaign)
+        WHERE ca.confirmed=1 AND ca.id_campaign LIKE ?`
+        pool.getConnection(function(err,connection){
+            if(err){
+                reject({
+                    status:'Failure',
+                    err:err,
+                    error:true,
+                    errorMessage:['Unable to get db connection getLetterList']
+                })
+            }
+            else{
+                connection.query(sql,[id_campaign],function(err,results,fields){
+                    connection.release()
+                    if(err){
+                        reject({
+                            status:'Failure',
+                            err:err,
+                            error:true,
+                            errorMessage:['Query issue getLetterList']
+                        })
+                    }else if(results.length == 0){
+                        resolve({
+                            status:'Success',
+                            error:false,
+                            id_campaign:id_campaign,
+                            message:'No letter list found',
+                            results:results
+                        })
+                    }else{
+                        resolve({
+                            status:'Success',
+                            error:false,
+                            id_campaign:id_campaign,
+                            results:results
+                        })
+                    }
+                })
+            }
+        })
+    })
 }
 module.exports = {
     getCampaignDetails:getCampaignDetails,
     getCampaignKeywordList:getCampaignKeywordList,
     getNationalDetails:getNationalDetails,
-    getCampaignObj:getCampaignObj
+    getCampaignObj:getCampaignObj,
+    getLetterList:getLetterList
 }
