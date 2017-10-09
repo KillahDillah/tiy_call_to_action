@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
+import {Button} from 'semantic-ui-react'
 
 class UpdateTexters extends Component {
     constructor(props){
@@ -41,7 +42,7 @@ class UpdateTexters extends Component {
                 <h3>Send an update on the campaign!</h3>
                 <form onSubmit={this.handleSubmit}>
                     <textarea rows="4" cols="50" onChange={this.handleChange} name="body">{this.state.body}</textarea>
-                    <button type="submit">Send Message</button>
+                    <Button color='teal' style={{width:'373px'}}fluid size='small' type="submit">Send Message</Button>
                 </form>
             </div>
         )

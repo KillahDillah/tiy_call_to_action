@@ -10,7 +10,7 @@ import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui
 class Login extends Component {
   state = {
     username:'',
-    password:''
+    password:'',
   }
   componentWillMount() {
     this.props.dispatch(logoutUser())
