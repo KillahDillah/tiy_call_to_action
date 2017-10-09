@@ -98,7 +98,7 @@ function updateCampaign(id_campaign,id_texter,confirmed){
         if(confirmed){
             sql = `
             UPDATE campaign_activity
-            SET confirmed = 1
+            SET confirmed = 1, active = 0
             WHERE id_campaign = ? AND id_texter = ?`
         }else{
             sql = `

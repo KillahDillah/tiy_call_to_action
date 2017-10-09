@@ -21,7 +21,7 @@ function messageRouter(phone,textBody,cb,fullUrl){
             //This object stores the needed id_texters key
             let texter = identityResults.texter
             //First check on the textBody is to see if it's in response to an open campaign
-            if(/^yes$/i.test(textBody)){
+            if(/^yes$/i.test(textBody.trim())){
                 let activeCampaign = Text.checkCampaign(phone)
                 activeCampaign.catch(console.log)
                 .then(function(campaignResults){
@@ -30,7 +30,7 @@ function messageRouter(phone,textBody,cb,fullUrl){
                         let updateCampaign = Text.updateCampaign(campaignResults.id_campaign,texter.id_texters,true)
                         updateCampaign.catch(console.log)
                         .then(function(results){
-                            cb(`Successfully confirmed campaign ${campaignResults.id_campaign}`)
+                            cb(`Successfully confirmed campaign #${textBody.trim()}`)
                         })
                     }else{
                         //No campaign found
@@ -39,7 +39,7 @@ function messageRouter(phone,textBody,cb,fullUrl){
                 })
             }
             //Similar function to a yes coming in
-            else if(/^no$/i.test(textBody)){
+            else if(/^no$/i.test(textBody.trim())){
                 let activeCampaign = Text.checkCampaign(phone)
                 activeCampaign.catch(console.log)
                 .then(function(campaignResults){
@@ -55,15 +55,16 @@ function messageRouter(phone,textBody,cb,fullUrl){
                     }
                 })
             }
-            else if(/^list\d*/i.test(textBody)){
+            else if(/^list\d*/i.test(textBody.trim())){
                 let topDigit = /^list(\d\d)*$/i.exec(textBody)[1] || 0
+                console.log(topDigit,"topDigit")
                 let campaignList = Campaign.getCampaignKeywordList(texter.id_texters,Number(topDigit)+10,Number(topDigit))
                 campaignList.catch(console.log)
                 .then(obj =>{
                     cb(obj.textBody)
                 })
             }
-            else if(/^reps*/i.test(textBody)){
+            else if(/^reps*/i.test(textBody.trim())){
                 let repsBlob = Representative.findRepresentatives(texter.address)
                 repsBlob.catch(console.log)
                 .then(blob => Representative.createRepsArray(blob))
@@ -82,7 +83,7 @@ function messageRouter(phone,textBody,cb,fullUrl){
             }
             //After checking for yes/no, it checks for a keyword
             else{
-                let keywordCheck = Text.findCampaign(textBody)
+                let keywordCheck = Text.findCampaign(textBody.trim())
                 keywordCheck.catch(console.log)
                 .then(function(results){
                     //If no campaign is returned, message is sent back asking them to text in again

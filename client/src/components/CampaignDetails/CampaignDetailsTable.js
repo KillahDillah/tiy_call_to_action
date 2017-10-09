@@ -1,27 +1,28 @@
 import React, { Component } from 'react'
 import CampaignDetailsTableRow from './CampaignDetailsTableRow'
+import { Table } from 'semantic-ui-react'
 
 class CampaignDetailsTable extends Component {
     render() {
         return (
                 <div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Phone number</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Elected Representatives</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <Table celled>
+                    <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell>Phone number</Table.HeaderCell>
+                        <Table.HeaderCell>Name</Table.HeaderCell>
+                        <Table.HeaderCell>Email</Table.HeaderCell>
+                        <Table.HeaderCell>City</Table.HeaderCell>
+                        <Table.HeaderCell>State</Table.HeaderCell>
+                        <Table.HeaderCell>Elected Representatives</Table.HeaderCell>
+                    </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
                         {this.props.data.map(function(item){
                             return <CampaignDetailsTableRow person={item} key={item.id_texters} />
                         }) }
-                    </tbody>
-                </table>
+                    </Table.Body>
+                </Table>
                 </div>	
                 )
     }

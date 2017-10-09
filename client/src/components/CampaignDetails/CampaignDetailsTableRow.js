@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
+import { Table } from 'semantic-ui-react'
 
 class CampaignDetailsTableRow extends Component {
     render() {
         return (
-            <tr>
-            <td>{this.props.person.texterPhone.replace(/\d{4}$/,'XXXX')}</td>
-            <td>{this.props.person.texterFirstName + " " + this.props.person.texterLastName}</td>
-            <td>{this.props.person.texterEmail}</td>
-            <td>{this.props.person.texterCity}</td>
-            <td>{this.props.person.texterState}</td>
-            <td>{this.props.person.texterRepresentatives.split(",").map(function(item){
+            <Table.Row>
+            <Table.Cell>{this.props.person.texterPhone.replace(/\d{4}$/,'XXXX')}</Table.Cell>
+            <Table.Cell>{this.props.person.texterFirstName + " " + this.props.person.texterLastName}</Table.Cell>
+            <Table.Cell>{this.props.person.texterEmail}</Table.Cell>
+            <Table.Cell>{this.props.person.texterCity}</Table.Cell>
+            <Table.Cell>{this.props.person.texterState}</Table.Cell>
+            <Table.Cell>{this.props.person.texterRepresentatives.split(",").map(function(item){
                 return <div key={item}>{item}<br/></div>
-            })}</td>
-        </tr>	
+            })}</Table.Cell>
+        </Table.Row>	
                 )
     }
 }

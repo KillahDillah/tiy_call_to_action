@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const config = require('config')
 const Twilio = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+const Letter = require('../model/letterModel')
 
 /**
  * This a webhook for Twilio to use to send incoming text messages.
@@ -121,6 +122,25 @@ router.get("/campaign/:id_campaign/obj", function(req,res,next){
   let campaignObj = Campaign.getCampaignObj(req.params.id_campaign)
   campaignObj.catch(err => {
     res.send({ error: true, message: 'Unable to get campaign obj' })
+  })
+    .then(data => {
+      res.json(data)
+    })
+})
+router.post("/campaign/:id_campaign/sendletters", function(req,res,next){
+  let sendLetters = Letter.sendLetters(req.params.id_campaign)
+  sendLetters.catch(err => {
+    res.send({ error: true, message: 'Unable to send letters' })
+  })
+    .then(data => {
+      console.log("completed",data)
+      res.json(data)
+    })
+})
+router.get("/campaign/:id_campaign/letterlist", function(req,res,next){
+  let campaignLetterList = Campaign.getLetterList(req.params.id_campaign)
+  campaignLetterList.catch(err => {
+    res.send({ error: true, message: 'Unable to get campaign letter list' })
   })
     .then(data => {
       res.json(data)
