@@ -11,7 +11,6 @@ import ErrorRegistering from './Texter/ErrorRegistering'
 import ThanksRegistering from './Texter/ThanksRegistering'
 import CampaignerReg from './CampaignerReg'
 import Login from './Login'
-import Registered from './Registered'
 import Letter from './Letter'
 import Main from './Main'
 
@@ -26,7 +25,6 @@ class App extends Component {
             <Route exact path="/reg/:phone" component={TexterForm} />
             <Route exact path="/error" component={ErrorRegistering} />
             <Route exact path="/thanks/:id" component={ThanksRegistering}/>
-            <Route exact path="/registered" component={Registered} />
             <Route exact path="/ltr/:id_campaign" component={Letter} />
             <Route exact path="/login" component={Login} />
             <Route path="/" component={Main} />

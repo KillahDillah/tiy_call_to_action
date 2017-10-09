@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { callLogoutUser } from '../actions/campaignAction'
-import { Container, Image, Menu, Icon } from 'semantic-ui-react'
+import { Container, Image, Menu, Icon, Segment, Grid, Header, List } from 'semantic-ui-react'
 
 class Layout extends Component {
 
@@ -33,7 +33,13 @@ class Layout extends Component {
         </Menu>
         {/* Rendering of the page below */}
         {this.props.children}
-      
+        {/*<Segment vertical style={{backgroundColor:'white',padding: '0em 0em' }}>
+                  <Container textAlign='center'>
+                    <List horizontal inverted divided link>
+                      <List.Item style={{color:'black'}}>&copy;Text to Action</List.Item>
+                    </List>  
+                  </Container>
+                </Segment>*/}
       </div>
     )
   }

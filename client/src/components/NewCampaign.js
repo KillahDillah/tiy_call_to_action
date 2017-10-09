@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import {Authorize} from '../lib/auth'
-import { Button, Form, Grid, Image, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Image, Segment, TextArea } from 'semantic-ui-react'
 
 
 //TODO: Clear state on form submit and change to singular keyword
@@ -15,7 +15,10 @@ class NewCampaign extends Component {
       campname: "",
       keywords: "",
       campsdesc: "",
-      campldesc: ""
+      campldesc: `Dear(congressperson),
+                    My name is (texter).
+                    Please consider my vote for (campaign).
+                    Regards, (texter)`
     }
   }
 
@@ -81,11 +84,12 @@ class NewCampaign extends Component {
                     placeholder='This desciption will be when sent via text'
                     name='campsdesc'
                   />
-                  <Form.Input onChange={this.handleChange}
+                  <TextArea onChange={this.handleChange}
                     fluid
                     icon='sticky note outline'
                     iconPosition='left'
                     placeholder='Body of letter sent to representative'
+                    value={this.state.campldesc}
                     name='campldesc'
                   />
                   <Form.Input onChange={this.handleChange}
