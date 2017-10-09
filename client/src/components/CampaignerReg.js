@@ -31,7 +31,7 @@ class CampaignReg extends Component {
         email: this.state.email,
         password: this.state.password
       }).then(resp => {
-        this.props.history.push('/registered')
+        this.props.history.push(`'/login?username='${this.state.username}`)
       }).catch(err => {
         console.log(err)
         this.setState({
