@@ -30,7 +30,7 @@ function messageRouter(phone,textBody,cb,fullUrl){
                         let updateCampaign = Text.updateCampaign(campaignResults.id_campaign,texter.id_texters,true)
                         updateCampaign.catch(console.log)
                         .then(function(results){
-                            cb(`Successfully confirmed campaign #${textBody.trim()}`)
+                            cb(`Successfully joined the campaign.`)
                         })
                     }else{
                         //No campaign found
@@ -48,7 +48,7 @@ function messageRouter(phone,textBody,cb,fullUrl){
                         //Update campaign marks the campaign as no longer active
                         updateCampaign.catch(console.log)
                         .then(function(results){
-                            cb(`You will not be part of campaign #${campaignResults.id_campaign}`)
+                            cb(`You will not be part of this campaign.`)
                         })
                     }else{
                         cb("No open campaign for you to confirm. Please text back with a campaign keyword to join!")
