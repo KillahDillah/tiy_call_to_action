@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
+import { Form, TextArea, Menu, Image, Button, Segment, Label } from 'semantic-ui-react'
 
 class UpdateTexters extends Component {
     constructor(props){
@@ -39,10 +40,10 @@ class UpdateTexters extends Component {
         return (
             <div>
                 <h3>Send an update on the campaign!</h3>
-                <form onSubmit={this.handleSubmit}>
-                    <textarea rows="4" cols="50" onChange={this.handleChange} name="body">{this.state.body}</textarea>
-                    <button type="submit">Send Message</button>
-                </form>
+                <Form onSubmit={this.handleSubmit}>
+                    <TextArea onChange={this.handleChange} name="body">{this.state.body}</TextArea>
+                    <Button type="submit">Send Message</Button>
+                </Form>
             </div>
         )
     }
