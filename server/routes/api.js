@@ -127,7 +127,7 @@ router.get("/campaign/:id_campaign/obj", function(req,res,next){
       res.json(data)
     })
 })
-router.post("/campaign/:id_campaign/sendletter", function(req,res,next){
+router.post("/campaign/:id_campaign/sendletters", function(req,res,next){
   let sendLetters = Letter.sendLetters(req.params.id_campaign)
   sendLetters.catch(err => {
     res.send({ error: true, message: 'Unable to send letters' })

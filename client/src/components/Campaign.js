@@ -10,6 +10,7 @@ import ByState from './ByState'
 import BySenate from './BySenate'
 import National from './National/National'
 import Letter from './Letter'
+import SendLetter from './SendLetter/SendLetter'
 import {setCampaignDetails} from '../actions/campaignAction'
 import {withRouter} from 'react-router-dom'
 
@@ -29,7 +30,7 @@ class Campaign extends Component {
                         <Route exact path="/campaign/:id_campaign/representative" component={BySenate} />
                         <Route exact path="/campaign/:id_campaign/day" component={ByDay} />
                         <Route exact path="/campaign/:id_campaign/state" component={ByState} />
-                        <Route exact path="/campaign/:id_campaign/sendletter" component={Letter} />
+                        <Route exact path="/campaign/:id_campaign/sendletter" component={SendLetter} />
                         <Route exact path="/campaign/:id_campaign/letter" component={Letter} />
                     </Switch>
                 </CampaignLayout>
