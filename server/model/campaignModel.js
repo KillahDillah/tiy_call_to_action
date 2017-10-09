@@ -215,7 +215,7 @@ function getCampaignObj(id_campaign){
 function getLetterList(id_campaign){
     return new Promise(function(resolve,reject){
         let sql =`
-        SELECT distinct ca.id_texter as id_texter, ca.confirmed, t.firstname as texterFirstName, t.lastname as texterLastName, t.streetname as texterStreet, t.city as texterCity, t.state as texterState, t.zip as texterZip, t.phone as texterPhone,
+        SELECT distinct ca.id_texter as id_texter, ca.confirmed, t.firstname as texterFirstName, t.lastname as texterLastName, t.streetname as texterStreet, t.city as texterCity, t.state as texterState, t.zip as texterZip, t.phone as texterPhone, t.streetnumber as texterStreetNumber,
 		r.id_rep as id_rep, r.state as repState, r.name as repName, r.addressLine1 as repAddressLine1, r.addressCity as repAddressCity, r.addressState as repAddressState, r.addressZip as repAddressZip,
         cl.lob_id as lob_id, c.longDesc as letter, cl.id_letter_campaign as idCL, c.id as id_campaign, cl.lob_thumbnail as thumbnail
         FROM campaign_activity as ca
