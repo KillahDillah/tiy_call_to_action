@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'semantic-ui-react'
 import axios from 'axios'
+import {withRouter} from 'react-router-dom'
 
 class SendButton extends Component {
     state={
@@ -21,6 +22,8 @@ class SendButton extends Component {
                 buttonText:"Sent!",
                 buttonColor:'green'
             })
+        }).then(e=>{
+            setTimeout(function() { this.props.history.push(`/campaign/${this.props.id_campaign}/letterview`); }.bind(this), 3000)
         })
     }
     render() {
@@ -30,4 +33,4 @@ class SendButton extends Component {
     }
 }
 
-export default SendButton
+export default withRouter(SendButton)

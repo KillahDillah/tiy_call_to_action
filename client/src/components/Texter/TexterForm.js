@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete'
-import { Form, Container, Menu, Image, Button } from 'semantic-ui-react'
+import { Form, Container, Menu, Image, Button, Segment, Label } from 'semantic-ui-react'
 
 class TexterForm extends Component {
     constructor(props) {
@@ -19,7 +19,8 @@ class TexterForm extends Component {
             phone: this.props.match.params.phone,
             latLng: "",
             visible:true,
-            css:{display:'none'}
+            css:{display:'none'},
+            hide:false
         }
         this.onChange = (address) => this.setState({ address })
     }
@@ -44,7 +45,8 @@ class TexterForm extends Component {
                     usState: addressObj.administrative_area_level_1 || "",
                     zip: addressObj.postal_code || "",
                     visible:false,
-                    css:{display:'inherit'}
+                    css:{display:'inherit'},
+                    hide:true
                 })
             })
             .catch(error => console.error('Error', error))
@@ -118,15 +120,16 @@ class TexterForm extends Component {
                     
                 </Menu>
                 <Form onSubmit={this.handleSubmit}>
-                    <Form.Input type="text" placeholder="First Name" name="firstname" label="First Name" />
-                    <Form.Input type="text" placeholder="Last Name" name="lastname" label="Last Name" />
-                    <Form.Input type="text" placeholder="Email" name="email" label="Email" />
-                    <Form.Input type="text" placeholder="Phone number including +1 and area code" name="phone" value={this.state.phone} label="Phone starting with +1" />
-                    <div>
-                        {this.state.visible && <PlacesAutocomplete onContextMenu={this.handleAddressSubmitSelect} inputProps={inputProps} />}
-                        {this.state.visible && <Button onClick={this.handleAddressSubmit}>Find Address from Google</Button> }
-                    </div>
+                    <Segment disabled={this.state.hide}>
+                        <Label attached="top left">Address</Label>
+                        <PlacesAutocomplete onContextMenu={this.handleAddressSubmitSelect} inputProps={inputProps} />
+                        <Button onClick={this.handleAddressSubmit}>Verify address on Google</Button>
+                    </Segment>
                     <Form.Group style={this.state.css}>
+                    <Form.Input type="text" placeholder="First Name" name="firstname" label="First Name" onChange={this.handleChange}/>
+                    <Form.Input type="text" placeholder="Last Name" name="lastname" label="Last Name" onChange={this.handleChange}/>
+                    <Form.Input type="text" placeholder="Email" name="email" label="Email" onChange={this.handleChange}/>
+                    <Form.Input type="text" placeholder="Phone number including +1 and area code" name="phone" value={this.state.phone} label="Phone starting with +1" onChange={this.handleChange}/>
                     <Form.Input type="text" placeholder="Street Number" onChange={this.handleChange} name="streetnumber" value={this.state.streetnumber} label="Street Number"/>
                     <Form.Input type={this.state.type} placeholder="Street Name" onChange={this.handleChange} name="streetname" value={this.state.streetname} label="Street Name"/>
                     <Form.Input type={this.state.type} placeholder="City" onChange={this.handleChange} name="city" value={this.state.city} label="City" />

@@ -25,7 +25,7 @@ function sendLetter(item){
         name: `${item.texterFirstName} ${item.texterLastName}`,
         email: item.texterEmail,
         phone: item.texterPhone,
-        address_line1: item.texterStreet,
+        address_line1: `${item.texterStreetNumber} ${item.texterStreet}`,
         address_line2: '',
         address_city: item.texterCity,
         address_state: item.texterState,
