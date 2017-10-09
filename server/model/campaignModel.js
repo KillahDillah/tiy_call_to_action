@@ -74,11 +74,8 @@ function getCampaignKeywordList(id_texters,top,bottom){
         let topNum = top || 10
         let bottomNum = bottom || 0
         let sql = `
-        SELECT c.keywords, ca.id_texter
-        FROM campaigns as c
-        LEFT JOIN campaign_activity as ca on ca.id_campaign=c.id
-        GROUP BY c.id
-        HAVING ca.id_texter != ? OR ca.id_texter is null
+        SELECT keywords
+        FROM campaigns
         LIMIT ?,?`
         pool.getConnection(function(err,connection){
             if(err){
@@ -90,7 +87,7 @@ function getCampaignKeywordList(id_texters,top,bottom){
                 })
             }
             else{
-                connection.query(sql,[id_texters,bottomNum,topNum],function(err,results,fields){
+                connection.query(sql,[bottomNum,topNum],function(err,results,fields){
                     connection.release()
                     if(err){
                         reject(
