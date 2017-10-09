@@ -195,6 +195,7 @@ router.post("/NewCampaign", function (req, res, next) {
 })
 
 router.post('/CampaignerReg', function (req, res, next) {
+  console.log (req.body)
   const fname = req.body.fname
   const lname = req.body.lname
   const username = req.body.username
@@ -242,6 +243,7 @@ router.post("/token", function (req, res, next) {
   conn.query(sql, [username], function (err, results, fields) {
     if (results.length > 0) {
       const hashedPassword = results[0].password
+      console.log(password,hashedPassword)
       bcrypt.compare(password, hashedPassword).then(function (result) {
         if (result) {
           res.json({
@@ -249,7 +251,7 @@ router.post("/token", function (req, res, next) {
           })
         } else {
           res.status(401).json({
-            message: 'Invalid Credentials'
+            message: 'Invalid Credentials- passwords no match'
           })
         }
       }).catch(function (err) {
@@ -257,7 +259,7 @@ router.post("/token", function (req, res, next) {
       })
     } else {
       res.status(401).json({
-        message: 'Invalid Credentials'
+        message: 'Invalid Credentials- no user found'
       })
     }
   })

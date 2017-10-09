@@ -1,9 +1,9 @@
 {
     "db":{
-        "host":"us-cdbr-iron-east-05.cleardb.net",
-        "user":"bf88a005046089", // change me
-        "password":"2c2b19f8", // change me
-        "database":"heroku_a63de5d81717b5a" // change me
+        "host":"35.197.66.186",
+        "user":"tiy", // change me
+        "password":"mNNbFdL64GuhFp", // change me
+        "database":"text_to_action" // change me
     },
     "google":{
         "apiKey":"AIzaSyAugniaitAfv6TASa1c_WV3ac-Lvk8EFWg"
