@@ -34,11 +34,11 @@ class CampaignDetails extends Component {
             partial = <CampaignDetailsTable data={this.state.detailsArr} />
         }
         return (
-                <Container>
-                <h2>Campaign {this.props.id_campaign}</h2>
-                    {partial}
-                </Container>	
-                )
+          <Container>
+          <h2>Campaign {this.props.id_campaign}</h2>
+              {partial}
+          </Container>	
+        )
     }
 }
 

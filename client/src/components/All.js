@@ -7,10 +7,12 @@ import {Container} from 'semantic-ui-react'
 class All extends Component {
   render() {
     return (
+      <div>
       <Container
         style={{marginTop:'1em'}}>
         <CampaignDetails id_campaign={this.props.match.params.id_campaign} />
       </Container>
+      </div>
     )
   }
 }

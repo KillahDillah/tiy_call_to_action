@@ -33,9 +33,9 @@ class Nav extends Component {
     }]
     return (
       <div className="nav">
-      <Menu vertical tabular>
+      <Menu vertical tabular style={{backgroundColor:'white', paddingBottom:'100px'}}>
       {navItems.map(item =>
-        <Menu.Item className='nav' as={Link} to={'/campaign/'+this.props.match.params.id_campaign+'/'+item.param} key={item.param}>
+        <Menu.Item style={{padding:'20px'}} as={Link} to={'/campaign/'+this.props.match.params.id_campaign+'/'+item.param} key={item.param}>
           {item.name}
         </Menu.Item>
       )}

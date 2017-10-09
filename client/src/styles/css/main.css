@@ -76,7 +76,12 @@ footer .copyright {
   background-color: lightgrey;
 }
 
-.ui.vertical.tabular.menu.item :hover{
+.ui.vertical.tabular.menu .item:hover{
+  background-color: lightgrey;
+  border-bottom: 1px solid darkgrey;
+}
+
+.ui.vertical.tabular.menu .item:active{
   background-color: grey;
 }
 
@@ -88,3 +93,4 @@ th, td {
   text-align:left;
   padding-right:20px;
 }
+
