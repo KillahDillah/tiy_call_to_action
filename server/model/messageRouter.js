@@ -30,7 +30,7 @@ function messageRouter(phone,textBody,cb,fullUrl){
                         let updateCampaign = Text.updateCampaign(campaignResults.id_campaign,texter.id_texters,true)
                         updateCampaign.catch(console.log)
                         .then(function(results){
-                            cb(`Successfully confirmed campaign ${campaignResults.id_campaign}`)
+                            cb(`Successfully confirmed campaign #${textBody.trim()}`)
                         })
                     }else{
                         //No campaign found
