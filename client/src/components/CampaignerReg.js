@@ -89,7 +89,7 @@ class CampaignReg extends Component {
                     icon='user'
                     iconPosition='left'
                     placeholder='E-mail address'
-                    name=''
+                    name='email'
                   />
                   <Form.Input onChange={this.handleChange}
                     fluid
@@ -97,6 +97,7 @@ class CampaignReg extends Component {
                     iconPosition='left'
                     placeholder='Password'
                     type='password'
+                    name='password'
                   />
 
                   <Button color='teal' fluid size='large' type="submit">Register</Button>
