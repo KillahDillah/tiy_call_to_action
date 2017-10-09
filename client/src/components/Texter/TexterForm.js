@@ -126,10 +126,10 @@ class TexterForm extends Component {
                         <Button onClick={this.handleAddressSubmit}>Verify address on Google</Button>
                     </Segment>
                     <Form.Group style={this.state.css}>
-                    <Form.Input type="text" placeholder="First Name" name="firstname" label="First Name" />
-                    <Form.Input type="text" placeholder="Last Name" name="lastname" label="Last Name" />
-                    <Form.Input type="text" placeholder="Email" name="email" label="Email" />
-                    <Form.Input type="text" placeholder="Phone number including +1 and area code" name="phone" value={this.state.phone} label="Phone starting with +1" />
+                    <Form.Input type="text" placeholder="First Name" name="firstname" label="First Name" onChange={this.handleChange}/>
+                    <Form.Input type="text" placeholder="Last Name" name="lastname" label="Last Name" onChange={this.handleChange}/>
+                    <Form.Input type="text" placeholder="Email" name="email" label="Email" onChange={this.handleChange}/>
+                    <Form.Input type="text" placeholder="Phone number including +1 and area code" name="phone" value={this.state.phone} label="Phone starting with +1" onChange={this.handleChange}/>
                     <Form.Input type="text" placeholder="Street Number" onChange={this.handleChange} name="streetnumber" value={this.state.streetnumber} label="Street Number"/>
                     <Form.Input type={this.state.type} placeholder="Street Name" onChange={this.handleChange} name="streetname" value={this.state.streetname} label="Street Name"/>
                     <Form.Input type={this.state.type} placeholder="City" onChange={this.handleChange} name="city" value={this.state.city} label="City" />
