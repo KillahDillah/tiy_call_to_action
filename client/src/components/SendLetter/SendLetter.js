@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { Table, Button} from 'semantic-ui-react'
 import SendButton from './SendButton'
 
@@ -41,7 +41,7 @@ class SendLetter extends Component {
                     <Table.Row>
                         <Table.Cell>Sent</Table.Cell>
                         <Table.Cell>{this.state.sentArr.length}</Table.Cell>
-                        <Table.Cell>{this.state.sentArr.length > 0 && <Button>View</Button>}</Table.Cell>
+                        <Table.Cell>{this.state.sentArr.length > 0 && <Button as={Link} to={`/campaign/${this.props.match.params.id_campaign}/letterview`}>View</Button>}</Table.Cell>
                     </Table.Row>
                     <Table.Row>
                     <Table.Cell>Unsent</Table.Cell>
