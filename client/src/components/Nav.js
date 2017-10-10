@@ -40,7 +40,7 @@ class Nav extends Component {
       <div className="nav">
       <Menu vertical tabular fluid>
       {navItems.map(item =>
-        <Menu.Item className='nav' as={Link} to={'/campaign/'+this.props.match.params.id_campaign+'/'+item.param} key={item.param} onClick={this.handleItemClick} active={activeItem === item.name} name={item.name}>
+        <Menu.Item className='nav' as={Link} to={'/campaign/'+this.props.match.params.id_campaign+'/'+item.param} key={item.param} onClick={this.handleItemClick} active={activeItem === item.name} style={backgroundColor:'grey'} name={item.name}>
           {item.name}
         </Menu.Item>
       )}
