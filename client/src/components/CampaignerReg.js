@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Button, Form, Grid, Image, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Image, Segment, Header } from 'semantic-ui-react'
 
 class CampaignReg extends Component {
 
@@ -54,39 +54,44 @@ class CampaignReg extends Component {
               height: 100%;
             }
           `}</style>
+
           <Grid
             textAlign='center'
             style={{ height: '100%' }}
             verticalAlign='middle'
           >
             <Grid.Column style={{ maxWidth: 450 }}>
+            <Header as='h2' color='grey' textAlign='center'>
+              <Image src='/logo.png' />
+              {' '}Register
+            </Header>
               <Form size='large' onSubmit={this.submitForm}>
                 <Segment stacked>
                   <Form.Input onChange={this.handleChange}
                     fluid
                     icon='user'
                     iconPosition='left'
-                    placeholder='First Name or Organization'
+                    placeholder='First Name'
                     name='fname'
                   />
                   <Form.Input onChange={this.handleChange}
                     fluid
                     icon='user'
                     iconPosition='left'
-                    placeholder='Last Name (optional)'
+                    placeholder='Last Name'
                     name='lname'
                   />
                   <Form.Input onChange={this.handleChange}
                     fluid
                     icon='user'
                     iconPosition='left'
-                    placeholder='Username/Organization'
+                    placeholder='Username'
                     name='username'
                   />
                   {this.state.error !== '' ? <p>{this.state.error}</p> : ''}
                   <Form.Input onChange={this.handleChange}
                     fluid
-                    icon='user'
+                    icon='at'
                     iconPosition='left'
                     placeholder='E-mail address'
                     name='email'
