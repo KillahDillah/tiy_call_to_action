@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { withRouter, Link } from 'react-router-dom'
-import { Table, Button} from 'semantic-ui-react'
+import { Table, Button, Container, Message} from 'semantic-ui-react'
 import SendButton from './SendButton'
 
 class SendLetter extends Component {
@@ -29,6 +29,15 @@ class SendLetter extends Component {
     }
     render() {
         return (
+            <Container>
+            <Message>
+            <Message.Header>Sending a Letter</Message.Header>
+            <Message.List>
+              <Message.Item>Letters are mailed using the <a href="https://www.lob.com">Lob service</a>.</Message.Item>
+              <Message.Item>Each texter will have three to five representatives to send letters for.</Message.Item>
+              <Message.Item>Images are provided of the letters of how they appear printed out.</Message.Item>
+            </Message.List>
+          </Message>
             <Table>
                 <Table.Header>
                     <Table.Row>
@@ -55,6 +64,7 @@ class SendLetter extends Component {
             </Table.Row>
                 </Table.Body>
             </Table>
+            </Container>
         )
     }
 }

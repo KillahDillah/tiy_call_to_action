@@ -5,8 +5,13 @@ import { Menu} from 'semantic-ui-react'
 
 
 class Nav extends Component {
+  state = { activeItem: 'Details' }
+  
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
+    const { activeItem } = this.state
+
     let navItems = [{
       name: 'Details',
       param: 'all'
@@ -33,9 +38,9 @@ class Nav extends Component {
     }]
     return (
       <div className="nav">
-      <Menu vertical tabular>
+      <Menu vertical tabular fluid>
       {navItems.map(item =>
-        <Menu.Item className='nav' as={Link} to={'/campaign/'+this.props.match.params.id_campaign+'/'+item.param} key={item.param}>
+        <Menu.Item className='nav' as={Link} to={'/campaign/'+this.props.match.params.id_campaign+'/'+item.param} key={item.param} onClick={this.handleItemClick} active={activeItem === item.name} name={item.name}>
           {item.name}
         </Menu.Item>
       )}
