@@ -23,10 +23,10 @@ class Layout extends Component {
               />
               Text to Action
             </Menu.Item>
-            <Menu.Item as={Link} to="/">Home</Menu.Item>
             <Menu.Item as={Link} to="/newcampaign" name="newCampaign"><Icon name="add" />New Campaign</Menu.Item>
           </Container>
           <Menu.Menu position="right">
+            <Menu.Item>(928) 440-8398</Menu.Item>
             <Menu.Item as={Link} to="/login" name="logout" onClick={this.logout}><Icon name="sign out" />Sign Out</Menu.Item>
           </Menu.Menu>
         </Menu>
