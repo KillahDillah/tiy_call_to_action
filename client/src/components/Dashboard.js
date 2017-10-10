@@ -40,10 +40,6 @@ class Dashboard extends Component {
   render() {
     return(
       <div className="dashboard">
-      <Image 
-        src="https://d371bzke8qmfhi.cloudfront.net/styles/explore_hero/s3/images/navigation/mountrushmore_1.jpg?itok=4-xvtCQs"
-        style={{position:'fixed', opacity:'0.5'}}
-        />
         <style>{`
             body > div,
             body > div > div,
