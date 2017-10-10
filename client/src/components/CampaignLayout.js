@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Segment } from 'semantic-ui-react'
+import { Grid, Segment, Header, Label } from 'semantic-ui-react'
 import Nav from './Nav'
 import { connect } from 'react-redux'
 import { AuthRoute as Route } from '../lib/auth'
@@ -14,9 +14,13 @@ class CampaignLayout extends Component {
                 </Grid.Column>
                 <Grid.Column stretched width={12}>
                     <Segment>
-                    <h2>{this.props.name}</h2>
-                    <p>{this.props.shortDesc}</p>
-                    <p>Activity: {this.props.countActivity}</p>
+                        <Header as="h1">
+                        {this.props.name}
+                        <Header.Subheader>
+                        {this.props.shortDesc}
+                        </Header.Subheader>
+                        </Header>
+                        <Label ribbon="right">{this.props.countActivity} responses</Label>
                     {this.props.children}
                     </Segment>
                 </Grid.Column>

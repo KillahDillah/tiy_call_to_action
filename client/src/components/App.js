@@ -16,6 +16,10 @@ import Main from './Main'
 
 
 class App extends Component {
+  componentDidMount() {
+    document.title = "Text to Action"
+  }
+  
   render() {
     return (
       <Provider store={store}>
