@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
-import { Form, TextArea, Menu, Image, Button, Segment, Label, Header } from 'semantic-ui-react'
+import { Form, TextArea, Button, Header } from 'semantic-ui-react'
 
 class UpdateTexters extends Component {
     constructor(props){
