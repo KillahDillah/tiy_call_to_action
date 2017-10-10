@@ -163,6 +163,56 @@ function getNationalDetails(id_campaign){
         })
     })
 }
+
+function getCampaignRepDetails(id_campaign){
+    return new Promise(function(resolve,reject){
+        let sql = `
+        SELECT COUNT(distinct ca.id_texter) as value, r.name as repName, r.office_name as repOffice, t.state as texterState
+        FROM campaign_activity as ca
+        JOIN texters as t on ca.id_texter=t.id_texters
+        JOIN representatives as r on t.id_texters=r.id_texters
+        WHERE ca.confirmed=1 AND ca.id_campaign LIKE ?
+        group by r.name`
+        pool.getConnection(function(err,connection){
+            if(err){
+                reject({
+                    status:'Failure',
+                    err:err,
+                    error:true,
+                    errorMessage:['Unable to get db connection getCampaignRepDetails']
+                })
+            }
+            else{
+                connection.query(sql,[id_campaign],function(err,results,fields){
+                    connection.release()
+                    if(err){
+                        reject({
+                            status:'Failure',
+                            err:err,
+                            error:true,
+                            errorMessage:['Query issue getCampaignRepDetails']
+                        })
+                    }else if(results.length == 0){
+                        resolve({
+                            status:'Success',
+                            error:false,
+                            id_campaign:null,
+                            message:'No campaign details found'
+                        })
+                    }else{
+                        resolve({
+                            status:'Success',
+                            error:false,
+                            id_campaign:id_campaign,
+                            results:results
+                        })
+                    }
+                })
+            }
+        })
+    })
+}
+
 function getCampaignObj(id_campaign){
     return new Promise(function(resolve,reject){
         let sql =`
@@ -269,5 +319,6 @@ module.exports = {
     getCampaignKeywordList:getCampaignKeywordList,
     getNationalDetails:getNationalDetails,
     getCampaignObj:getCampaignObj,
-    getLetterList:getLetterList
+    getLetterList:getLetterList,
+    getCampaignRepDetails:getCampaignRepDetails
 }

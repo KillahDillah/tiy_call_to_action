@@ -118,6 +118,15 @@ router.get("/campaign/:id_campaign/national", function(req,res,next){
       res.json(data)
     })
 })
+router.get("/campaign/:id_campaign/reps", function(req,res,next){
+  let campaignDetails = Campaign.getCampaignRepDetails(req.params.id_campaign)
+  campaignDetails.catch(err => {
+    res.send({ err:err,error: true, message: 'Unable to get campaign details' })
+  })
+    .then(data => {
+      res.json(data)
+    })
+})
 router.get("/campaign/:id_campaign/obj", function(req,res,next){
   let campaignObj = Campaign.getCampaignObj(req.params.id_campaign)
   campaignObj.catch(err => {
