@@ -11,7 +11,6 @@ class CampaignDetailsTable extends Component {
                     <Table.Row>
                         <Table.HeaderCell>Phone number</Table.HeaderCell>
                         <Table.HeaderCell>Name</Table.HeaderCell>
-                        <Table.HeaderCell>Email</Table.HeaderCell>
                         <Table.HeaderCell>City</Table.HeaderCell>
                         <Table.HeaderCell>State</Table.HeaderCell>
                         <Table.HeaderCell>Elected Representatives</Table.HeaderCell>

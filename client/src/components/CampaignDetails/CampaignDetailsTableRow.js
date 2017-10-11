@@ -7,7 +7,6 @@ class CampaignDetailsTableRow extends Component {
             <Table.Row>
             <Table.Cell>{this.props.person.texterPhone.replace(/\d{4}$/,'XXXX')}</Table.Cell>
             <Table.Cell>{this.props.person.texterFirstName + " " + this.props.person.texterLastName}</Table.Cell>
-            <Table.Cell>{this.props.person.texterEmail}</Table.Cell>
             <Table.Cell>{this.props.person.texterCity}</Table.Cell>
             <Table.Cell>{this.props.person.texterState}</Table.Cell>
             <Table.Cell>{this.props.person.texterRepresentatives.split(",").map(function(item){
