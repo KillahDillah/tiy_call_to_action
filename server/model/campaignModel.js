@@ -172,7 +172,7 @@ function getCampaignRepDetails(id_campaign){
         JOIN texters as t on ca.id_texter=t.id_texters
         JOIN representatives as r on t.id_texters=r.id_texters
         WHERE ca.confirmed=1 AND ca.id_campaign LIKE ?
-        group by r.name`
+        group by r.name, r.office_name, t.state`
         pool.getConnection(function(err,connection){
             if(err){
                 reject({

@@ -15,10 +15,7 @@ class NewCampaign extends Component {
       campname: "",
       keywords: "",
       campsdesc: "",
-      campldesc: `Dear(congressperson),
-                    My name is (texter).
-                    Please consider my vote for (campaign).
-                    Regards, (texter)`
+      campldesc: `This is the body of the letter to be sent to representatives. Asking for changes in legislation, details of a new issue, or other information can be provided here.`
     }
   }
 

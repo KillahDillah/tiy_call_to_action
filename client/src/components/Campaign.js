@@ -7,7 +7,7 @@ import All from './All'
 import Update from './Update'
 import ByDay from './ByDay'
 import ByState from './ByState'
-import BySenate from './BySenate'
+import ByRep from './byRep/ByRep'
 import National from './National/National'
 import Letter from './Letter'
 import SendLetter from './SendLetter/SendLetter'
@@ -28,7 +28,7 @@ class Campaign extends Component {
                         <Route exact path="/campaign/:id_campaign/all" component={All} />
                         <Route exact path="/campaign/:id_campaign/updatetexters" component={Update} />
                         <Route exact path="/campaign/:id_campaign/campaign" component={National} />
-                        <Route exact path="/campaign/:id_campaign/representative" component={BySenate} />
+                        <Route exact path="/campaign/:id_campaign/representative" component={ByRep} />
                         <Route exact path="/campaign/:id_campaign/day" component={ByDay} />
                         <Route exact path="/campaign/:id_campaign/state" component={ByState} />
                         <Route exact path="/campaign/:id_campaign/sendletter" component={SendLetter} />
