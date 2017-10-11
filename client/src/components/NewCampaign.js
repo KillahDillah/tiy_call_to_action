@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import {Authorize} from '../lib/auth'
-import { Button, Form, Grid, Image, Segment, TextArea } from 'semantic-ui-react'
+import { Button, Form, Grid, Segment, TextArea } from 'semantic-ui-react'
 
 
 //TODO: Clear state on form submit and change to singular keyword
@@ -51,15 +51,13 @@ class NewCampaign extends Component {
   render() {
     return(
       <div className='login-form'>
-        <Image 
-        src="https://d371bzke8qmfhi.cloudfront.net/styles/explore_hero/s3/images/navigation/mountrushmore_1.jpg?itok=4-xvtCQs"
-        style={{position:'fixed', opacity:'0.5'}}
-        />
           <style>{`
             body > div,
-            body > div > div,
-            body > div > div > div.login-form {
+            body > div > div {
               height: 100%;
+            }
+            body > div > div > div.login-form  {
+              margin-top:10%;
             }
           `}</style>
           <Grid
@@ -85,9 +83,7 @@ class NewCampaign extends Component {
                     name='campsdesc'
                   />
                   <TextArea onChange={this.handleChange}
-                    fluid
                     icon='sticky note outline'
-                    iconPosition='left'
                     placeholder='Body of letter sent to representative'
                     value={this.state.campldesc}
                     name='campldesc'

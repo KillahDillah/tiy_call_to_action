@@ -88,3 +88,12 @@ th, td {
   text-align:left;
   padding-right:20px;
 }
+
+.ui.vertical.tabular.menu .active.item {
+  position:relative;
+  right:-10px;
+}
+
+.nav {
+  background:white;
+}

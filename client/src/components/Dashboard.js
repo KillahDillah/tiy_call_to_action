@@ -3,7 +3,7 @@ import {Authorize} from '../lib/auth'
 import jwtDecode from 'jwt-decode'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
-import { Header, Image, Segment, Container, Card } from 'semantic-ui-react'
+import { Header, Segment, Container, Card } from 'semantic-ui-react'
 
 function getMetrics(userId){
   return axios.get(`/api/metrics/${userId}`)
@@ -40,10 +40,6 @@ class Dashboard extends Component {
   render() {
     return(
       <div className="dashboard">
-      <Image 
-        src="https://d371bzke8qmfhi.cloudfront.net/styles/explore_hero/s3/images/navigation/mountrushmore_1.jpg?itok=4-xvtCQs"
-        style={{position:'fixed', opacity:'0.5'}}
-        />
         <style>{`
             body > div,
             body > div > div,

@@ -24,10 +24,10 @@ class Campaign extends Component {
             <Router>
                 <CampaignLayout>
                     <Switch>
-                        <Route exact path="/campaign/:id_campaign" component={All} />
+                        <Route exact path="/campaign/:id_campaign" component={National} />
                         <Route exact path="/campaign/:id_campaign/all" component={All} />
                         <Route exact path="/campaign/:id_campaign/updatetexters" component={Update} />
-                        <Route exact path="/campaign/:id_campaign/national" component={National} />
+                        <Route exact path="/campaign/:id_campaign/campaign" component={National} />
                         <Route exact path="/campaign/:id_campaign/representative" component={BySenate} />
                         <Route exact path="/campaign/:id_campaign/day" component={ByDay} />
                         <Route exact path="/campaign/:id_campaign/state" component={ByState} />

@@ -5,20 +5,21 @@ import { Menu} from 'semantic-ui-react'
 
 
 class Nav extends Component {
-  state = { activeItem: 'Details' }
+  state = { activeItem: 'Campaign' }
   
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
     const { activeItem } = this.state
 
-    let navItems = [{
+    let navItems = [
+      {
+        name: 'Campaign',
+        param: 'campaign'
+      },
+      {
       name: 'Details',
       param: 'all'
-    },
-    {
-      name: 'National',
-      param: 'national'
     },
     {
       name: 'By Representative',

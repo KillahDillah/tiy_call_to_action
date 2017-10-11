@@ -17,6 +17,9 @@ class CampaignLayout extends Component {
                         <Header as="h1">
                         {this.props.name}
                         <Header.Subheader>
+                        Keyword: {this.props.keyword}
+                        </Header.Subheader>
+                        <Header.Subheader>
                         {this.props.shortDesc}
                         </Header.Subheader>
                         </Header>
