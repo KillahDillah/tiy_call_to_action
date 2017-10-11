@@ -3,7 +3,7 @@ import {Authorize} from '../lib/auth'
 import jwtDecode from 'jwt-decode'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
-import { Header, Image, Segment, Container, Card } from 'semantic-ui-react'
+import { Header, Segment, Container, Card } from 'semantic-ui-react'
 
 function getMetrics(userId){
   return axios.get(`/api/metrics/${userId}`)
