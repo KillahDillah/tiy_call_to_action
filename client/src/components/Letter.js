@@ -37,9 +37,11 @@ class Letter extends Component {
             <div>
               <p> {`To: {{repName}}`}</p>
             </div>
-            <div>
+            <br/>
+            <div id="ltr-desc">
               <p> {campaign.longDesc}</p>
             </div>
+            <br/>
             <div>
               <p>Regards, {`{{yourName}}`}</p>
               <br/>

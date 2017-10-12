@@ -97,3 +97,7 @@ th, td {
 .nav {
   background:white;
 }
+
+#ltr-desc {
+  width: 300px;
+}
