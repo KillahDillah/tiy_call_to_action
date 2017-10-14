@@ -1,8 +1,8 @@
-# Call To Action
+# Text to Action
 
 ## Introduction
 
-This is a group project to showcase our skills learned at The Iron Yard - Las Vegas over the past three months.
+This is a group project to showcase our skills learned at The Iron Yard - Las Vegas over the past four months months.
 * [Jase Cutler](https://github.com/cutlerjd)
 * [Leah Miller](https://github.com/KillahDillah)
 
