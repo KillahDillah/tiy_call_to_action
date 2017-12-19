@@ -24,7 +24,7 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.12",
-    "semantic-ui-react": "^0.74.2",
+    "semantic-ui-react": "^0.77.1",
     "topojson": "^3.0.2",
     "underscore": "^1.8.3"
   },
